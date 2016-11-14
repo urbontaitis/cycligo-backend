@@ -1,4 +1,4 @@
-package com.cycligo.backend.client.details;
+package com.cycligo.backend.profile.location;
 
 /**
  * Created by panda on 07/11/2016.

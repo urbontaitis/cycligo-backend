@@ -1,4 +1,4 @@
-package com.cycligo.backend.client.details;
+package com.cycligo.backend.event.race;
 
 import java.util.Date;
 

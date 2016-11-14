@@ -1,6 +1,4 @@
-package com.cycligo.backend.client.details;
-
-import com.cycligo.backend.client.details.Address;
+package com.cycligo.backend.profile.location;
 
 /**
  * Created by panda on 07/11/2016.

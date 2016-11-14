@@ -1,4 +1,4 @@
-package com.cycligo.backend.profile.event.race;
+package com.cycligo.backend.event.race;
 
 import com.cycligo.backend.core.errorhandler.ClientErrorInformation;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;

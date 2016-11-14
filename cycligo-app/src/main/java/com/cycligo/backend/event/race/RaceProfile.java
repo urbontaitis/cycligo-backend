@@ -1,7 +1,8 @@
-package com.cycligo.backend.profile.event.race;
+package com.cycligo.backend.event.race;
 
-import com.cycligo.backend.client.details.Distance;
-import com.cycligo.backend.client.details.Location;
+
+
+import com.cycligo.backend.profile.location.Location;
 
 import java.util.Date;
 import java.util.List;

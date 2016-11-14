@@ -1,4 +1,4 @@
-package com.cycligo.backend.profile.event.race;
+package com.cycligo.backend.event.race;
 
 import org.springframework.stereotype.Repository;
 
