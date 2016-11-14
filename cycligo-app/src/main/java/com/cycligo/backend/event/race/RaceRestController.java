@@ -15,8 +15,11 @@ import java.util.List;
 @RestController
 public class RaceRestController {
 
-    @Autowired
     private RaceRepository raceRepository;
+
+    public RaceRestController(RaceRepository raceRepository) {
+        this.raceRepository = raceRepository;
+    }
 
     @RequestMapping(value = "/event/race-profile/{id}", method = RequestMethod.GET)
     public RaceProfile getRaceProfile(@PathVariable Long id) throws RaceEventNotFoundException {
