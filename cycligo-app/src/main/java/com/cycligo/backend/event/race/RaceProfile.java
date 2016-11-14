@@ -2,6 +2,7 @@ package com.cycligo.backend.event.race;
 
 
 
+import com.cycligo.backend.profile.blob.Image;
 import com.cycligo.backend.profile.location.Location;
 
 import java.util.Date;
@@ -21,6 +22,7 @@ public class RaceProfile {
     private Date dateTo;
     private Location location;
     private String website;
+    private Image photo;
 
     public Long getId() {
         return id;
@@ -93,4 +95,13 @@ public class RaceProfile {
     public void setWebsite(String website) {
         this.website = website;
     }
+
+    public Image getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Image photo) {
+        this.photo = photo;
+    }
+
 }

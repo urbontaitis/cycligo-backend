@@ -2,7 +2,6 @@ package com.cycligo.backend.event.race;
 
 import com.cycligo.backend.core.errorhandler.ClientErrorInformation;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
