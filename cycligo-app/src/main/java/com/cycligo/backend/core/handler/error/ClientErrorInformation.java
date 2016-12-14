@@ -1,7 +1,9 @@
-package com.cycligo.backend.core.errorhandler;
+package com.cycligo.backend.core.handler.error;
 
 /**
+ *
  * Created by panda on 13/11/2016.
+ * cycligo-backend
  */
 public class ClientErrorInformation {
 
