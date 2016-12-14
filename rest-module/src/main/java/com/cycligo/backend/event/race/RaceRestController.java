@@ -21,14 +21,10 @@ public class RaceRestController {
     }
 
     @RequestMapping(value = "/event/race-profile/{id}", method = RequestMethod.GET)
-    RaceProfile getRaceProfile(@PathVariable Long id) throws Exception {
+    RaceProfile getRaceProfile(@PathVariable Long id) throws RaceEventNotFoundException {
 
         if (id == -1L) { // just for testing purpoise
             throw new RaceEventNotFoundException("This race event was not found");
-        }
-
-        if (id == -2L) { // just for testing purpoise
-            throw new Exception("This race event was not found");
         }
 
         RaceProfile raceProfile = raceRepository.getRaceProfile(id);

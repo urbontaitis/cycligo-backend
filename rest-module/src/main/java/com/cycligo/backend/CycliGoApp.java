@@ -9,6 +9,12 @@ import java.util.Arrays;
 /**
  * Created by panda on 13/11/2016.
  */
+// will be required in near future
+//@Configuration
+//@ComponentScan(basePackages="com.my.pack")
+//@EnableAutoConfiguration
+//@EnableJpaRepositories(basePackages="com.my.pack")
+//@EntityScan(basePackages="com.my.pack")
 @SpringBootApplication
 public class CycliGoApp {
 

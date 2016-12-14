@@ -3,11 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <name>cycligo-backend</name>
+    <name>CycliGO :: back-end</name>
     <description>CycliGo backend application</description>
     <groupId>com.cycligo.backend</groupId>
     <artifactId>cycligo-backend-parent</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <!-- to update parent pom version: -->
@@ -27,17 +27,16 @@
     </properties>
 
     <modules>
-        <module>cycligo-domain</module>
-        <module>cycligo-app</module>
+        <module>core-module</module>
+        <module>domain-module</module>
+        <module>rest-module</module>
     </modules>
 
     <dependencies>
-        <!--<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>-->
-
-        <!-- Below test dependencies -->
+        <dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+    </dependency>
         <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
@@ -52,5 +51,17 @@
             <url>https://jcenter.bintray.com/</url>
         </repository>
     </repositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
