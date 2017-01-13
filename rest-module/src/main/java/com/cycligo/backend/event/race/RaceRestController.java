@@ -1,6 +1,6 @@
 package com.cycligo.backend.event.race;
 
-import com.cycligo.backend.core.errorhandler.ClientErrorInformation;
+import com.cycligo.backend.core.handler.error.ClientErrorInformation;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class RaceRestController {
     }
 
     @RequestMapping(value = "/event/race-profile/{id}", method = RequestMethod.GET)
-    public RaceProfile getRaceProfile(@PathVariable Long id) throws RaceEventNotFoundException {
+    RaceProfile getRaceProfile(@PathVariable Long id) throws RaceEventNotFoundException {
 
         if (id == -1L) { // just for testing purpoise
             throw new RaceEventNotFoundException("This race event was not found");
@@ -33,15 +33,15 @@ public class RaceRestController {
     }
 
     @RequestMapping(value = "/event/active-races", method = RequestMethod.GET)
-    public List<RaceProfile> getActiveRaces() {
+    List<RaceProfile> getActiveRaces() {
 
         return raceRepository.getActiveRaces();
     }
 
     @ExceptionHandler(RaceEventNotFoundException.class)
-    public ResponseEntity<ClientErrorInformation> rulesForRaceEventNotFound(HttpServletRequest req, Exception ex) {
+    ResponseEntity<ClientErrorInformation> rulesForRaceEventNotFound(HttpServletRequest req, Exception ex) {
         ClientErrorInformation error = new ClientErrorInformation(ex.toString(), req.getRequestURL());
-        return new ResponseEntity<ClientErrorInformation>(error, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 
     }
 }
