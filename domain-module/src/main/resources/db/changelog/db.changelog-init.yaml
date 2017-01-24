@@ -1,0 +1,40 @@
+databaseChangeLog:
+
+- changeSet:
+      id: 1
+      author: murbontaitis
+      changes:
+        - createTable:
+            tableName: event
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(50)
+              - column:
+                  name: description
+                  type: longtext
+              - column:
+                  name: date
+                  type: datetime
+              - column:
+                  name: location
+                  type: varchar(50)
+              - column:
+                  name: event_type
+                  type: varchar(20)
+              - column:
+                  name: distance
+                  type: varchar(20)
+              - column:
+                  name: elevation
+                  type: varchar(20)
+              - column:
+                  name: price
+                  type: varchar(20)
