@@ -15,10 +15,10 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-public class EventRestControllerTest {
+public class EventControllerTest {
 
     @Autowired
-    private EventRestController raceRestController;
+    private EventController raceRestController;
 
 //    @Test(expected = RaceEventNotFoundException.class)
     @Ignore

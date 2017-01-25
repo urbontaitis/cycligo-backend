@@ -15,11 +15,11 @@ import java.util.List;
 
 
 @RestController
-public class EventRestController {
+public class EventController {
 
     private EventService eventService;
 
-    public EventRestController(EventService eventService) {
+    public EventController(EventService eventService) {
         this.eventService = eventService;
     }
 

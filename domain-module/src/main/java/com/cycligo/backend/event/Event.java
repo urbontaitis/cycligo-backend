@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by Mindaugas Urbontaitis on 25/01/2017.
@@ -21,7 +21,7 @@ public class Event {
 
     private String description;
 
-    private Date date;
+    private Timestamp date;
 
     private String location;
 
@@ -57,11 +57,11 @@ public class Event {
         this.description = description;
     }
 
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 

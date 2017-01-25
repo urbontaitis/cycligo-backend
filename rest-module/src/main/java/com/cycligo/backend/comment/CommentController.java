@@ -13,7 +13,7 @@ import java.util.List;
  * cycligo-backend
  */
 @RestController
-public class CommentRestController {
+public class CommentController {
 
     @RequestMapping(value = "/comments", method = RequestMethod.GET)
     List<Object> commentsByParentId(@RequestParam(value = "parentId") Long parentId) {
