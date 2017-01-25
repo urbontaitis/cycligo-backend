@@ -1,6 +1,7 @@
 package com.cycligo.backend.event.race;
 
 import com.cycligo.backend.event.EventDto;
+import com.cycligo.backend.event.EventNotFoundException;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -20,14 +21,13 @@ public class EventControllerTest {
     @Autowired
     private EventController raceRestController;
 
-//    @Test(expected = RaceEventNotFoundException.class)
-    @Ignore
-    public void shouldThrowRaceEventNotFoundException() throws RaceEventNotFoundException {
+    @Test(expected = EventNotFoundException.class)
+    public void shouldThrowRaceEventNotFoundException() throws EventNotFoundException {
         this.raceRestController.getRaceProfile(-1L);
     }
 
-    @Test//dump test need to create a real tests
-    public void test() throws RaceEventNotFoundException {
+    @Ignore//dump test need to create a real tests
+    public void test() throws EventNotFoundException {
         Long raceId = 1L;
         EventDto raceProfile = this.raceRestController.getRaceProfile(raceId);
 
