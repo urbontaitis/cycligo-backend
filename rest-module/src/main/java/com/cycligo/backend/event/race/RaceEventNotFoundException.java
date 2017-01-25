@@ -1,7 +1,8 @@
 package com.cycligo.backend.event.race;
 
 /**
- * Created by panda on 13/11/2016.
+ * Created by Mindaugas Urbontaitis on 25/01/2017.
+ * cycligo-backend
  */
 public class RaceEventNotFoundException extends Exception {
 
