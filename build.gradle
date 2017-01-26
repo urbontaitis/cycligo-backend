@@ -1,0 +1,61 @@
+buildscript {
+    ext {
+        springBootVersion = '1.4.4.RELEASE'
+    }
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'cycligoapi'
+    version = '1.0.0-SNAPSHOT'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-tomcat")
+    compile("org.springframework.boot:spring-boot-starter-data-rest")
+    compile("io.springfox:springfox-swagger2:2.6.0")
+    compile("io.springfox:springfox-swagger-ui:2.6.0")
+
+    compile project(':core-module')
+    compile project(':domain-module')
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testRuntime group: 'com.h2database', name: 'h2', version: '1.4.192'
+}
+
+allprojects {
+    group = 'com.cycligo.api'
+    version = '0.1.0-SNAPSHOT'
+
+    repositories {
+        jcenter()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+
+}
