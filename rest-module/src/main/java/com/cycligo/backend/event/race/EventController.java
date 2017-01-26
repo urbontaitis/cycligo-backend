@@ -20,25 +20,21 @@ public class EventController {
         this.eventService = eventService;
     }
 
-    @CrossOrigin
     @RequestMapping(value = "/events", method = RequestMethod.GET)
     ActiveEvent getActiveEvents() {
         return eventService.activeRaces();
     }
 
-    @CrossOrigin
     @RequestMapping(value = "/events/recent", method = RequestMethod.GET)
     RecentEvents getRecentEvents() {
         return eventService.recentRaces();
     }
 
-    @CrossOrigin
     @RequestMapping(value = "/events/filter", method = RequestMethod.GET)
     List<EventDto> filterEvents() {
         throw new NotYetImplementedException("TODO implement events filter");
     }
 
-    @CrossOrigin
     @RequestMapping(value = "/events/event/{id}", method = RequestMethod.GET)
     EventDto getRaceProfile(@PathVariable Long id) throws EventNotFoundException {
 
