@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <name>CycliGO :: back-end</name>
+    <name>CycliGO :: Built by cyclists for cyclists.</name>
     <description>CycliGo backend application</description>
     <groupId>com.cycligo.backend</groupId>
     <artifactId>cycligo-backend-parent</artifactId>
@@ -24,6 +24,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+
+        <maven.jar.plugin.version>3.0.2</maven.jar.plugin.version>
+        <springfox.swagger2.version>2.6.0</springfox.swagger2.version>
+        <pitest.maven.version>1.1.10</pitest.maven.version>
     </properties>
 
     <modules>

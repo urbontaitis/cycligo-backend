@@ -1,0 +1,148 @@
+databaseChangeLog:
+
+- changeSet:
+      id: 1
+      author: murbontaitis
+      changes:
+        - createTable:
+            tableName: event
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(50)
+              - column:
+                  name: description
+                  type: varchar(6000)
+              - column:
+                  name: date
+                  type: datetime
+              - column:
+                  name: location
+                  type: varchar(50)
+              - column:
+                  name: event_type
+                  type: varchar(20)
+              - column:
+                  name: distance
+                  type: varchar(20)
+              - column:
+                  name: elevation
+                  type: varchar(20)
+              - column:
+                  name: price
+                  type: varchar(20)
+
+- changeSet:
+      id: 2
+      author: murbontaitis
+      changes:
+        - createTable:
+            tableName: filter_event
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(50)
+- changeSet:
+      id: 3
+      author: murbontaitis
+      changes:
+        - createTable:
+            tableName: filter_choice
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+              - column:
+                  name: value
+                  type: varchar(50)
+              - column:
+                  name: filter_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_filter_choice_filer_event
+                    references: filter_event(id)
+                    nulable: false
+- changeSet:
+      id: 4
+      author: murbontaitis
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: surname
+                  type: varchar(255)
+              - column:
+                  name: email
+                  type: varchar(255)
+              - column:
+                  name: photo
+                  type: varchar(255)
+- changeSet:
+      id: 5
+      author: murbontaitis
+      changes:
+          - createTable:
+              tableName: comment
+              columns:
+                - column:
+                    name: id
+                    type: bigint
+                    autoIncrement: true
+                    constraints:
+                        primaryKey: true
+                        nullable: false
+                - column:
+                    name: comment
+                    type: varchar(1000)
+                - column:
+                    name: date
+                    type: datetime
+                - column:
+                    name: user_id
+                    type: bigint
+                    constraints:
+                        foreignKeyName: fk_comment_user
+                        refenrences: userDto(id)
+                        nullable: false
+                - column:
+                    name: reply_id
+                    type: bigint
+                    constraints:
+                        foreignKeyName: fk_comment_comment
+                        refenrences: comment(id)
+                        nullable: true
+                - column:
+                    name: parent_id
+                    type: bigint
