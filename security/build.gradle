@@ -1,0 +1,5 @@
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+    compile("org.springframework.social:spring-social-facebook")
+}
