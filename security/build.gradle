@@ -1,5 +1,8 @@
 apply plugin: 'org.springframework.boot'
 
 dependencies {
+    compile("org.springframework.security:spring-security-web")
     compile("org.springframework.social:spring-social-facebook")
+
+    testCompile("org.springframework.security:spring-security-test")
 }
