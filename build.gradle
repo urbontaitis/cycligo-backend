@@ -1,6 +1,7 @@
 buildscript {
     ext {
         springBootVersion = '1.5.1.RELEASE'
+        springfoxSwaggerVersion = '2.6.0'
     }
     repositories {
         jcenter()
@@ -15,22 +16,18 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
-apply plugin: 'org.springframework.boot'
 
 jar {
     baseName = 'cycligo-rest-api'
     version = '1.0.0-SNAPSHOT'
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-tomcat")
     compile("org.springframework.boot:spring-boot-starter-data-rest")
-    compile("io.springfox:springfox-swagger2:2.6.0")
-    compile("io.springfox:springfox-swagger-ui:2.6.0")
+    compile("io.springfox:springfox-swagger2:${springfoxSwaggerVersion}")
+    compile("io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}")
 
     compile project('cycligo-core')
     compile project('cycligo-domain')
@@ -44,6 +41,11 @@ allprojects {
     group = 'com.cycligo.api'
     version = '0.1.0-SNAPSHOT'
 
+    apply plugin: 'org.springframework.boot'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
     repositories {
         jcenter()
     }
@@ -51,12 +53,10 @@ allprojects {
 
 subprojects {
     apply plugin: 'java'
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+
     tasks.withType(JavaCompile) {
         options.encoding = 'UTF-8'
     }
-
 
     repositories {
         mavenLocal()
