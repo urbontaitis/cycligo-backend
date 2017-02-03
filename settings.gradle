@@ -1,6 +1,5 @@
-include 'core-module'
-include 'domain-module'
-include 'security'
+rootProject.name='cycligo rest api'
 
-
-
+include 'cycligo-core'
+include 'cycligo-domain'
+include 'cycligo-security'

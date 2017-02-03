@@ -1,5 +1,6 @@
 package com.cycligo.backend.event.race;
 
+import com.cycligo.backend.base.IntegrationTest;
 import com.cycligo.backend.event.EventDto;
 import com.cycligo.backend.event.EventNotFoundException;
 import org.junit.Assert;
@@ -8,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
@@ -16,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+@ActiveProfiles("domain-test")
 public class EventControllerTest {
 
     @Autowired

@@ -1,4 +1,4 @@
-package com.cycligo.backend.core.handler.error;
+package com.cycligo.backend.base.handler.error;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

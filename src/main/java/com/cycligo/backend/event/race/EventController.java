@@ -1,6 +1,6 @@
 package com.cycligo.backend.event.race;
 
-import com.cycligo.backend.core.handler.error.ClientErrorInformation;
+import com.cycligo.backend.base.handler.error.ClientErrorInformation;
 import com.cycligo.backend.event.*;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.hibernate.cfg.NotYetImplementedException;

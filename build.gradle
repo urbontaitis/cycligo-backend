@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.4.4.RELEASE'
+        springBootVersion = '1.5.1.RELEASE'
     }
     repositories {
         jcenter()
@@ -18,7 +18,7 @@ apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 
 jar {
-    baseName = 'cycligo-api'
+    baseName = 'cycligo-rest-api'
     version = '1.0.0-SNAPSHOT'
 }
 
@@ -32,12 +32,12 @@ dependencies {
     compile("io.springfox:springfox-swagger2:2.6.0")
     compile("io.springfox:springfox-swagger-ui:2.6.0")
 
-    compile project('core-module')
-    compile project('domain-module')
-    compile project('security')
+    compile project('cycligo-core')
+    compile project('cycligo-domain')
+    compile project('cycligo-security')
 
+    testCompile project(path: ':cycligo-domain', configuration: 'testOutput')
     testCompile('org.springframework.boot:spring-boot-starter-test')
-    testRuntime('com.h2database:h2')
 }
 
 allprojects {

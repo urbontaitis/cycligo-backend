@@ -2,7 +2,7 @@ package com.cycligo.backend.config;
 
 //import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
-//import org.springframework.core.annotation.Order;
+//import org.springframework.base.annotation.Order;
 
 /**
  * Created by Mindaugas Urbontaitis on 26/01/2017.
