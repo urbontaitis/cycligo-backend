@@ -6,20 +6,13 @@ import com.cycligo.backend.event.EventNotFoundException;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * Created by Mindaugas Urbontaitis on 25/01/2017.
  * cycligo-backend
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-@ActiveProfiles("domain-test")
-public class EventControllerTest {
+public class EventControllerTest extends IntegrationTest {
 
     @Autowired
     private EventController raceRestController;
