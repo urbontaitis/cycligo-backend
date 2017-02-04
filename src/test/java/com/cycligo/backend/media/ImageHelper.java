@@ -1,5 +1,6 @@
 package com.cycligo.backend.media;
 
+import com.cycligo.backend.base.ParentType;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -24,6 +25,8 @@ abstract class ImageHelper {
         Image image = new Image();
         image.setValue(blob);
         image.setMediaType(MediaType.IMAGE_PNG.toString());
+        image.setParentId(1L);
+        image.setParentType(ParentType.USER.toString());
 
         return image;
     }

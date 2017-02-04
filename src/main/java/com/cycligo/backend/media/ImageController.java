@@ -1,5 +1,7 @@
 package com.cycligo.backend.media;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,6 +15,7 @@ import java.io.IOException;
  * Created by Mindaugas Urbontaitis on 03/02/2017.
  * cycligo-rest-api
  */
+@Api(value = "Images")
 @RestController
 public class ImageController {
 
@@ -22,10 +25,15 @@ public class ImageController {
         this.imageRepository = imageRepository;
     }
 
-    @RequestMapping(value = "/media/image/{id}", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets a image based on image id and parent data (id and type)",
+            notes = "Retrieves a image as byte array",
+            response = byte.class)
+    @RequestMapping(value = "/media/image/{parentId}/{parentType}/{imageId}", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<byte[]> get(@PathVariable Long id) throws IOException {
-        Image image = imageRepository.findOne(id);
+    public ResponseEntity<byte[]> get(@PathVariable Long parentId,
+                                      @PathVariable String parentType,
+                                      @PathVariable Long imageId) throws IOException {
+        Image image = imageRepository.findByIdAndParentData(imageId, parentId, parentType);
         if (null == image) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -35,12 +43,19 @@ public class ImageController {
         return new ResponseEntity<>(image.getValue(), headers, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/media/image", method = RequestMethod.POST)
+    @ApiOperation(value = "Post a image based on image id and parent data (id and type)",
+            notes = "Post a image. When image is stored, returns image id",
+            response = Long.class)
+    @RequestMapping(value = "/media/image/{parentId}/{parentType}", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Long> upload(@RequestParam("image") MultipartFile image) {
+    public ResponseEntity<Long> upload(@PathVariable Long parentId,
+                                       @PathVariable String parentType,
+                                       @RequestParam("image") MultipartFile image) {
         Image upload = new Image();
         try {
-            upload.setMediaType(MediaType.IMAGE_PNG_VALUE);
+            upload.setParentType(parentType);
+            upload.setParentId(parentId);
+            upload.setMediaType(MediaType.IMAGE_JPEG_VALUE);
             upload.setValue(image.getBytes());
             upload = imageRepository.save(upload);
         } catch (IOException e) {

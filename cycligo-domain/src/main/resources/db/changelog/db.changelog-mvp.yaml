@@ -146,6 +146,13 @@ databaseChangeLog:
                 - column:
                     name: parent_id
                     type: bigint
+                    constraints:
+                        nullable: false
+                - column:
+                    name: parent_type
+                    type: varchar(10)
+                    constraints:
+                        nullable: false
 - changeSet:
       id: 6
       author: murbontaitis
@@ -163,6 +170,16 @@ databaseChangeLog:
                 - column:
                     name: value
                     type: longblob
+                    constraints:
+                        nullable: false
+                - column:
+                    name: parent_id
+                    type: bigint
+                    constraints:
+                        nullable: false
+                - column:
+                    name: parent_type
+                    type: varchar(10)
                     constraints:
                         nullable: false
                 - column:

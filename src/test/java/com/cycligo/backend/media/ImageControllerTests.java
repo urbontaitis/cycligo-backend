@@ -1,5 +1,6 @@
 package com.cycligo.backend.media;
 
+import com.cycligo.backend.base.ParentType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +38,10 @@ public class ImageControllerTests extends ImageHelper {
     @Test
     public void shouldGetImage() throws Exception {
         Image expected = create();
-        given(this.imageRepository.findOne(1L))
+        given(this.imageRepository.findByIdAndParentData(1L, 1L, ParentType.USER.toString()))
                 .willReturn(expected);
 
-        this.mvc.perform(get("/media/image/1")
+        this.mvc.perform(get("/media/image/1/USER/1")
                 .accept(MediaType.IMAGE_PNG))
                 .andExpect(status().isOk())
                 .andExpect(content().bytes(expected.getValue()));
@@ -59,7 +60,7 @@ public class ImageControllerTests extends ImageHelper {
         given(this.imageRepository.save(any(Image.class))).willReturn(expected);
 
 
-        this.mvc.perform(fileUpload("/media/image").file(file))
+        this.mvc.perform(fileUpload("/media/image/1/USER").file(file))
                 .andExpect(status().isOk())
                 .andExpect(content().string("100"));
 

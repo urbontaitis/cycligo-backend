@@ -14,9 +14,16 @@ public class Image {
     private Long id;
 
     @Lob
+    @Column(nullable = false)
     private byte[] value;
 
     private String mediaType;
+
+    @Column(nullable = false)
+    private Long parentId;
+
+    @Column(nullable = false)
+    private String parentType;
 
     public Long getId() {
         return id;
@@ -40,5 +47,21 @@ public class Image {
 
     public void setMediaType(String mediaType) {
         this.mediaType = mediaType;
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
+    }
+
+    public String getParentType() {
+        return parentType;
+    }
+
+    public void setParentType(String parentType) {
+        this.parentType = parentType;
     }
 }
