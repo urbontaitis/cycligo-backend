@@ -3,6 +3,7 @@ buildscript {
         springBootVersion = '1.5.1.RELEASE'
         springfoxSwaggerVersion = '2.6.0'
         commonsIoVersion = '1.3.2'
+        jUnitVersion = '4.12'
     }
     repositories {
         jcenter()
@@ -36,7 +37,7 @@ dependencies {
     compile project('cycligo-security')
 
     testCompile project(path: ':cycligo-domain', configuration: 'testOutput')
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+
 }
 
 allprojects {
@@ -50,6 +51,11 @@ allprojects {
 
     repositories {
         jcenter()
+    }
+
+    dependencies {
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+        testCompile("junit:junit:${jUnitVersion}")
     }
 }
 
@@ -65,5 +71,4 @@ subprojects {
         jcenter()
         maven { url "https://repo.spring.io/libs-milestone" }
     }
-
 }

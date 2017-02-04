@@ -146,3 +146,25 @@ databaseChangeLog:
                 - column:
                     name: parent_id
                     type: bigint
+- changeSet:
+      id: 6
+      author: murbontaitis
+      changes:
+          - createTable:
+              tableName: image
+              columns:
+                - column:
+                    name: id
+                    type: bigint
+                    autoIncrement: true
+                    constraints:
+                        primarykey: true
+                        nullable: false
+                - column:
+                    name: blob
+                    type: mediumblob
+                    constraints:
+                        nullable: false
+                - column:
+                    name: media_type
+                    type: varchar(25)
