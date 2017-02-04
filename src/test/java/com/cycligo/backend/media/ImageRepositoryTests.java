@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
@@ -20,6 +21,9 @@ import static org.junit.Assert.assertNotNull;
 public class ImageRepositoryTests extends ImageHelper {
 
     @Autowired
+    private TestEntityManager entityManager;
+
+    @Autowired
     private ImageRepository imageRepository;
 
     @Test
@@ -34,10 +38,9 @@ public class ImageRepositoryTests extends ImageHelper {
     @Test
     public void shouldGetImage() throws IOException {
         Image image = create();
+        entityManager.persist(image);
 
-        imageRepository.save(image);
-
-        Image actual = imageRepository.findOne(image.getId());
+        Image actual = imageRepository.findByIdAndParentData(image.getId(), image.getParentId(), image.getParentType());
 
         assertNotNull(actual.getValue());
     }
