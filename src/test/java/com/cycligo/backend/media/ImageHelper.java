@@ -22,9 +22,13 @@ abstract class ImageHelper {
         byte[] blob = IOUtils.toByteArray(in);
 
         Image image = new Image();
-        image.setBlob(blob);
+        image.setValue(blob);
         image.setMediaType(MediaType.IMAGE_PNG.toString());
 
         return image;
+    }
+
+    public Resource getResource() {
+        return resource;
     }
 }

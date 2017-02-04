@@ -14,7 +14,7 @@ public class Image {
     private Long id;
 
     @Lob
-    private byte[] blob;
+    private byte[] value;
 
     private String mediaType;
 
@@ -26,12 +26,12 @@ public class Image {
         this.id = id;
     }
 
-    public byte[] getBlob() {
-        return blob;
+    public byte[] getValue() {
+        return value;
     }
 
-    public void setBlob(byte[] blob) {
-        this.blob = blob;
+    public void setValue(byte[] value) {
+        this.value = value;
     }
 
     public String getMediaType() {

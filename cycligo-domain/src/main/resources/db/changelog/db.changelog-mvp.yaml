@@ -158,11 +158,11 @@ databaseChangeLog:
                     type: bigint
                     autoIncrement: true
                     constraints:
-                        primarykey: true
+                        primaryKey: true
                         nullable: false
                 - column:
-                    name: blob
-                    type: mediumblob
+                    name: value
+                    type: longblob
                     constraints:
                         nullable: false
                 - column:

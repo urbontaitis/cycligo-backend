@@ -39,6 +39,6 @@ public class ImageRepositoryTests extends ImageHelper {
 
         Image actual = imageRepository.findOne(image.getId());
 
-        assertNotNull(actual.getBlob());
+        assertNotNull(actual.getValue());
     }
 }
