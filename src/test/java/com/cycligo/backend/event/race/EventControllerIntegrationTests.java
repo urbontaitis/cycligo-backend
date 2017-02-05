@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Created by Mindaugas Urbontaitis on 25/01/2017.
  * cycligo-backend
  */
-public class EventControllerTest extends IntegrationTest {
+public class EventControllerIntegrationTests extends IntegrationTest {
 
     @Autowired
     private EventController raceRestController;

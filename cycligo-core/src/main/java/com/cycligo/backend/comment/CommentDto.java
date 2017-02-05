@@ -2,6 +2,7 @@ package com.cycligo.backend.comment;
 
 import com.cycligo.backend.user.UserDto;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
 public class CommentDto {
     private Long id;
     private String comment;
-    private Date date;
+    private LocalDateTime date;
     private UserDto userDto;
     private List<CommentDto> replies;
 
@@ -33,11 +34,11 @@ public class CommentDto {
         this.comment = comment;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

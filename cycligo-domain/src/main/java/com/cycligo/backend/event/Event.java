@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
  * Created by Mindaugas Urbontaitis on 25/01/2017.
@@ -21,7 +22,7 @@ public class Event {
 
     private String description;
 
-    private Timestamp date;
+    private LocalDateTime date;
 
     private String location;
 
@@ -57,11 +58,11 @@ public class Event {
         this.description = description;
     }
 
-    public Timestamp getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

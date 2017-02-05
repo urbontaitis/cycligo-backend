@@ -3,7 +3,7 @@ package com.cycligo.backend.comment;
 import com.cycligo.backend.user.User;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,7 +24,7 @@ public class Comment {
 
     private String comment;
 
-    private Timestamp date;
+    private LocalDateTime date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reply_id", nullable = true)
@@ -63,11 +63,11 @@ public class Comment {
         this.comment = comment;
     }
 
-    public Timestamp getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

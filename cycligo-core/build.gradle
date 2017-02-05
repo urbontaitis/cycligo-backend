@@ -1,4 +1,7 @@
 
 dependencies {
   compile project(':cycligo-domain')
+
+  compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}")
+  compile("com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}")
 }
