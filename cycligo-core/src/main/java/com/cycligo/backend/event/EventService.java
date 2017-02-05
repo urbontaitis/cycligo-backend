@@ -48,4 +48,12 @@ public class EventService {
         return (new EventMapper()).entity2Dto(event);
     }
 
+    public Long save(EventDto input) {
+        EventMapper mapper = new EventMapper();
+        Event event = mapper.dto2Entity(input);
+
+        event = eventRepository.save(event);
+
+        return event.getId();
+    }
 }

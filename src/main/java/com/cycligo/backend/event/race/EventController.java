@@ -7,7 +7,9 @@ import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 
@@ -39,6 +41,16 @@ public class EventController {
     EventDto getRaceProfile(@PathVariable Long id) throws EventNotFoundException {
 
         return eventService.race(id);
+    }
+
+    @RequestMapping(value="/events/event", method = RequestMethod.POST)
+    ResponseEntity<?> add(@RequestBody EventDto input) {
+        //TODO add alternative ResponseEntity.noContent().build()
+        Long eventId = eventService.save(input);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest().path("/{id}")
+                .buildAndExpand(eventId).toUri();
+        return ResponseEntity.created(location).build();
     }
 
     @ExceptionHandler(EventNotFoundException.class)

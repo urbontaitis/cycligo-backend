@@ -20,4 +20,18 @@ class EventMapper {
         return dto;
     }
 
+    Event dto2Entity(EventDto dto) {
+        Event entity = new Event();
+        entity.setId(dto.getId());
+        entity.setTitle(dto.getTitle());
+        entity.setDate(dto.getDate());
+        entity.setDescription(dto.getDescription());
+        entity.setDistance(dto.getDistance());
+        entity.setElevation(dto.getElevation());
+        entity.setEventType(dto.getEventType());
+        entity.setLocation(dto.getLocation());
+        entity.setPrice(dto.getTicketPrice());
+        return entity;
+    }
+
 }
