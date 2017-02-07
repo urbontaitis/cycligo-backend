@@ -16,6 +16,7 @@ class EventMapper {
         dto.setDistance(event.getDistance());
         dto.setElevation(event.getElevation());
         dto.setTicketPrice(event.getPrice());
+        dto.setDescription(event.getDescription());
 
         return dto;
     }

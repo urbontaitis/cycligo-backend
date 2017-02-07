@@ -17,7 +17,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import static org.hamcrest.Matchers.*;
@@ -25,6 +24,7 @@ import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static com.cycligo.backend.event.race.EventTestHelper.initEventDto;
 
 /**
  * Created by Mindaugas Urbontaitis on 04/02/2017.
@@ -70,7 +70,7 @@ public class EventControllerTests {
 
     @Test
     public void readSingleEvent() throws Exception {
-        EventDto expected = initEvent();
+        EventDto expected = initEventDto();
         given(eventService.race(1L)).willReturn(expected);
 
         mvc.perform(get("/events/event/1"))
@@ -89,7 +89,7 @@ public class EventControllerTests {
 
     @Test
     public void createEvent() throws Exception {
-        EventDto expected = initEvent();
+        EventDto expected = initEventDto();
         expected.setId(null);
         String eventJson = json(expected);
         given(eventService.save(expected)).willReturn(1L);
@@ -98,19 +98,6 @@ public class EventControllerTests {
             .contentType(contentType)
             .content(eventJson))
             .andExpect(status().isCreated());
-    }
-
-    protected EventDto initEvent() {
-        return new EventDto(
-                1L,
-                "test-title",
-                "test-description",
-                 LocalDateTime.of(2017,01,01,10,30),
-                "test-location",
-                "test-event-type",
-                "test-distance",
-                "test-elevation",
-                "test-ticket-price");
     }
 
     protected String json(Object o) throws IOException {
