@@ -16,10 +16,10 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: title
-                  type: varchar(50)
+                  type: nvarchar(50)
               - column:
                   name: description
-                  type: varchar(6000)
+                  type: nvarchar(6000)
               - column:
                   name: date
                   type: datetime
@@ -72,7 +72,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: name
-                  type: varchar(50)
+                  type: nvarchar(50)
               - column:
                   name: value
                   type: varchar(50)
@@ -99,13 +99,13 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: name
-                  type: varchar(255)
+                  type: nvarchar(255)
               - column:
                   name: surname
-                  type: varchar(255)
+                  type: nvarchar(255)
               - column:
                   name: email
-                  type: varchar(255)
+                  type: nvarchar(255)
               - column:
                   name: photo
                   type: varchar(255)
@@ -125,7 +125,7 @@ databaseChangeLog:
                         nullable: false
                 - column:
                     name: comment
-                    type: varchar(1000)
+                    type: nvarchar(1000)
                 - column:
                     name: date
                     type: datetime
