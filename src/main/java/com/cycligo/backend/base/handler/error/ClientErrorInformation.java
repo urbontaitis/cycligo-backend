@@ -7,16 +7,16 @@ package com.cycligo.backend.base.handler.error;
  */
 public class ClientErrorInformation {
 
-    private String errorMessage;
+    private String message;
     private StringBuffer requestURL;
 
-    public ClientErrorInformation(String errorMessage, StringBuffer requestURL) {
-        this.errorMessage = errorMessage;
+    public ClientErrorInformation(String message, StringBuffer requestURL) {
+        this.message = message;
         this.requestURL = requestURL;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public String getMessage() {
+        return message;
     }
 
     public StringBuffer getRequestURL() {

@@ -15,6 +15,8 @@ public class CommentMapper {
         dto.setComment(entity.getComment());
         dto.setDate(entity.getDate());
         dto.setUserDto(entity2Dto(entity.getUser()));
+        dto.setParentId(entity.getParentId());
+        dto.setParentType(entity.getParentType());
         if (!entity.getReplies().isEmpty()) {
             for (Comment reply: entity.getReplies()) {
                 dto.getReplies().add(entity2Dto(reply));
@@ -30,5 +32,17 @@ public class CommentMapper {
         dto.setSurname(entity.getSurname());
         dto.setPhoto(entity.getPhoto());
         return dto;
+    }
+
+    public Comment dto2Entity(CommentDto dto) {
+        Comment entity = new Comment();
+        entity.setId(dto.getId());
+        entity.setComment(dto.getComment());
+        entity.setDate(dto.getDate());
+        entity.setParentId(dto.getParentId());
+        entity.setParentType(dto.getParentType());
+//        entity.setUser(); TODO implement
+//        entity.setReplies();
+        return entity;
     }
 }

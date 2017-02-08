@@ -1,10 +1,11 @@
 package com.cycligo.backend.comment;
 
 import com.cycligo.backend.user.UserDto;
+import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,11 +13,18 @@ import java.util.List;
  * cycligo-backend
  */
 public class CommentDto {
+
     private Long id;
+
+    @NotEmpty(message = "{comments.comment_cannot_be_empty}")
     private String comment;
     private LocalDateTime date;
     private UserDto userDto;
     private List<CommentDto> replies;
+    @NotNull(message = "{base.parent_id_is_required}")
+    private Long parentId;
+    @NotEmpty(message = "{base.parent_type_is_required}")
+    private String parentType;
 
     public Long getId() {
         return id;
@@ -57,4 +65,19 @@ public class CommentDto {
         return replies;
     }
 
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
+    }
+
+    public String getParentType() {
+        return parentType;
+    }
+
+    public void setParentType(String parentType) {
+        this.parentType = parentType;
+    }
 }

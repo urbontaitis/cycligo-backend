@@ -1,12 +1,14 @@
 package com.cycligo.backend.comment;
 
+import com.cycligo.backend.base.ParentType;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.Valid;
 
 /**
  * Created by Mindaugas Urbontaitis on 24/01/2017.
@@ -33,12 +35,13 @@ public class CommentController {
 
     @ApiOperation(value = "Post a comment based on parent id",
             notes = "Post a comment",
-            response = Object.class)
-    @RequestMapping(value = "/comments/{parentId}/comment", method = RequestMethod.PUT)
-    List<Object> postComment(@PathVariable Long parentId) {
-        throw new NotYetImplementedException("TODO implement comments API");
+            response = CommentDto.class)
+    @RequestMapping(value = "/comments/comment", method = RequestMethod.POST)
+    ResponseEntity<CommentDto> add(@Valid @RequestBody CommentDto input) {
+
+        input.setParentType(ParentType.EVENT.name());// FIXME temporary workaround
+        CommentDto result = commentService.save(input);
+
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
-
-
-
 }
