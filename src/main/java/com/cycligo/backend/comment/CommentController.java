@@ -4,10 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,16 +26,16 @@ public class CommentController {
     @ApiOperation(value = "Gets a comments based on parent id",
             notes = "Retrieves a comments",
             response = Comments.class)
-    @RequestMapping(value = "/comments", method = RequestMethod.GET)
-    Comments commentsByParentId(@RequestParam(value = "parentId") Long parentId) {
+    @RequestMapping(value = "/comments/{parentId}", method = RequestMethod.GET)
+    Comments commentsByParentId(@PathVariable Long parentId) {
         return commentService.findByParentId(parentId);
     }
 
     @ApiOperation(value = "Post a comment based on parent id",
             notes = "Post a comment",
             response = Object.class)
-    @RequestMapping(value = "/comments/comment", method = RequestMethod.PUT)
-    List<Object> postComment(@RequestParam(value = "parentId") Long parentId) {
+    @RequestMapping(value = "/comments/{parentId}/comment", method = RequestMethod.PUT)
+    List<Object> postComment(@PathVariable Long parentId) {
         throw new NotYetImplementedException("TODO implement comments API");
     }
 
