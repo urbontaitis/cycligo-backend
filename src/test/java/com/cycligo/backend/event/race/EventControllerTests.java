@@ -1,30 +1,22 @@
 package com.cycligo.backend.event.race;
 
+import com.cycligo.backend.base.MvcMockTest;
 import com.cycligo.backend.event.EventDto;
-import com.cycligo.backend.event.EventNotFoundException;
 import com.cycligo.backend.event.EventService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.mock.http.MockHttpOutputMessage;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.Arrays;
-
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
-import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static com.cycligo.backend.event.race.EventTestHelper.initEventDto;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Created by Mindaugas Urbontaitis on 04/02/2017.
@@ -32,41 +24,13 @@ import static com.cycligo.backend.event.race.EventTestHelper.initEventDto;
  */
 @RunWith(SpringRunner.class)
 @WebMvcTest(EventController.class)
-public class EventControllerTests {
-
-    private MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
-            MediaType.APPLICATION_JSON.getSubtype(),
-            Charset.forName("utf8"));
-
-    private HttpMessageConverter mappingJackson2HttpMessageConverter;
+public class EventControllerTests extends MvcMockTest {
 
     @Autowired
     private MockMvc mvc;
 
     @MockBean
     private EventService eventService;
-
-    @Autowired
-    void setConverters(HttpMessageConverter<?>[] converters) {
-
-        this.mappingJackson2HttpMessageConverter = Arrays.asList(converters).stream()
-                .filter(hmc -> hmc instanceof MappingJackson2HttpMessageConverter)
-                .findAny()
-                .orElse(null);
-
-        assertNotNull("the JSON message converter must not be null",
-                this.mappingJackson2HttpMessageConverter);
-    }
-
-
-    @Test
-    public void eventNotFound() throws Exception {
-        given(eventService.race(1L)).willThrow(new EventNotFoundException(1L));
-
-        mvc.perform(get("/"))
-                .andExpect(status().isNotFound())
-                .andExpect(content().contentType(contentType));
-    }
 
     @Test
     public void readSingleEvent() throws Exception {
@@ -75,7 +39,7 @@ public class EventControllerTests {
 
         mvc.perform(get("/events/event/1"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(contentType))
+                .andExpect(content().contentType(getContentType()))
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.title", is(expected.getTitle())))
                 .andExpect(jsonPath("$.description", is(expected.getDescription())))
@@ -95,15 +59,8 @@ public class EventControllerTests {
         given(eventService.save(expected)).willReturn(1L);
 
         mvc.perform(post("/events/event")
-            .contentType(contentType)
+            .contentType(getContentType())
             .content(eventJson))
             .andExpect(status().isCreated());
-    }
-
-    protected String json(Object o) throws IOException {
-        MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();
-        this.mappingJackson2HttpMessageConverter.write(
-                o, MediaType.APPLICATION_JSON, mockHttpOutputMessage);
-        return mockHttpOutputMessage.getBodyAsString();
     }
 }
