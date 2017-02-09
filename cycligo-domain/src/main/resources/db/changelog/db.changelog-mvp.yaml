@@ -134,7 +134,7 @@ databaseChangeLog:
                     type: bigint
                     constraints:
                         foreignKeyName: fk_comment_user
-                        refenrences: userDto(id)
+                        refenrences: user(id)
                         nullable: false
                 - column:
                     name: reply_id

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 
 /**
  * Created by Mindaugas Urbontaitis on 25/01/2017.
@@ -35,18 +36,21 @@ public class CommentService {
     }
 
     public CommentDto save(CommentDto dto) {
+        if (dto.getDate() == null) {
+            dto.setDate(LocalDateTime.now());
+        }
 
         Comment entity = mapper.dto2Entity(dto);
-        entity = commentRepository.save(entity);
-
         // FIXME temporary workaround to set user
         entity.setUser(fake());
+        entity = commentRepository.save(entity);
 
         return mapper.entity2Dto(entity);
     }
 
     private User fake() {
         User user = new User();
+        user.setId(-1L);
         user.setName("Ted");
         user.setSurname("Test");
         user.setEmail("ted@test.email");

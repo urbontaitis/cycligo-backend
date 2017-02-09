@@ -1,6 +1,7 @@
 package com.cycligo.backend.comment;
 
 import com.cycligo.backend.user.UserDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
@@ -18,8 +19,10 @@ public class CommentDto {
 
     @NotEmpty(message = "{comments.comment_cannot_be_empty}")
     private String comment;
+
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private LocalDateTime date;
-    private UserDto userDto;
+    private UserDto user;
     private List<CommentDto> replies;
     @NotNull(message = "{base.parent_id_is_required}")
     private Long parentId;
@@ -50,12 +53,12 @@ public class CommentDto {
         this.date = date;
     }
 
-    public UserDto getUserDto() {
-        return userDto;
+    public UserDto getUser() {
+        return user;
     }
 
-    public void setUserDto(UserDto userDto) {
-        this.userDto = userDto;
+    public void setUser(UserDto user) {
+        this.user = user;
     }
 
     public List<CommentDto> getReplies() {

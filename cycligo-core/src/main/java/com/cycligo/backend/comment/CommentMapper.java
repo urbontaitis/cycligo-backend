@@ -14,7 +14,7 @@ public class CommentMapper {
         dto.setId(entity.getId());
         dto.setComment(entity.getComment());
         dto.setDate(entity.getDate());
-        dto.setUserDto(entity2Dto(entity.getUser()));
+        dto.setUser(entity2Dto(entity.getUser()));
         dto.setParentId(entity.getParentId());
         dto.setParentType(entity.getParentType());
         if (!entity.getReplies().isEmpty()) {
