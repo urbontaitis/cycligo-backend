@@ -50,7 +50,7 @@ public class ImageController {
     @ResponseBody
     public ResponseEntity<Long> upload(@PathVariable Long parentId,
                                        @PathVariable String parentType,
-                                       @RequestParam("image") MultipartFile image) {
+                                       @RequestParam("file") MultipartFile image) {
         Image upload = new Image();
         try {
             upload.setParentType(parentType);
