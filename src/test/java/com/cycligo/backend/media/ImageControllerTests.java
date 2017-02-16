@@ -51,7 +51,7 @@ public class ImageControllerTests extends ImageHelper {
     public void shouldUploadImage() throws Exception {
         InputStream img = getResource().getInputStream();
         MockMultipartFile file = new MockMultipartFile(
-                "image",
+                "file",
                 "test.png",
                 "multipart/form-data",
                 img);
