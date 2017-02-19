@@ -17,6 +17,14 @@ buildscript {
     }
 }
 
+task dev << {
+    bootRun.systemProperty 'spring.profiles.active', 'domain-dev'
+}
+
+task qa << {
+    bootRun.systemProperty 'spring.profiles.active', 'domain-qa'
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
