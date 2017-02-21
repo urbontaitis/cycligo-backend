@@ -33,7 +33,12 @@ public class CycliGoApp {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:3000"); //temporary
+        config.setAllowedOrigins(
+                Arrays.asList(
+                    "http://localhost:3000",
+                    "http://localhost:8080",
+                    "http://192.168.1.36",
+                    "http://test.murbo.net"));
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
