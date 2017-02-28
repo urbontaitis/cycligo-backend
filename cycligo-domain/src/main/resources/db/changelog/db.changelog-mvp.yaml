@@ -27,8 +27,8 @@ databaseChangeLog:
                   name: ends
                   type: datetime
               - column:
-                  name: location
-                  type: varchar(50)
+                  name: location_id
+                  type: bigint
               - column:
                   name: photo_id
                   type: bigint
@@ -39,8 +39,11 @@ databaseChangeLog:
                   name: category_id
                   type: bigint
               - column:
+                  name: link_to_event
+                  type: varchar(50)
+              - column:
                   name: approved
-                  type: tinyint
+                  type: boolean
               - column:
                   name: created_by
                   type: bigint
@@ -51,15 +54,15 @@ databaseChangeLog:
                   name: updated_by
                   type: bigint
               - column:
-                  name: update_at
-                  type: bigint
+                  name: updated_at
+                  type: timestamp
               - column:
                   name: version
                   type: int
 
 
 - changeSet:
-      id: 1-eventDetail
+      id: 1-eventDetails
       author: murbontaitis
       changes:
         - createTable:
@@ -107,7 +110,7 @@ databaseChangeLog:
                       name: label
                       type: nvarchar(256)
                   - column:
-                      name: placeId
+                      name: place_id
                       type: nvarchar(256)
                   - column:
                       name: latitude
