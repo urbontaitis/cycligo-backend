@@ -28,12 +28,10 @@ public class ImageController {
     @ApiOperation(value = "Gets a image based on image id and parent data (id and type)",
             notes = "Retrieves a image as byte array",
             response = byte.class)
-    @RequestMapping(value = "/media/image/{parentId}/{parentType}/{imageId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/media/image/{imageId}", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<byte[]> get(@PathVariable Long parentId,
-                                      @PathVariable String parentType,
-                                      @PathVariable Long imageId) throws IOException {
-        Image image = imageRepository.findByIdAndParentData(imageId, parentId, parentType);
+    public ResponseEntity<byte[]> get(@PathVariable Long imageId) throws IOException {
+        Image image = imageRepository.findById(imageId);
         if (null == image) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -46,15 +44,13 @@ public class ImageController {
     @ApiOperation(value = "Post a image based on image id and parent data (id and type)",
             notes = "Post a image. When image is stored, returns image id",
             response = Long.class)
-    @RequestMapping(value = "/media/image/{parentId}/{parentType}", method = RequestMethod.POST)
+    @RequestMapping(value = "/media/image", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Long> upload(@PathVariable Long parentId,
-                                       @PathVariable String parentType,
-                                       @RequestParam("file") MultipartFile image) {
+    public ResponseEntity<Long> upload(@RequestParam("photo") MultipartFile image) {
         Image upload = new Image();
         try {
-            upload.setParentType(parentType);
-            upload.setParentId(parentId);
+            upload.setParentType("DELETE");
+            upload.setParentId(1L);
             upload.setMediaType(MediaType.IMAGE_JPEG_VALUE);
             upload.setValue(image.getBytes());
             upload = imageRepository.save(upload);

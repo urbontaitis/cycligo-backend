@@ -17,7 +17,6 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.fileUpload;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -38,10 +37,10 @@ public class ImageControllerTests extends ImageHelper {
     @Test
     public void shouldGetImage() throws Exception {
         Image expected = create();
-        given(this.imageRepository.findByIdAndParentData(1L, 1L, ParentType.USER.toString()))
+        given(this.imageRepository.findById(1L))
                 .willReturn(expected);
 
-        this.mvc.perform(get("/media/image/1/USER/1")
+        this.mvc.perform(get("/media/image/1")
                 .accept(MediaType.IMAGE_PNG))
                 .andExpect(status().isOk())
                 .andExpect(content().bytes(expected.getValue()));
@@ -51,7 +50,7 @@ public class ImageControllerTests extends ImageHelper {
     public void shouldUploadImage() throws Exception {
         InputStream img = getResource().getInputStream();
         MockMultipartFile file = new MockMultipartFile(
-                "file",
+                "photo",
                 "test.png",
                 "multipart/form-data",
                 img);
@@ -60,7 +59,7 @@ public class ImageControllerTests extends ImageHelper {
         given(this.imageRepository.save(any(Image.class))).willReturn(expected);
 
 
-        this.mvc.perform(fileUpload("/media/image/1/USER").file(file))
+        this.mvc.perform(fileUpload("/media/image").file(file))
                 .andExpect(status().isOk())
                 .andExpect(content().string("100"));
 

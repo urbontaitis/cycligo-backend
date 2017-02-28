@@ -40,7 +40,7 @@ public class ImageRepositoryTests extends ImageHelper {
         Image image = create();
         entityManager.persist(image);
 
-        Image actual = imageRepository.findByIdAndParentData(image.getId(), image.getParentId(), image.getParentType());
+        Image actual = imageRepository.findById(image.getId());
 
         assertNotNull(actual.getValue());
     }
