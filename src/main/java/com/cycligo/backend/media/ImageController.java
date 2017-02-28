@@ -47,11 +47,11 @@ public class ImageController {
     @RequestMapping(value = "/media/image", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<Long> upload(@RequestParam("photo") MultipartFile image) {
+//        Content-Disposition: form-data; name="photo"; filename="more-soon.jpg"
+//        Content-Type: image/jpeg
         Image upload = new Image();
         try {
-            upload.setParentType("DELETE");
-            upload.setParentId(1L);
-            upload.setMediaType(MediaType.IMAGE_JPEG_VALUE);
+            upload.setMediaType(MediaType.IMAGE_JPEG_VALUE); //get content type from request
             upload.setValue(image.getBytes());
             upload = imageRepository.save(upload);
         } catch (IOException e) {
