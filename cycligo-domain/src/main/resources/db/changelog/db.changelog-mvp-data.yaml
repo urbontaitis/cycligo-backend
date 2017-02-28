@@ -5,28 +5,40 @@ databaseChangeLog:
       comment: "Initial data for filter component"
       changes:
         - insert:
-            tableName: filter_event
+            tableName: lookup
             columns:
               - column:
-                  name: title
+                  name: name
+                  value: "MTB"
+              - column:
+                  name: value
                   value: "MTB"
         - insert:
-            tableName: filter_event
+            tableName: lookup
             columns:
               - column:
-                  name: title
+                  name: name
+                  value: "ROAD"
+              - column:
+                  name: value
                   value: "ROAD"
         - insert:
-            tableName: filter_event
+            tableName: lookup
             columns:
               - column:
-                  name: title
+                  name: name
+                  value: "COUNTRIES"
+              - column:
+                  name: value
                   value: "Countries"
         - insert:
-            tableName: filter_event
+            tableName: lookup
             columns:
               - column:
-                  name: title
+                  name: name
+                  value: "DISTANCE"
+              - column:
+                  name: value
                   value: "Distance"
 
   - changeSet:
@@ -37,7 +49,7 @@ databaseChangeLog:
         - loadData:
             encoding: UTF-8
             file: db/changelog/data/mtb-data.csv
-            tableName: filter_choice
+            tableName: lookup
 
   - changeSet:
       id: 2-data-add-filter-id
@@ -46,7 +58,7 @@ databaseChangeLog:
       changes:
         - sql:
             splitStatements: true
-            sql: UPDATE filter_choice SET filter_id=(SELECT id FROM filter_event WHERE title = 'MTB') WHERE filter_id IS NULL
+            sql: UPDATE lookup SET lookup_id=(SELECT id FROM lookup WHERE name = 'MTB') WHERE lookup_id IS NULL
             stripComments: true
 
   - changeSet:
@@ -58,7 +70,7 @@ databaseChangeLog:
               columns:
               encoding: UTF-8
               file: db/changelog/data/road-data.csv
-              tableName: filter_choice
+              tableName: lookup
 
   - changeSet:
       id: 3-data-add-filter-id
@@ -67,7 +79,7 @@ databaseChangeLog:
       changes:
         - sql:
             splitStatements: true
-            sql: UPDATE filter_choice SET filter_id=(SELECT id FROM filter_event WHERE title = 'ROAD') WHERE filter_id IS NULL
+            sql: UPDATE lookup SET lookup_id=(SELECT id FROM lookup WHERE name = 'ROAD') WHERE lookup_id IS NULL
             stripComments: true
 
   - changeSet:
@@ -79,7 +91,7 @@ databaseChangeLog:
               columns:
               encoding: UTF-8
               file: db/changelog/data/countries-data.csv
-              tableName: filter_choice
+              tableName: lookup
 
   - changeSet:
       id: 4-data-add-filter-id
@@ -88,7 +100,7 @@ databaseChangeLog:
       changes:
         - sql:
             splitStatements: true
-            sql: UPDATE filter_choice SET filter_id=(SELECT id FROM filter_event WHERE title = 'Countries') WHERE filter_id IS NULL
+            sql: UPDATE lookup SET lookup_id=(SELECT id FROM lookup WHERE name = 'COUNTRIES') WHERE lookup_id IS NULL
             stripComments: true
 
   - changeSet:
@@ -100,7 +112,7 @@ databaseChangeLog:
               columns:
               encoding: UTF-8
               file: db/changelog/data/distance-data.csv
-              tableName: filter_choice
+              tableName: lookup
 
   - changeSet:
       id: 5-data-add-filter-id
@@ -109,5 +121,5 @@ databaseChangeLog:
       changes:
         - sql:
             splitStatements: true
-            sql: UPDATE filter_choice SET filter_id=(SELECT id FROM filter_event WHERE title = 'Distance') WHERE filter_id IS NULL
+            sql: UPDATE lookup SET lookup_id=(SELECT id FROM lookup WHERE name = 'DISTANCE') WHERE lookup_id IS NULL
             stripComments: true

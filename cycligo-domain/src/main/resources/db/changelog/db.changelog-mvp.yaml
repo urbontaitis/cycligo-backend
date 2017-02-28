@@ -117,13 +117,13 @@ databaseChangeLog:
                       type: decimal(9,6)
                   - column:
                       name: city_id
-                      typa: bigint
+                      type: bigint
                   - column:
                       name: country_id
-                      typa: bigint
+                      type: bigint
                   - column:
                       name: continent_id
-                      typa: bigint
+                      type: bigint
 
 
 - changeSet:
