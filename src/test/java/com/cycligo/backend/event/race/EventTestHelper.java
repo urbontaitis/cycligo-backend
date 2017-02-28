@@ -1,7 +1,8 @@
 package com.cycligo.backend.event.race;
 
-import com.cycligo.backend.event.Event;
-import com.cycligo.backend.event.EventDto;
+import com.cycligo.backend.event.*;
+import com.cycligo.backend.location.Location;
+import com.cycligo.backend.lookup.Lookup;
 
 import java.time.LocalDateTime;
 
@@ -12,16 +13,19 @@ import java.time.LocalDateTime;
 public class EventTestHelper {
 
     protected static EventDto initEventDto() {
-        return new EventDto(
-                1L,
-                "test-title",
-                "test-description",
-                LocalDateTime.of(2017,01,01,10,30),
-                "test-location",
-                "test-event-type",
-                "test-distance",
-                "test-elevation",
-                "test-ticket-price");
+        EventDto dto = new EventDto();
+        dto.setId(1L);
+        dto.setTitle("test-title");
+        dto.setDescription("test-description");
+        dto.setStarts(LocalDateTime.of(2017,01,01,10,30));
+        dto.setEnds(LocalDateTime.of(2017,01,10,00,00));
+        dto.setLocation(new LocationDto("test-location"));
+        dto.setDiscipline("MTB");
+        dto.setCategory("marathon");
+        dto.getDetails().add(new EventDetailDto(100, 2000, (double) 50));
+        dto.setLinkToEvent("http://cycligo.com");
+
+        return dto;
     }
 
     protected static Event initEvent() {
@@ -29,11 +33,16 @@ public class EventTestHelper {
         event.setTitle("test-title");
         event.setDescription("test-description");
         event.setStarts(LocalDateTime.of(2017,01,01,10,30));
-//        event.setLocation("test-location");
-//        event.setEventType("test-event-type");
-//        event.setDistance("test-distance");
-//        event.setElevation("test-elevation");
-//        event.setPrice("test-ticket-price");
+//        event.setLocation(new Location());
+//        event.setDiscipline(new Lookup());
+//        event.setCategory(new Lookup());
+//        event.setEventDetails();
+        event.setApproved(false);
+        event.setPhotoId(100L);
+//        event.setCreatedAt();
+//        event.setCreatedBy();
+//        event.setUpdatedAt();
+//        event.setUpdatedAt();
         return event;
     }
 
