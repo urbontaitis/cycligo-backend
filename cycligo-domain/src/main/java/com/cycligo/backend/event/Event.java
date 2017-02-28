@@ -1,10 +1,9 @@
 package com.cycligo.backend.event;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.sql.Timestamp;
+import com.cycligo.backend.location.Location;
+import com.cycligo.backend.lookup.Lookup;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
@@ -22,17 +21,32 @@ public class Event {
 
     private String description;
 
-    private LocalDateTime date;
+    private LocalDateTime starts;
 
-    private String location;
+    private LocalDateTime ends;
 
-    private String eventType;
+    private Location location;
 
-    private String distance;
+    private Long imageId;
 
-    private String elevation;
+    private Lookup discipline;
 
-    private String price;
+    private Lookup category;
+
+    private EventDetail eventDetail;
+
+    private boolean approved;
+
+    private Long createdBy;
+
+    private LocalDateTime createdAt;
+
+    private Long updatedBy;
+
+    private Long updatedAt;
+
+    @Version
+    private int version;
 
     public Long getId() {
         return id;
@@ -58,51 +72,107 @@ public class Event {
         this.description = description;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public LocalDateTime getStarts() {
+        return starts;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setStarts(LocalDateTime starts) {
+        this.starts = starts;
     }
 
-    public String getLocation() {
+    public LocalDateTime getEnds() {
+        return ends;
+    }
+
+    public void setEnds(LocalDateTime ends) {
+        this.ends = ends;
+    }
+
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 
-    public String getEventType() {
-        return eventType;
+    public Long getImageId() {
+        return imageId;
     }
 
-    public void setEventType(String eventType) {
-        this.eventType = eventType;
+    public void setImageId(Long imageId) {
+        this.imageId = imageId;
     }
 
-    public String getDistance() {
-        return distance;
+    public Lookup getDiscipline() {
+        return discipline;
     }
 
-    public void setDistance(String distance) {
-        this.distance = distance;
+    public void setDiscipline(Lookup discipline) {
+        this.discipline = discipline;
     }
 
-    public String getElevation() {
-        return elevation;
+    public Lookup getCategory() {
+        return category;
     }
 
-    public void setElevation(String elevation) {
-        this.elevation = elevation;
+    public void setCategory(Lookup category) {
+        this.category = category;
     }
 
-    public String getPrice() {
-        return price;
+    public EventDetail getEventDetail() {
+        return eventDetail;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setEventDetail(EventDetail eventDetail) {
+        this.eventDetail = eventDetail;
+    }
+
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
+
+    public Long getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(Long createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Long getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(Long updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public Long getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Long updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    protected int getVersion() {
+        return version;
+    }
+
+    protected void setVersion(int version) {
+        this.version = version;
     }
 }

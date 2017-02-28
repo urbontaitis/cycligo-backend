@@ -19,32 +19,51 @@ databaseChangeLog:
                   type: nvarchar(50)
               - column:
                   name: description
-                  type: nvarchar(6000)
+                  type: nvarchar(4000)
               - column:
-                  name: date
+                  name: starts
+                  type: datetime
+              - column:
+                  name: ends
                   type: datetime
               - column:
                   name: location
                   type: varchar(50)
               - column:
-                  name: event_type
-                  type: varchar(20)
+                  name: photo_id
+                  type: bigint
               - column:
-                  name: distance
-                  type: varchar(20)
+                  name: discipline_id
+                  type: bigint
               - column:
-                  name: elevation
-                  type: varchar(20)
+                  name: category_id
+                  type: bigint
               - column:
-                  name: price
-                  type: varchar(20)
+                  name: approved
+                  type: tinyint
+              - column:
+                  name: created_by
+                  type: bigint
+              - column:
+                  name: created_at
+                  type: timestamp
+              - column:
+                  name: updated_by
+                  type: bigint
+              - column:
+                  name: update_at
+                  type: bigint
+              - column:
+                  name: version
+                  type: int
+
 
 - changeSet:
-      id: 2
+      id: 1-eventDetail
       author: murbontaitis
       changes:
         - createTable:
-            tableName: filter_event
+            tableName: event_detail
             columns:
               - column:
                   name: id
@@ -54,14 +73,65 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: title
-                  type: varchar(50)
+                  name: event_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_event_detail_event
+                    refenrences: event(id)
+                    nullable: false
+              - column:
+                  name: distance
+                  type: int
+              - column:
+                  name: elevation
+                  type: int
+              - column:
+                  name: price
+                  type: decimal(13, 2)
+
 - changeSet:
-      id: 3
+      id: 1-location
+      author: murbontaitis
+      changes:
+          - createTable:
+                tableName: location
+                columns:
+                  - column:
+                      name: id
+                      type: bigint
+                      autoIncrement: true
+                      constraints:
+                          primaryKey: true
+                          nullable: false
+                  - column:
+                      name: label
+                      type: nvarchar(256)
+                  - column:
+                      name: placeId
+                      type: nvarchar(256)
+                  - column:
+                      name: latitude
+                      type: decimal(9,6)
+                  - column:
+                      name: longitude
+                      type: decimal(9,6)
+                  - column:
+                      name: city_id
+                      typa: bigint
+                  - column:
+                      name: country_id
+                      typa: bigint
+                  - column:
+                      name: continent_id
+                      typa: bigint
+
+
+- changeSet:
+      id: 2
       author: murbontaitis
       changes:
         - createTable:
-            tableName: filter_choice
+            tableName: lookup
             columns:
               - column:
                   name: id
@@ -77,12 +147,48 @@ databaseChangeLog:
                   name: value
                   type: varchar(50)
               - column:
-                  name: filter_id
+                  name: lookup_id
                   type: bigint
                   constraints:
-                    foreignKeyName: fk_filter_choice_filer_event
-                    references: filter_event(id)
+                    foreignKeyName: fk_lookup_lookup
+                    references: lookup(id)
                     nulable: false
+
+- changeSet:
+      id: 3-image
+      author: murbontaitis
+      changes:
+          - createTable:
+              tableName: image
+              columns:
+                - column:
+                    name: id
+                    type: bigint
+                    autoIncrement: true
+                    constraints:
+                        primaryKey: true
+                        nullable: false
+                - column:
+                    name: value
+                    type: longblob
+                    constraints:
+                        nullable: false
+                - column:
+                    name: media_type
+                    type: varchar(25)
+                - column:
+                    name: created_by
+                    type: bigint
+                - column:
+                    name: created_at
+                    type: timestamp
+                - column:
+                    name: updated_by
+                    type: bigint
+                - column:
+                    name: updated_at
+                    type: timestamp
+
 - changeSet:
       id: 4
       author: murbontaitis
@@ -153,35 +259,5 @@ databaseChangeLog:
                     type: varchar(10)
                     constraints:
                         nullable: false
-- changeSet:
-      id: 6
-      author: murbontaitis
-      changes:
-          - createTable:
-              tableName: image
-              columns:
-                - column:
-                    name: id
-                    type: bigint
-                    autoIncrement: true
-                    constraints:
-                        primaryKey: true
-                        nullable: false
-                - column:
-                    name: value
-                    type: longblob
-                    constraints:
-                        nullable: false
-                - column:
-                    name: parent_id
-                    type: bigint
-                    constraints:
-                        nullable: false
-                - column:
-                    name: parent_type
-                    type: varchar(10)
-                    constraints:
-                        nullable: false
-                - column:
-                    name: media_type
-                    type: varchar(25)
+
+

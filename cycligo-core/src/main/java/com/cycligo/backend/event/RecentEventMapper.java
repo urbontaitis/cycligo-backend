@@ -10,7 +10,7 @@ public class RecentEventMapper {
         RecentEvent dto = new RecentEvent();
         dto.setId(entity.getId());
         dto.setTitle(entity.getTitle());
-        dto.setDate(entity.getDate());
+//        dto.setDate(entity.getDate());
         dto.setTime(""); // FIXME
         dto.setPicture(""); // FIXME add picture to entity
 

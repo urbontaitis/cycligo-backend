@@ -8,7 +8,8 @@ import java.util.Set;
  * Created by Mindaugas Urbontaitis on 25/01/2017.
  * cycligo-backend
  */
-@Entity
+//@Entity
+@Deprecated
 public class FilterEvent {
 
     @Id

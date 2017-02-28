@@ -28,12 +28,12 @@ public class EventTestHelper {
         Event event = new Event();
         event.setTitle("test-title");
         event.setDescription("test-description");
-        event.setDate(LocalDateTime.of(2017,01,01,10,30));
-        event.setLocation("test-location");
-        event.setEventType("test-event-type");
-        event.setDistance("test-distance");
-        event.setElevation("test-elevation");
-        event.setPrice("test-ticket-price");
+        event.setStarts(LocalDateTime.of(2017,01,01,10,30));
+//        event.setLocation("test-location");
+//        event.setEventType("test-event-type");
+//        event.setDistance("test-distance");
+//        event.setElevation("test-elevation");
+//        event.setPrice("test-ticket-price");
         return event;
     }
 

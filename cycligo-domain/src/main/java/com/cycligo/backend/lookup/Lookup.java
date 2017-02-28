@@ -1,14 +1,15 @@
-package com.cycligo.backend.filter.event;
+package com.cycligo.backend.lookup;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
- * Created by Mindaugas Urbontaitis on 25/01/2017.
- * cycligo-backend
+ * Created by Mindaugas Urbontaitis on 28/02/2017.
+ * cycligo-rest-api
  */
-//@Entity
-@Deprecated
-public class FilterChoice {
+@Entity
+public class Lookup {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +19,9 @@ public class FilterChoice {
 
     private String value;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "filter_id", nullable = false)
-    private FilterEvent filterEvent;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "lookup_id", nullable = true)
+    private Set<Lookup> lookups = new HashSet<>(0);
 
     public Long getId() {
         return id;
@@ -46,11 +47,11 @@ public class FilterChoice {
         this.value = value;
     }
 
-    public FilterEvent getFilterEvent() {
-        return filterEvent;
+    public Set<Lookup> getLookups() {
+        return lookups;
     }
 
-    public void setFilterEvent(FilterEvent filterEvent) {
-        this.filterEvent = filterEvent;
+    public void setLookups(Set<Lookup> lookups) {
+        this.lookups = lookups;
     }
 }
