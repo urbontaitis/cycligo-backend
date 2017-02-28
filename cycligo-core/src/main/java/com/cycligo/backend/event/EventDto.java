@@ -4,38 +4,33 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Mindaugas Urbontaitis on 25/01/2017.
  * cycligo-backend
  */
 public class EventDto {
+
     private Long id;
     private String title;
     private String description;
 
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime date;
-    private String location;
-    private String eventType;
-    private String distance;
-    private String elevation;
-    private String ticketPrice;
+    private LocalDateTime starts;
 
-    public EventDto() {}
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime ends;
 
-    public EventDto(Long id, String title, String description, LocalDateTime date, String location, String eventType, String distance, String elevation, String ticketPrice) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.date = date;
-        this.location = location;
-        this.eventType = eventType;
-        this.distance = distance;
-        this.elevation = elevation;
-        this.ticketPrice = ticketPrice;
-    }
+    private LocationDto location;
+    private String discipline;
+    private String category;
+    private List<EventDetailDto> details;
+    private Long photo;
+    private String linkToEvent;
 
     public Long getId() {
         return id;
@@ -61,51 +56,70 @@ public class EventDto {
         this.description = description;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public LocalDateTime getStarts() {
+        return starts;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setStarts(LocalDateTime starts) {
+        this.starts = starts;
     }
 
-    public String getLocation() {
+    public LocalDateTime getEnds() {
+        return ends;
+    }
+
+    public void setEnds(LocalDateTime ends) {
+        this.ends = ends;
+    }
+
+    public LocationDto getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(LocationDto location) {
         this.location = location;
     }
 
-    public String getEventType() {
-        return eventType;
+    public String getDiscipline() {
+        return discipline;
     }
 
-    public void setEventType(String eventType) {
-        this.eventType = eventType;
+    public void setDiscipline(String discipline) {
+        this.discipline = discipline;
     }
 
-    public String getDistance() {
-        return distance;
+    public String getCategory() {
+        return category;
     }
 
-    public void setDistance(String distance) {
-        this.distance = distance;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public String getElevation() {
-        return elevation;
+    public List<EventDetailDto> getDetails() {
+        if (details == null) {
+            details = new ArrayList<>();
+        }
+        return details;
     }
 
-    public void setElevation(String elevation) {
-        this.elevation = elevation;
+    public void setDetails(List<EventDetailDto> details) {
+        this.details = details;
     }
 
-    public String getTicketPrice() {
-        return ticketPrice;
+    public Long getPhoto() {
+        return photo;
     }
 
-    public void setTicketPrice(String ticketPrice) {
-        this.ticketPrice = ticketPrice;
+    public void setPhoto(Long photo) {
+        this.photo = photo;
+    }
+
+    public String getLinkToEvent() {
+        return linkToEvent;
+    }
+
+    public void setLinkToEvent(String linkToEvent) {
+        this.linkToEvent = linkToEvent;
     }
 }

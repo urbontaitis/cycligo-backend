@@ -1,6 +1,9 @@
 package com.cycligo.backend.event;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDateTime;
+
 
 /**
  * Created by Mindaugas Urbontaitis on 25/01/2017.
@@ -9,9 +12,13 @@ import java.time.LocalDateTime;
 public class RecentEvent {
     private Long id;
     private String title;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDateTime date;
-    private String time;
-    private String picture; //TODO how to handle it?
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    private LocalDateTime time;
+    private Long photo;
     private String link;
 
     public Long getId() {
@@ -38,20 +45,20 @@ public class RecentEvent {
         this.date = date;
     }
 
-    public String getTime() {
+    public LocalDateTime getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(LocalDateTime time) {
         this.time = time;
     }
 
-    public String getPicture() {
-        return picture;
+    public Long getPhoto() {
+        return photo;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setPhoto(Long photo) {
+        this.photo = photo;
     }
 
     public String getLink() {

@@ -26,7 +26,7 @@ public class Image {
 
     private Long updatedBy;
 
-    private Long updatedAt;
+    private LocalDateTime updatedAt;
 
     public Long getId() {
         return id;
@@ -76,11 +76,11 @@ public class Image {
         this.updatedBy = updatedBy;
     }
 
-    public Long getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Long updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 }

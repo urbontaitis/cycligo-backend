@@ -5,6 +5,8 @@ import com.cycligo.backend.lookup.Lookup;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Mindaugas Urbontaitis on 25/01/2017.
@@ -25,15 +27,24 @@ public class Event {
 
     private LocalDateTime ends;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "location_id", nullable = false)
     private Location location;
 
-    private Long imageId;
+    private Long photoId;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "discipline_id", nullable = false)
     private Lookup discipline;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false)
     private Lookup category;
 
-    private EventDetail eventDetail;
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
+    private Set<EventDetail> eventDetails = new HashSet<>(0);
+
+    private String linkToEvent;
 
     private boolean approved;
 
@@ -43,7 +54,7 @@ public class Event {
 
     private Long updatedBy;
 
-    private Long updatedAt;
+    private LocalDateTime updatedAt;
 
     @Version
     private int version;
@@ -96,12 +107,12 @@ public class Event {
         this.location = location;
     }
 
-    public Long getImageId() {
-        return imageId;
+    public Long getPhotoId() {
+        return photoId;
     }
 
-    public void setImageId(Long imageId) {
-        this.imageId = imageId;
+    public void setPhotoId(Long photoId) {
+        this.photoId = photoId;
     }
 
     public Lookup getDiscipline() {
@@ -120,12 +131,20 @@ public class Event {
         this.category = category;
     }
 
-    public EventDetail getEventDetail() {
-        return eventDetail;
+    public Set<EventDetail> getEventDetails() {
+        return eventDetails;
     }
 
-    public void setEventDetail(EventDetail eventDetail) {
-        this.eventDetail = eventDetail;
+    public void setEventDetails(Set<EventDetail> eventDetails) {
+        this.eventDetails = eventDetails;
+    }
+
+    public String getLinkToEvent() {
+        return linkToEvent;
+    }
+
+    public void setLinkToEvent(String linkToEvent) {
+        this.linkToEvent = linkToEvent;
     }
 
     public boolean isApproved() {
@@ -160,11 +179,11 @@ public class Event {
         this.updatedBy = updatedBy;
     }
 
-    public Long getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Long updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 

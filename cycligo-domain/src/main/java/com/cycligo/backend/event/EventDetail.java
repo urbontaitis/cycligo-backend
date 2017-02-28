@@ -1,9 +1,6 @@
 package com.cycligo.backend.event;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 /**
@@ -17,7 +14,9 @@ public class EventDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long eventId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id", nullable = false)
+    private Event event;
 
     private int distance;
 
@@ -33,12 +32,12 @@ public class EventDetail {
         this.id = id;
     }
 
-    public Long getEventId() {
-        return eventId;
+    public Event getEventId() {
+        return event;
     }
 
-    public void setEventId(Long eventId) {
-        this.eventId = eventId;
+    public void setEventId(Event eventId) {
+        this.event = event;
     }
 
     public int getDistance() {
