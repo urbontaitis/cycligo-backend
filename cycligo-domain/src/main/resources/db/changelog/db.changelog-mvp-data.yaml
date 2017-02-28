@@ -27,19 +27,19 @@ databaseChangeLog:
             columns:
               - column:
                   name: name
-                  value: "COUNTRIES"
+                  value: "Countries"
               - column:
                   name: value
-                  value: "Countries"
+                  value: "COUNTRIES"
         - insert:
             tableName: lookup
             columns:
               - column:
                   name: name
-                  value: "DISTANCE"
+                  value: "Distance"
               - column:
                   name: value
-                  value: "Distance"
+                  value: "DISTANCE"
 
   - changeSet:
       id: 2-data
@@ -49,7 +49,7 @@ databaseChangeLog:
         - loadData:
             encoding: UTF-8
             file: db/changelog/data/mtb-data.csv
-            tableName: lookup
+            tableName: lookup_value
 
   - changeSet:
       id: 2-data-add-filter-id
@@ -58,7 +58,7 @@ databaseChangeLog:
       changes:
         - sql:
             splitStatements: true
-            sql: UPDATE lookup SET lookup_id=(SELECT id FROM lookup WHERE name = 'MTB') WHERE lookup_id IS NULL
+            sql: UPDATE lookup_value SET lookup_id=(SELECT id FROM lookup WHERE value = 'MTB') WHERE lookup_id IS NULL
             stripComments: true
 
   - changeSet:
@@ -70,7 +70,7 @@ databaseChangeLog:
               columns:
               encoding: UTF-8
               file: db/changelog/data/road-data.csv
-              tableName: lookup
+              tableName: lookup_value
 
   - changeSet:
       id: 3-data-add-filter-id
@@ -79,7 +79,7 @@ databaseChangeLog:
       changes:
         - sql:
             splitStatements: true
-            sql: UPDATE lookup SET lookup_id=(SELECT id FROM lookup WHERE name = 'ROAD') WHERE lookup_id IS NULL
+            sql: UPDATE lookup_value SET lookup_id=(SELECT id FROM lookup WHERE value = 'ROAD') WHERE lookup_id IS NULL
             stripComments: true
 
   - changeSet:
@@ -91,7 +91,7 @@ databaseChangeLog:
               columns:
               encoding: UTF-8
               file: db/changelog/data/countries-data.csv
-              tableName: lookup
+              tableName: lookup_value
 
   - changeSet:
       id: 4-data-add-filter-id
@@ -100,7 +100,7 @@ databaseChangeLog:
       changes:
         - sql:
             splitStatements: true
-            sql: UPDATE lookup SET lookup_id=(SELECT id FROM lookup WHERE name = 'COUNTRIES') WHERE lookup_id IS NULL
+            sql: UPDATE lookup_value SET lookup_id=(SELECT id FROM lookup WHERE value = 'COUNTRIES') WHERE lookup_id IS NULL
             stripComments: true
 
   - changeSet:
@@ -112,7 +112,7 @@ databaseChangeLog:
               columns:
               encoding: UTF-8
               file: db/changelog/data/distance-data.csv
-              tableName: lookup
+              tableName: lookup_value
 
   - changeSet:
       id: 5-data-add-filter-id
@@ -121,5 +121,5 @@ databaseChangeLog:
       changes:
         - sql:
             splitStatements: true
-            sql: UPDATE lookup SET lookup_id=(SELECT id FROM lookup WHERE name = 'DISTANCE') WHERE lookup_id IS NULL
+            sql: UPDATE lookup_value SET lookup_id=(SELECT id FROM lookup WHERE value = 'DISTANCE') WHERE lookup_id IS NULL
             stripComments: true

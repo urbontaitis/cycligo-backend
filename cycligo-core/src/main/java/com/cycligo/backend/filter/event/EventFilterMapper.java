@@ -1,6 +1,7 @@
 package com.cycligo.backend.filter.event;
 
 import com.cycligo.backend.lookup.Lookup;
+import com.cycligo.backend.lookup.LookupValue;
 
 /**
  * Created by Mindaugas Urbontaitis on 25/01/2017.
@@ -12,13 +13,13 @@ public class EventFilterMapper {
         EventFilterDto dto = new EventFilterDto();
         dto.setId(filter.getId());
         dto.setTitle(filter.getName());
-        for (Lookup filterChoice : filter.getLookups()) {
-            dto.getChoices().add(entit2Dto(filterChoice));
+        for (LookupValue filterChoice : filter.getLookups()) {
+            dto.getChoices().add(entity2Dto(filterChoice));
         }
         return dto;
     }
 
-    ChoiceDto entit2Dto(Lookup filterChoice) {
+    ChoiceDto entity2Dto(LookupValue filterChoice) {
         ChoiceDto dto = new ChoiceDto();
         dto.setId(filterChoice.getId());
         dto.setName(filterChoice.getName());

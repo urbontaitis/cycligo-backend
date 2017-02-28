@@ -1,15 +1,13 @@
 package com.cycligo.backend.lookup;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by Mindaugas Urbontaitis on 28/02/2017.
  * cycligo-rest-api
  */
 @Entity
-public class Lookup {
+public class LookupValue {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,9 +17,9 @@ public class Lookup {
 
     private String value;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "lookup_id", nullable = true)
-    private Set<LookupValue> lookups = new HashSet<>(0);
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "lookup_id", nullable = false)
+    private Lookup lookup;
 
     public Long getId() {
         return id;
@@ -47,11 +45,11 @@ public class Lookup {
         this.value = value;
     }
 
-    public Set<LookupValue> getLookups() {
-        return lookups;
+    public Lookup getLookup() {
+        return lookup;
     }
 
-    public void setLookups(Set<LookupValue> lookups) {
-        this.lookups = lookups;
+    public void setLookup(Lookup lookup) {
+        this.lookup = lookup;
     }
 }

@@ -1,8 +1,9 @@
 package com.cycligo.backend.event.race;
 
-import com.cycligo.backend.event.*;
-import com.cycligo.backend.location.Location;
-import com.cycligo.backend.lookup.Lookup;
+import com.cycligo.backend.event.Event;
+import com.cycligo.backend.event.EventDetailDto;
+import com.cycligo.backend.event.EventDto;
+import com.cycligo.backend.event.LocationDto;
 
 import java.time.LocalDateTime;
 

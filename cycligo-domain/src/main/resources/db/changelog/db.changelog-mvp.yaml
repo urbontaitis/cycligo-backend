@@ -149,11 +149,32 @@ databaseChangeLog:
               - column:
                   name: value
                   type: varchar(50)
+
+- changeSet:
+      id: 2-lookup-value
+      author: murbontaitis
+      changes:
+        - createTable:
+            tableName: lookup_value
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: nvarchar(50)
+              - column:
+                  name: value
+                  type: varchar(50)
               - column:
                   name: lookup_id
                   type: bigint
                   constraints:
-                    foreignKeyName: fk_lookup_lookup
+                    foreignKeyName: fk_lookup_value_lookup
                     references: lookup(id)
                     nulable: false
 

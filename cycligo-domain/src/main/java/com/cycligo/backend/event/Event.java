@@ -1,7 +1,7 @@
 package com.cycligo.backend.event;
 
 import com.cycligo.backend.location.Location;
-import com.cycligo.backend.lookup.Lookup;
+import com.cycligo.backend.lookup.LookupValue;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -35,11 +35,11 @@ public class Event {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "discipline_id", nullable = false)
-    private Lookup discipline;
+    private LookupValue discipline;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
-    private Lookup category;
+    private LookupValue category;
 
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
     private Set<EventDetail> eventDetails = new HashSet<>(0);
@@ -115,19 +115,19 @@ public class Event {
         this.photoId = photoId;
     }
 
-    public Lookup getDiscipline() {
+    public LookupValue getDiscipline() {
         return discipline;
     }
 
-    public void setDiscipline(Lookup discipline) {
+    public void setDiscipline(LookupValue discipline) {
         this.discipline = discipline;
     }
 
-    public Lookup getCategory() {
+    public LookupValue getCategory() {
         return category;
     }
 
-    public void setCategory(Lookup category) {
+    public void setCategory(LookupValue category) {
         this.category = category;
     }
 
