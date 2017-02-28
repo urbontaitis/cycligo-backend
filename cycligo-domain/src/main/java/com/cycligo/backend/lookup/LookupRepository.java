@@ -1,5 +1,6 @@
 package com.cycligo.backend.lookup;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +10,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface LookupRepository extends CrudRepository<Lookup, Long> {
+
+    @Query("select l from Lookup l where l.name = 'MTB' or l.name = 'ROAD' or l.name='COUNTRIES' or l.name = 'DISTANCE'")
+    Iterable<Lookup> findAllFilters();
 }

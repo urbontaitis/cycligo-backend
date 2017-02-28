@@ -1,5 +1,7 @@
 package com.cycligo.backend.filter.event;
 
+import com.cycligo.backend.lookup.Lookup;
+import com.cycligo.backend.lookup.LookupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,20 +16,20 @@ import java.util.List;
 @Service
 public class EventFilterService {
 
-    private EventFilterRepository eventFilterRepository;
+    private LookupRepository lookupRepository;
     private EventFilterMapper mapper = new EventFilterMapper();
 
     @Autowired
-    public EventFilterService(EventFilterRepository eventFilterRepository) {
-        this.eventFilterRepository = eventFilterRepository;
+    public EventFilterService(LookupRepository lookupRepository) {
+        this.lookupRepository = lookupRepository;
     }
 
     @Transactional
     public List<EventFilterDto> fetchAll() {
         List<EventFilterDto> result = new ArrayList<>();
-        Iterable<FilterEvent> filters = eventFilterRepository.findAll();
-        for (FilterEvent filter : filters) {
-            result.add(mapper.entity2Dto(filter));
+        Iterable<Lookup> filters = lookupRepository.findAll();
+        for (Lookup lookup : filters) {
+            result.add(mapper.entity2Dto(lookup));
         }
 
         return result;
