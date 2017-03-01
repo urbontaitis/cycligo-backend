@@ -11,7 +11,6 @@ public class RecentEventMapper {
         dto.setId(entity.getId());
         dto.setTitle(entity.getTitle());
         dto.setDate(entity.getStarts());
-        dto.setTime(entity.getStarts());
         dto.setPhoto(entity.getPhotoId());
 
         return dto;

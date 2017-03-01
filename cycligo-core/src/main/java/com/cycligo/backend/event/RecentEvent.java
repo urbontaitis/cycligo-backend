@@ -11,18 +11,16 @@ import java.time.LocalDateTime;
  * cycligo-backend
  */
 public class RecentEvent {
+
     private Long id;
+
     private String title;
 
-    @JsonFormat(pattern="yyyy-MM-dd")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime date;
 
-    @JsonFormat(pattern="HH:mm")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
-    private LocalDateTime time;
     private Long photo;
-    private String link;
 
     public Long getId() {
         return id;
@@ -48,14 +46,6 @@ public class RecentEvent {
         this.date = date;
     }
 
-    public LocalDateTime getTime() {
-        return time;
-    }
-
-    public void setTime(LocalDateTime time) {
-        this.time = time;
-    }
-
     public Long getPhoto() {
         return photo;
     }
@@ -64,11 +54,4 @@ public class RecentEvent {
         this.photo = photo;
     }
 
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
 }
