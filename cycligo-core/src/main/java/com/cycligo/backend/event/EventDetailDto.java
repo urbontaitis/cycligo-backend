@@ -8,14 +8,14 @@ public class EventDetailDto {
 
     private Integer distance;
     private Integer elevation;
-    private Double ticketPrice;
+    private Double price;
 
     public EventDetailDto() {}
 
-    public EventDetailDto(Integer distance, Integer elevation, Double ticketPrice) {
+    public EventDetailDto(Integer distance, Integer elevation, Double price) {
         this.distance = distance;
         this.elevation = elevation;
-        this.ticketPrice = ticketPrice;
+        this.price = price;
     }
 
     public Integer getDistance() {
@@ -34,11 +34,11 @@ public class EventDetailDto {
         this.elevation = elevation;
     }
 
-    public Double getTicketPrice() {
-        return ticketPrice;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setTicketPrice(Double ticketPrice) {
-        this.ticketPrice = ticketPrice;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

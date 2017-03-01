@@ -16,8 +16,8 @@ class EventMapper {
         dto.setEnds(event.getEnds());
         dto.setPhoto(event.getPhotoId());
         dto.setDescription(event.getDescription());
-        dto.setDiscipline(event.getDiscipline().getValue());
-        dto.setCategory(event.getCategory().getValue());
+        dto.setDiscipline(event.getDiscipline().getName());
+        dto.setCategory(event.getCategory().getName());
         dto.setLocation(entity2Dto(event.getLocation()));
         dto.setLinkToEvent(event.getLinkToEvent());
         for (EventDetail eventDetail : event.getEventDetails()) {
@@ -31,7 +31,7 @@ class EventMapper {
         EventDetailDto dto = new EventDetailDto();
         dto.setDistance(eventDetail.getDistance());
         dto.setElevation(eventDetail.getElevation());
-        dto.setTicketPrice(eventDetail.getPrice().doubleValue());
+        dto.setPrice(eventDetail.getPrice().doubleValue());
         return dto;
     }
 
