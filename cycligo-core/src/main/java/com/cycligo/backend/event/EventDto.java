@@ -17,12 +17,12 @@ public class EventDto {
     private String title;
     private String description;
 
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDateTime starts;
 
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDateTime ends;
 
     private LocationDto location;

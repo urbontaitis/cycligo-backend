@@ -1,5 +1,6 @@
 package com.cycligo.backend.event;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
@@ -13,9 +14,11 @@ public class RecentEvent {
     private Long id;
     private String title;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDateTime date;
 
+    @JsonFormat(pattern="HH:mm")
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalDateTime time;
     private Long photo;
