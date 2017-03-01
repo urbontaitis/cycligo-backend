@@ -1,5 +1,7 @@
 package com.cycligo.backend.event;
 
+import com.cycligo.backend.location.Location;
+
 /**
  * Created by Mindaugas Urbontaitis on 25/01/2017.
  * cycligo-backend
@@ -10,14 +12,35 @@ class EventMapper {
         EventDto dto = new EventDto();
         dto.setId(event.getId());
         dto.setTitle(event.getTitle());
-//        dto.setDate(event.getDate());
-//        dto.setLocation(event.getLocation());
-//        dto.setEventType(event.getEventType());
-//        dto.setDistance(event.getDistance());
-//        dto.setElevation(event.getElevation());
-//        dto.setTicketPrice(event.getPrice());
+        dto.setStarts(event.getStarts());
+        dto.setEnds(event.getEnds());
+        dto.setPhoto(event.getPhotoId());
         dto.setDescription(event.getDescription());
+        dto.setDiscipline(event.getDiscipline().getValue());
+        dto.setCategory(event.getCategory().getValue());
+        dto.setLocation(entity2Dto(event.getLocation()));
+        dto.setLinkToEvent(event.getLinkToEvent());
+        for (EventDetail eventDetail : event.getEventDetails()) {
+            dto.getDetails().add(entity2Dto(eventDetail));
+        }
 
+        return dto;
+    }
+
+    EventDetailDto entity2Dto(EventDetail eventDetail) {
+        EventDetailDto dto = new EventDetailDto();
+        dto.setDistance(eventDetail.getDistance());
+        dto.setElevation(eventDetail.getElevation());
+        dto.setTicketPrice(eventDetail.getPrice().doubleValue());
+        return dto;
+    }
+
+    LocationDto entity2Dto(Location entity) {
+        LocationDto dto = new LocationDto();
+        dto.setLabel(entity.getLabel());
+        dto.setLatitude(entity.getLatitude().doubleValue());
+        dto.setLongitude(entity.getLongitude().doubleValue());
+        dto.setPlaceId(entity.getPlaceId());
         return dto;
     }
 
