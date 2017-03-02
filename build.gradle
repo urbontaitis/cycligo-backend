@@ -21,6 +21,11 @@ task dev << {
     bootRun.systemProperty 'spring.profiles.active', 'domain-dev'
 }
 
+task debugDev << {
+    bootRun.jvmArgs "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005"
+    dev
+}
+
 task qa << {
     bootRun.systemProperty 'spring.profiles.active', 'domain-qa'
 }
