@@ -3,7 +3,6 @@ package com.cycligo.backend.event.race;
 import com.cycligo.backend.base.MvcMockTest;
 import com.cycligo.backend.event.EventDto;
 import com.cycligo.backend.event.EventService;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,11 +58,11 @@ public class EventControllerTests extends MvcMockTest {
                 .andExpect(jsonPath("$.linkToEvent", is(expected.getLinkToEvent())));
     }
 
-    @Ignore("fails of custom validation Clock")
+    @Test
     public void createEvent() throws Exception {
         EventDto expected = initEventDto();
         expected.setId(null);
-        expected.setStarts(null);
+        expected.setStarts(LocalDateTime.now());
         expected.setEnds(null);
         String eventJson = json(expected);
         given(eventService.save(expected)).willReturn(1L);
