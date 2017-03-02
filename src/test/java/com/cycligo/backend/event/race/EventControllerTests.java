@@ -46,10 +46,13 @@ public class EventControllerTests extends MvcMockTest {
                 .andExpect(jsonPath("$.description", is(expected.getDescription())))
                 .andExpect(jsonPath("$.starts", is("2017-01-01T10:30:00")))
                 .andExpect(jsonPath("$.ends", is("2017-01-10T00:00:00")))
-//                .andExpect(jsonPath("$.location", is(expected.getLocation())))
+                .andExpect(jsonPath("$.location.label", is(expected.getLocation().getLabel())))
+                .andExpect(jsonPath("$.location.placeId", is(expected.getLocation().getPlaceId())))
+                .andExpect(jsonPath("$.location.latitude", is(expected.getLocation().getLatitude())))
+                .andExpect(jsonPath("$.location.longitude", is(expected.getLocation().getLongitude())))
                 .andExpect(jsonPath("$.discipline", is(expected.getDiscipline())))
                 .andExpect(jsonPath("$.category", is(expected.getCategory())))
-//                .andExpect(jsonPath("$.details", is(expected.getDetails())))
+                .andExpect(jsonPath("$.details[?(@.distance == \'100\' && @.elevation == \'2000\' && @.price == \'50.0\')]").exists())
                 .andExpect(jsonPath("$.photo", is(expected.getPhoto())))
                 .andExpect(jsonPath("$.linkToEvent", is(expected.getLinkToEvent())));
     }
