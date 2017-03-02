@@ -5,7 +5,9 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import java.time.Clock;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 /**
  * Created by Mindaugas Urbontaitis on 02/03/2017.
@@ -13,10 +15,10 @@ import java.time.LocalDateTime;
  */
 public class EventValidator implements Validator {
 
-    private Clock clock;
+    private final Clock clock;
 
     public EventValidator() {
-        clock.systemDefaultZone();
+        this.clock = Clock.systemDefaultZone();
     }
 
     protected EventValidator(Clock clock) {
@@ -31,8 +33,8 @@ public class EventValidator implements Validator {
         EventDto event = (EventDto) obj;
         LocalDateTime ends = event.getEnds();
         LocalDateTime starts = event.getStarts();
-        LocalDateTime today = LocalDateTime.now(clock);
-        if (starts.isBefore(today)) {
+        LocalDateTime today = LocalDateTime.now(clock).with(LocalTime.MIDNIGHT);
+        if (starts != null && starts.isBefore(today)) {
             e.rejectValue("starts", "event.starts_date_cannot_be_before_today");
         }
 

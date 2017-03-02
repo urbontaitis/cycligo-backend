@@ -1,6 +1,7 @@
 package com.cycligo.backend.event.race;
 
 import com.cycligo.backend.base.handler.error.ClientErrorInformation;
+import com.cycligo.backend.base.handler.error.ValidationException;
 import com.cycligo.backend.event.*;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.hibernate.cfg.NotYetImplementedException;
@@ -47,11 +48,11 @@ public class EventController {
     }
 
     @RequestMapping(value="/events/event", method = RequestMethod.POST)
-    ResponseEntity<?> add(@Valid @RequestBody EventDto input, BindingResult result) throws MethodArgumentNotValidException {
+    ResponseEntity<?> add(@Valid @RequestBody EventDto input, BindingResult result) throws ValidationException {
         //TODO add alternative ResponseEntity.noContent().build()
         (new EventValidator()).validate(input, result);
         if (result.hasFieldErrors()) {
-            throw new MethodArgumentNotValidException(null, result);
+            throw new ValidationException(result);
         }
 
         Long eventId = eventService.save(input);

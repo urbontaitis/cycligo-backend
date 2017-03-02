@@ -25,6 +25,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<ClientErrorInformation>(error, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(value = ValidationException.class)
+    public ResponseEntity<ValidationError> handleValidationException(ValidationException e){
+        ValidationError error = ValidationErrorBuilder.fromBindingErrors(e.getBindingResult());
+        return new ResponseEntity<ValidationError>(error, HttpStatus.BAD_REQUEST);
+    }
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception, HttpHeaders headers, HttpStatus status, WebRequest request) {
         ValidationError error = ValidationErrorBuilder.fromBindingErrors(exception.getBindingResult());
