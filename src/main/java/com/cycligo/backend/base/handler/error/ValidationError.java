@@ -12,23 +12,23 @@ import java.util.List;
 public class ValidationError {
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private List<String> errors = new ArrayList<>();
+    private List<Error> errors = new ArrayList<>();
 
-    private final String message;
+    private final String globalMessage;
 
-    public ValidationError(String message) {
-        this.message = message;
+    public ValidationError(String globalMessage) {
+        this.globalMessage = globalMessage;
     }
 
-    public void addValidationError(String error) {
-        errors.add(error);
+    public void addValidationError(String field, String error) {
+        errors.add(new Error(field, error));
     }
 
-    public List<String> getErrors() {
+    public List<Error> getErrors() {
         return errors;
     }
 
-    public String getMessage() {
-        return message;
+    public String getGlobalMessage() {
+        return globalMessage;
     }
 }

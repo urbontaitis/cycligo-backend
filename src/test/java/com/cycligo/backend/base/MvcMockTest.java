@@ -1,5 +1,8 @@
 package com.cycligo.backend.base;
 
+import com.cycligo.backend.base.handler.error.ValidationError;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -9,6 +12,7 @@ import javax.inject.Inject;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
+import java.util.Locale;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -23,6 +27,9 @@ public abstract class MvcMockTest {
     private MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
             MediaType.APPLICATION_JSON.getSubtype(),
             Charset.forName("utf8"));
+
+    @Autowired
+    private MessageSource messageSource;
 
     @Inject
     public void setConverters(HttpMessageConverter<?>[] converters) {
@@ -45,5 +52,11 @@ public abstract class MvcMockTest {
 
     public MediaType getContentType() {
         return contentType;
+    }
+
+    public ValidationError createValidationError(String field, String message) {
+        ValidationError validationError = new ValidationError("Validation failed. 1 error(s)");
+        validationError.addValidationError(field, messageSource.getMessage(message, null, Locale.getDefault()));
+        return validationError;
     }
 }

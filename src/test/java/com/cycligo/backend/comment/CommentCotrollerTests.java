@@ -32,13 +32,9 @@ public class CommentCotrollerTests extends MvcMockTest {
     @MockBean
     private CommentService commentService;
 
-    @Autowired
-    private MessageSource messageSource;
-
     @Test
     public void shouldThrowParentIdIsRequired() throws Exception {
-        ValidationError expected = new ValidationError("Validation failed. 1 error(s)");
-        expected.addValidationError(messageSource.getMessage("base.parent_id_is_required", null, Locale.getDefault()));
+        ValidationError expected = createValidationError("global", "base.parent_id_is_required");
         String expectedJson = json(expected);
 
         CommentDto requestDto = initCommentDto();
@@ -54,8 +50,7 @@ public class CommentCotrollerTests extends MvcMockTest {
 
     @Test
     public void shouldThrowParentTypeIsRequired() throws Exception {
-        ValidationError expected = new ValidationError("Validation failed. 1 error(s)");
-        expected.addValidationError(messageSource.getMessage("base.parent_type_is_required", null, Locale.getDefault()));
+        ValidationError expected = createValidationError("global", "base.parent_type_is_required");
         String expectedJson = json(expected);
 
         CommentDto requestDto = initCommentDto();
@@ -71,8 +66,7 @@ public class CommentCotrollerTests extends MvcMockTest {
 
     @Test
     public void shouldThrowCommentCannotBeEmpty() throws Exception {
-        ValidationError expected = new ValidationError("Validation failed. 1 error(s)");
-        expected.addValidationError(messageSource.getMessage("comments.comment_cannot_be_empty", null, Locale.getDefault()));
+        ValidationError expected = createValidationError("comment", "comments.comment_cannot_be_empty");
         String expectedJson = json(expected);
 
         CommentDto requestDto = initCommentDto();

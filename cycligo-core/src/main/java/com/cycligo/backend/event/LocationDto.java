@@ -1,10 +1,14 @@
 package com.cycligo.backend.event;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  * Created by Mindaugas Urbontaitis on 28/02/2017.
  * cycligo-rest-api
  */
 public class LocationDto {
+
+    @NotEmpty(message = "{event.location_is_required}")
     private String label;
     private String placeId;
     private Double latitude;

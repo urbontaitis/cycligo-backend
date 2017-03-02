@@ -3,7 +3,6 @@ package com.cycligo.backend.event.race;
 import com.cycligo.backend.base.MvcMockTest;
 import com.cycligo.backend.event.EventDto;
 import com.cycligo.backend.event.EventService;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.time.LocalDateTime;
 
 import static com.cycligo.backend.event.race.EventTestHelper.initEventDto;
 import static org.hamcrest.Matchers.is;
@@ -57,10 +58,12 @@ public class EventControllerTests extends MvcMockTest {
                 .andExpect(jsonPath("$.linkToEvent", is(expected.getLinkToEvent())));
     }
 
-    @Ignore
+    @Test
     public void createEvent() throws Exception {
         EventDto expected = initEventDto();
         expected.setId(null);
+        expected.setStarts(null);
+        expected.setEnds(null);
         String eventJson = json(expected);
         given(eventService.save(expected)).willReturn(1L);
 
@@ -69,4 +72,5 @@ public class EventControllerTests extends MvcMockTest {
             .content(eventJson))
             .andExpect(status().isCreated());
     }
+
 }

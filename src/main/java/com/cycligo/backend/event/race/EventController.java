@@ -6,9 +6,12 @@ import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -44,8 +47,13 @@ public class EventController {
     }
 
     @RequestMapping(value="/events/event", method = RequestMethod.POST)
-    ResponseEntity<?> add(@RequestBody EventDto input) {
+    ResponseEntity<?> add(@Valid @RequestBody EventDto input, BindingResult result) throws MethodArgumentNotValidException {
         //TODO add alternative ResponseEntity.noContent().build()
+        (new EventValidator()).validate(input, result);
+        if (result.hasFieldErrors()) {
+            throw new MethodArgumentNotValidException(null, result);
+        }
+
         Long eventId = eventService.save(input);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{id}")
