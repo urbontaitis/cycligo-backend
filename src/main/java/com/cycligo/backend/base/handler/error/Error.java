@@ -10,6 +10,8 @@ public class Error {
     private String message;
 
     public Error(String field, String error) {
+        this.field = field;
+        this.message = error;
     }
 
     public String getField() {

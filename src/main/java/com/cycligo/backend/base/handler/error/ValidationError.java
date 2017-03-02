@@ -14,10 +14,10 @@ public class ValidationError {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<Error> errors = new ArrayList<>();
 
-    private final String globalMessage;
+    private final String message;
 
-    public ValidationError(String globalMessage) {
-        this.globalMessage = globalMessage;
+    public ValidationError(String message) {
+        this.message = message;
     }
 
     public void addValidationError(String field, String error) {
@@ -28,7 +28,7 @@ public class ValidationError {
         return errors;
     }
 
-    public String getGlobalMessage() {
-        return globalMessage;
+    public String getMessage() {
+        return message;
     }
 }
