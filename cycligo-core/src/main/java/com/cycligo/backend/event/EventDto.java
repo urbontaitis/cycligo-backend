@@ -23,11 +23,11 @@ public class EventDto {
     private String description;
 
     @NotNull(message = "{event.starts_date_is_required}")
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDateTime starts;
 
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDateTime ends;
 
