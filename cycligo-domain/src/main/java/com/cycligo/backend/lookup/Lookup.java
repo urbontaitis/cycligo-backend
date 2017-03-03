@@ -19,8 +19,7 @@ public class Lookup {
 
     private String value;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "lookup_id", nullable = true)
+    @OneToMany(mappedBy = "lookup", fetch = FetchType.LAZY)
     private Set<LookupValue> lookups = new HashSet<>(0);
 
     public Long getId() {

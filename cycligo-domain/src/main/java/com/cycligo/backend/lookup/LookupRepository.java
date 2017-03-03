@@ -13,4 +13,6 @@ public interface LookupRepository extends CrudRepository<Lookup, Long> {
 
     @Query("select l from Lookup l where l.name = 'MTB' or l.name = 'ROAD' or l.name='COUNTRIES' or l.name = 'DISTANCE'")
     Iterable<Lookup> findAllFilters();
+
+    Lookup findByName(String name);
 }
