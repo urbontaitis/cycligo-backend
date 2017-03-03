@@ -81,7 +81,7 @@ databaseChangeLog:
                   constraints:
                     foreignKeyName: fk_event_detail_event
                     refenrences: event(id)
-                    nullable: false
+                    nullable: true
               - column:
                   name: distance
                   type: int
