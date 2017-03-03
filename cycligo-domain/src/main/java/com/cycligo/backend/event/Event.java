@@ -46,7 +46,7 @@ public class Event {
 
     private String linkToEvent;
 
-    private boolean approved;
+    private Boolean approved;
 
     private Long createdBy;
 
@@ -147,11 +147,11 @@ public class Event {
         this.linkToEvent = linkToEvent;
     }
 
-    public boolean isApproved() {
+    public Boolean isApproved() {
         return approved;
     }
 
-    public void setApproved(boolean approved) {
+    public void setApproved(Boolean approved) {
         this.approved = approved;
     }
 
