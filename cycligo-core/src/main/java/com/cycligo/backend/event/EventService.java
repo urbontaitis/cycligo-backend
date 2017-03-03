@@ -1,5 +1,6 @@
 package com.cycligo.backend.event;
 
+import com.cycligo.backend.lookup.LookupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +12,13 @@ import org.springframework.stereotype.Service;
 public class EventService {
 
     private EventRepository eventRepository;
+    private LookupRepository lookupRepository;
+//    private LookupValueRepository lookupValueRepository;
 
     @Autowired
-    public EventService(EventRepository eventRepository) {
+    public EventService(EventRepository eventRepository, LookupRepository lookupRepository) {
         this.eventRepository = eventRepository;
+        this.lookupRepository = lookupRepository;
     }
 
 
@@ -23,7 +27,7 @@ public class EventService {
 
         Iterable<Event> events = eventRepository.findAll();
         for(Event event  : events) {
-            result.getEvents().add((new EventMapper()).entity2Dto(event));
+            result.getEvents().add((new EventMapper(lookupRepository)).entity2Dto(event));
         }
 
         return result;
@@ -45,11 +49,11 @@ public class EventService {
         Event event = eventRepository.findById(id).orElseThrow(
                 () -> new EventNotFoundException(id));
 
-        return (new EventMapper()).entity2Dto(event);
+        return (new EventMapper(lookupRepository)).entity2Dto(event);
     }
 
     public Long save(EventDto input) {
-        EventMapper mapper = new EventMapper();
+        EventMapper mapper = new EventMapper(lookupRepository);
         Event event = mapper.dto2Entity(input);
 
         event = eventRepository.save(event);

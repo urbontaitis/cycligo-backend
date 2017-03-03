@@ -1,11 +1,12 @@
 package com.cycligo.backend.event.race;
 
-import com.cycligo.backend.event.Event;
-import com.cycligo.backend.event.EventDetailDto;
-import com.cycligo.backend.event.EventDto;
-import com.cycligo.backend.event.LocationDto;
+import com.cycligo.backend.event.*;
+import com.cycligo.backend.location.Location;
+import com.cycligo.backend.lookup.Lookup;
+import com.cycligo.backend.lookup.LookupValue;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 /**
  * Created by Mindaugas Urbontaitis on 06/02/2017.
@@ -34,17 +35,25 @@ public class EventTestHelper {
         event.setTitle("test-title");
         event.setDescription("test-description");
         event.setStarts(LocalDateTime.of(2017,01,01,10,30));
-//        event.setLocation(new Location());
-//        event.setDiscipline(new Lookup());
-//        event.setCategory(new Lookup());
-//        event.setEventDetails();
+        event.setLocation(new Location());
+        event.setDiscipline(new Lookup());
+        event.setCategory(new LookupValue());
+        Set<EventDetail> details = event.getEventDetails();
+        details.add(new EventDetail());
+        event.setEventDetails(details);
+
         event.setApproved(false);
         event.setPhotoId(100L);
-//        event.setCreatedAt();
-//        event.setCreatedBy();
-//        event.setUpdatedAt();
-//        event.setUpdatedAt();
+        event.setCreatedAt(null);
+        event.setCreatedBy(null);
+        event.setUpdatedAt(null);
+        event.setUpdatedAt(null);
         return event;
+    }
+
+    public static Location initLoaction() {
+//        Location
+        return null;
     }
 
 

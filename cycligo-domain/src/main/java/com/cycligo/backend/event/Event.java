@@ -1,6 +1,7 @@
 package com.cycligo.backend.event;
 
 import com.cycligo.backend.location.Location;
+import com.cycligo.backend.lookup.Lookup;
 import com.cycligo.backend.lookup.LookupValue;
 
 import javax.persistence.*;
@@ -27,21 +28,21 @@ public class Event {
 
     private LocalDateTime ends;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade={CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "location_id", nullable = false)
     private Location location;
 
     private Long photoId;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade={CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "discipline_id", nullable = false)
-    private LookupValue discipline;
+    private Lookup discipline;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade={CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "category_id", nullable = false)
     private LookupValue category;
 
-    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade={CascadeType.PERSIST, CascadeType.MERGE})
     private Set<EventDetail> eventDetails = new HashSet<>(0);
 
     private String linkToEvent;
@@ -115,11 +116,11 @@ public class Event {
         this.photoId = photoId;
     }
 
-    public LookupValue getDiscipline() {
+    public Lookup getDiscipline() {
         return discipline;
     }
 
-    public void setDiscipline(LookupValue discipline) {
+    public void setDiscipline(Lookup discipline) {
         this.discipline = discipline;
     }
 
@@ -193,5 +194,10 @@ public class Event {
 
     protected void setVersion(int version) {
         this.version = version;
+    }
+
+    public void addEventDetaiils(EventDetail eventDetail) {
+        eventDetail.setEvent(this);
+        this.eventDetails.add(eventDetail);
     }
 }
