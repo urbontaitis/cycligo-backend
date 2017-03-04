@@ -43,15 +43,21 @@ class EventMapper {
         EventDetailDto dto = new EventDetailDto();
         dto.setDistance(eventDetail.getDistance());
         dto.setElevation(eventDetail.getElevation());
-        dto.setPrice(eventDetail.getPrice().doubleValue());
+        if (null != eventDetail.getPrice()) {
+            dto.setPrice(eventDetail.getPrice().doubleValue());
+        }
         return dto;
     }
 
     LocationDto entity2Dto(Location entity) {
         LocationDto dto = new LocationDto();
         dto.setLabel(entity.getLabel());
-        dto.setLatitude(entity.getLatitude().doubleValue());
-        dto.setLongitude(entity.getLongitude().doubleValue());
+        if (null != entity.getLatitude()) {
+            dto.setLatitude(entity.getLatitude().doubleValue());
+        }
+        if (null != entity.getLongitude()) {
+            dto.setLongitude(entity.getLongitude().doubleValue());
+        }
         dto.setPlaceId(entity.getPlaceId());
         return dto;
     }
@@ -70,8 +76,10 @@ class EventMapper {
         entity.setCategory(getLookupValue(dto.getCategory(), discipline.getLookups()));
         entity.setLocation(dto2Entity(dto.getLocation()));
         for (EventDetailDto detail : dto.getDetails()) {
-            EventDetail eventDetail = dto2Entity(detail);
-            entity.addEventDetaiils(eventDetail);
+            if (detail.getDistance() != null || detail.getElevation() != null || detail.getPrice() != null) {
+                EventDetail eventDetail = dto2Entity(detail);
+                entity.addEventDetaiils(eventDetail);
+            }
         }
 
         return entity;
@@ -81,7 +89,9 @@ class EventMapper {
         EventDetail entity = new EventDetail();
         entity.setDistance(dto.getDistance());
         entity.setElevation(dto.getElevation());
-        entity.setPrice(new BigDecimal(dto.getPrice()));
+        if (null != dto.getPrice()) {
+            entity.setPrice(new BigDecimal(dto.getPrice()));
+        }
 
         return entity;
     }
@@ -90,9 +100,12 @@ class EventMapper {
         Location entity = new Location();
         entity.setLabel(dto.getLabel());
         entity.setPlaceId(dto.getPlaceId());
-        entity.setLatitude(new BigDecimal(dto.getLatitude()));
-        entity.setLongitude(new BigDecimal(dto.getLongitude()));
-
+        if ( null != dto.getLatitude()) {
+            entity.setLatitude(new BigDecimal(dto.getLatitude()));
+        }
+        if (null != dto.getLongitude()) {
+            entity.setLongitude(new BigDecimal(dto.getLongitude()));
+        }
         entity.setContinentId(null);
         entity.setCountryId(null);
         entity.setCityId(null);
@@ -103,7 +116,7 @@ class EventMapper {
     Lookup getLookup(String name) {
         Lookup lookup = repository.findByName(name);
         if (lookup == null) {
-            throw new IllegalArgumentException("Tyring to save with non existing property: " + name);
+            throw new IllegalArgumentException("Trying to save with non existing property: " + name);
         }
         return lookup;
     }
