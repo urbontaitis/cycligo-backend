@@ -37,8 +37,10 @@ public class CycliGoApp {
                 Arrays.asList(
                     "http://localhost:3000",
                     "http://localhost:8080",
-                    "http://192.168.1.36",
-                    "http://test.murbo.net"));
+                    "http://beta.cycligo.com",
+                    "http://cycligo.com",
+                    "http://www.cycligo.com"
+                ));
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
