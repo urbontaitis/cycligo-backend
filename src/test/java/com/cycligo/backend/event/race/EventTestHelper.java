@@ -56,5 +56,23 @@ public class EventTestHelper {
         return null;
     }
 
+    public static Lookup initLockup(){
+        Lookup lookup = new Lookup();
+        lookup.setId(-1L);
+        lookup.setName("MTB");
+        lookup.setValue("test");
+        lookup.getLookups().add(initLockupValue());
+
+        return lookup;
+    }
+
+    public static LookupValue initLockupValue() {
+        LookupValue value = new LookupValue();
+        value.setId(-2L);
+        value.setName("test-value");
+        value.setValue("test-value");
+        return value;
+    }
+
 
 }
