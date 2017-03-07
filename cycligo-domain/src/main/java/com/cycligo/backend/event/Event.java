@@ -22,6 +22,7 @@ public class Event {
 
     private String title;
 
+    @Column(length = 16777215, columnDefinition = "MEDIUMTEXT")
     private String description;
 
     private LocalDateTime starts;

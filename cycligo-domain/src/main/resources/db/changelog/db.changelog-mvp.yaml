@@ -284,4 +284,31 @@ databaseChangeLog:
                     constraints:
                         nullable: false
 
+- changeSet:
+      id: 6
+      author: murbontaitis
+      changes:
+        - modifyDataType:
+            columnName: link_to_event
+            newDataType: varchar(2083)
+            tableName: event
+
+- changeSet:
+    id: 7
+    author: murbontaitis
+    changes:
+      - sql:
+          splitStatements: true
+          sql: UPDATE event SET description=NULL
+          stripComments: true
+
+- changeSet:
+      id: 8
+      author: murbontaitis
+      changes:
+        - modifyDataType:
+            columnName: description
+            newDataType: mediumtext
+            tableName: event
+
 
