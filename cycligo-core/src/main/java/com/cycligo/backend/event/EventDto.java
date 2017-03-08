@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,10 @@ public class EventDto {
     private Long id;
 
     @NotEmpty(message = "{event.title_is_required}")
+    @Size(max=50)
     private String title;
+
+    @Size(max=16777215)
     private String description;
 
     @NotNull(message = "{event.starts_date_is_required}")
@@ -36,14 +40,17 @@ public class EventDto {
     private LocationDto location;
 
     @NotEmpty(message = "{event.discipline_is_required}")
+    @Size(max=50)
     private String discipline;
 
     @NotEmpty(message = "{event.category_is_required}")
+    @Size(max=50)
     private String category;
     private List<EventDetailDto> details;
     private Long photo;
 
     @NotEmpty(message = "{event.link_to_event_is_required}")
+    @Size(max=2083)
     private String linkToEvent;
 
     public Long getId() {

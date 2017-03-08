@@ -2,6 +2,8 @@ package com.cycligo.backend.event;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Size;
+
 /**
  * Created by Mindaugas Urbontaitis on 28/02/2017.
  * cycligo-rest-api
@@ -9,7 +11,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class LocationDto {
 
     @NotEmpty(message = "{event.location_is_required}")
+    @Size(max=256)
     private String label;
+    @Size(max=256)
     private String placeId;
     private Double latitude;
     private Double longitude;
