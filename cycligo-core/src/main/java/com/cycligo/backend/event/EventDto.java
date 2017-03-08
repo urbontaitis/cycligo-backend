@@ -46,6 +46,8 @@ public class EventDto {
     @NotEmpty(message = "{event.category_is_required}")
     @Size(max=50)
     private String category;
+
+    @Valid
     private List<EventDetailDto> details;
     private Long photo;
 

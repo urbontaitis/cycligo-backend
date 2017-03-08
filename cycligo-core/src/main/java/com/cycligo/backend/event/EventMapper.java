@@ -41,8 +41,12 @@ class EventMapper {
 
     EventDetailDto entity2Dto(EventDetail eventDetail) {
         EventDetailDto dto = new EventDetailDto();
-        dto.setDistance(eventDetail.getDistance());
-        dto.setElevation(eventDetail.getElevation());
+        if (null != eventDetail.getDistance()) {
+            dto.setDistance(eventDetail.getDistance().doubleValue());
+        }
+        if (null != eventDetail.getElevation()) {
+            dto.setElevation(eventDetail.getElevation().doubleValue());
+        }
         if (null != eventDetail.getPrice()) {
             dto.setPrice(eventDetail.getPrice().doubleValue());
         }
@@ -87,8 +91,12 @@ class EventMapper {
 
     EventDetail dto2Entity(EventDetailDto dto) {
         EventDetail entity = new EventDetail();
-        entity.setDistance(dto.getDistance());
-        entity.setElevation(dto.getElevation());
+        if(null != dto.getDistance()) {
+            entity.setDistance(dto.getDistance().intValue());
+        }
+        if(null != dto.getElevation()) {
+            entity.setElevation(dto.getElevation().intValue());
+        }
         if (null != dto.getPrice()) {
             entity.setPrice(new BigDecimal(dto.getPrice()));
         }

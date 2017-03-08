@@ -24,7 +24,7 @@ public class EventTestHelper {
         dto.setLocation(new LocationDto("test-location"));
         dto.setDiscipline("MTB");
         dto.setCategory("marathon");
-        dto.getDetails().add(new EventDetailDto(100, 2000, (double) 50));
+        dto.getDetails().add(new EventDetailDto((double) 100, (double) 2000, (double) 50));
         dto.setLinkToEvent("http://cycligo.com");
 
         return dto;

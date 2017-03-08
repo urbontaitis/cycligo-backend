@@ -1,36 +1,41 @@
 package com.cycligo.backend.event;
 
+import org.springframework.format.annotation.NumberFormat;
+
 /**
  * Created by Mindaugas Urbontaitis on 28/02/2017.
  * cycligo-rest-api
  */
 public class EventDetailDto {
 
-    private Integer distance;
-    private Integer elevation;
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
+    private Double distance;
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
+    private Double elevation;
+    @NumberFormat(style = NumberFormat.Style.CURRENCY)
     private Double price;
 
     public EventDetailDto() {}
 
-    public EventDetailDto(Integer distance, Integer elevation, Double price) {
+    public EventDetailDto(Double distance, Double elevation, Double price) {
         this.distance = distance;
         this.elevation = elevation;
         this.price = price;
     }
 
-    public Integer getDistance() {
+    public Double getDistance() {
         return distance;
     }
 
-    public void setDistance(Integer distance) {
+    public void setDistance(Double distance) {
         this.distance = distance;
     }
 
-    public Integer getElevation() {
+    public Double getElevation() {
         return elevation;
     }
 
-    public void setElevation(Integer elevation) {
+    public void setElevation(Double elevation) {
         this.elevation = elevation;
     }
 
