@@ -19,7 +19,7 @@ databaseChangeLog:
                   type: nvarchar(50)
               - column:
                   name: description
-                  type: nvarchar(4000)
+                  type: mediumtext
               - column:
                   name: starts
                   type: datetime
@@ -40,7 +40,7 @@ databaseChangeLog:
                   type: bigint
               - column:
                   name: link_to_event
-                  type: varchar(50)
+                  type: varchar(2083)
               - column:
                   name: approved
                   type: boolean
@@ -255,7 +255,7 @@ databaseChangeLog:
                         nullable: false
                 - column:
                     name: comment
-                    type: nvarchar(1000)
+                    type: mediumtext
                 - column:
                     name: date
                     type: datetime
@@ -285,30 +285,45 @@ databaseChangeLog:
                         nullable: false
 
 - changeSet:
-      id: 6
+      id: 6-mysql
       author: murbontaitis
+      comment: Not possible to store LT and emoji letters
+      dbms: mysql
       changes:
-        - modifyDataType:
-            columnName: link_to_event
-            newDataType: varchar(2083)
-            tableName: event
+        - sql:
+            splitStatements: true
+            sql: ALTER DATABASE cycligo CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+            stripComments: true
 
 - changeSet:
-    id: 7
-    author: murbontaitis
-    changes:
-      - sql:
-          splitStatements: true
-          sql: UPDATE event SET description=NULL
-          stripComments: true
+      id: 7-mysql
+      author: murbontaitis
+      comment: Not possible to store LT and emoji letters
+      dbms: mysql
+      changes:
+        - sql:
+            splitStatements: true
+            sql: ALTER TABLE event CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+            stripComments: true
 
 - changeSet:
-      id: 8
+      id: 8-mysql
       author: murbontaitis
+      comment: Not possible to store LT and emoji letters
+      dbms: mysql
       changes:
-        - modifyDataType:
-            columnName: description
-            newDataType: mediumtext
-            tableName: event
+        - sql:
+            splitStatements: true
+            sql: ALTER TABLE location CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+            stripComments: true
 
-
+- changeSet:
+      id: 9-mysql
+      author: murbontaitis
+      comment: Not possible to store LT and emoji letters
+      dbms: mysql
+      changes:
+        - sql:
+            splitStatements: true
+            sql: ALTER TABLE comment CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+            stripComments: true

@@ -22,6 +22,8 @@ public class Comment {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @Lob
+    @Column(length = 16777215, columnDefinition = "MEDIUMTEXT")
     private String comment;
 
     private LocalDateTime date;
