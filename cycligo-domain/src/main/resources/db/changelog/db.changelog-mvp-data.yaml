@@ -83,9 +83,24 @@ databaseChangeLog:
             stripComments: true
 
   - changeSet:
-        id: 4-data
+        id: 4-delete
         author: murbontaitis
-        comment: "Initial data for Countries filter"
+        comment: "Remove old country lookups"
+        preConditions:
+          - onFail: MARK_RAN
+          - sqlCheck:
+              expectedResult: 1
+              sql: select count(value) from lookup_value where value='LTU';
+        changes:
+          - sql:
+              splitStatements: true
+              sql: DELETE FROM lookup_value WHERE lookup_id=(SELECT id FROM lookup WHERE value = 'COUNTRIES')
+              stripComments: true
+
+  - changeSet:
+        id: 4-data-new
+        author: murbontaitis
+        comment: "Initial data for Countries filter (updated)"
         changes:
           - loadData:
               columns:
@@ -94,9 +109,9 @@ databaseChangeLog:
               tableName: lookup_value
 
   - changeSet:
-      id: 4-data-add-filter-id
+      id: 4-data-add-filter-id-new
       author: murbontaitis
-      comment: "Add Countries filter FK"
+      comment: "Add Countries filter FK (updated)"
       changes:
         - sql:
             splitStatements: true
