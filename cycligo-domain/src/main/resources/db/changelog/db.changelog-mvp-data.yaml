@@ -138,3 +138,13 @@ databaseChangeLog:
             splitStatements: true
             sql: UPDATE lookup_value SET lookup_id=(SELECT id FROM lookup WHERE value = 'DISTANCE') WHERE lookup_id IS NULL
             stripComments: true
+
+  - changeSet:
+        id: 6
+        author: murbontaitis
+        comment: "Create UNKNOWN country"
+        changes:
+          - sql:
+              splitStatements: true
+              sql: INSERT INTO lookup_value (name, value, lookup_id) SELECT 'Unknown country', 'UNKNOWN', id FROM lookup WHERE value = 'COUNTRIES'
+              stripComments: true
