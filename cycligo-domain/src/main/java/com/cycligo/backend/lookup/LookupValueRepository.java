@@ -12,4 +12,6 @@ public interface LookupValueRepository extends CrudRepository<LookupValue, Long>
 
     LookupValue findByName(String name);
 
+    LookupValue findByValue(String value);
+
 }
