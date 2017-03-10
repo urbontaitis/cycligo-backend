@@ -5,5 +5,6 @@ dependencies {
   compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}")
   compile("com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}")
   compile("org.hibernate:hibernate-validator:${hibernateValidatorVersion}")
-  compile("com.google.maps:google-maps-services:0.1.17")
+  compile("com.google.maps:google-maps-services:${googleMapsServicesVersion}")
+  compile("org.apache.commons:commons-lang3:${commonsLang3Version}")
 }

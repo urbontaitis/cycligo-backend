@@ -6,6 +6,9 @@ buildscript {
         jUnitVersion = '4.12'
         jacksonVersion = '2.8.6'
         hibernateValidatorVersion = '5.4.0.Final'
+        googleMapsServicesVersion = '0.1.17'
+        commonsLang3Version = '3.5'
+
     }
     repositories {
         jcenter()
