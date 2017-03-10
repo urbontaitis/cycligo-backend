@@ -5,10 +5,11 @@ import com.cycligo.backend.base.handler.error.ValidationException;
 import com.cycligo.backend.event.*;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.hibernate.cfg.NotYetImplementedException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -20,6 +21,8 @@ import java.util.List;
 @RestController
 public class EventController {
 
+    private static final Logger logger = LoggerFactory.getLogger(EventController.class);
+
     private EventService eventService;
 
     public EventController(EventService eventService) {
@@ -27,8 +30,9 @@ public class EventController {
     }
 
     @RequestMapping(value = "/events", method = RequestMethod.GET)
-    ActiveEvent getActiveEvents() {
-        return eventService.activeRaces();
+    ActiveEvent getActiveEvents(EventSearchParams eventSearchParams) {
+        logger.info("search criteria: {}", eventSearchParams);
+        return eventService.activeRaces(eventSearchParams);
     }
 
     @RequestMapping(value = "/events/recent", method = RequestMethod.GET)
@@ -68,4 +72,5 @@ public class EventController {
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 
     }
+
 }

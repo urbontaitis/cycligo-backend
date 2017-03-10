@@ -1,5 +1,6 @@
 package com.cycligo.backend.event;
 
+import com.cycligo.backend.event.race.EventSearchParams;
 import com.cycligo.backend.lookup.LookupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,10 +23,22 @@ public class EventService {
     }
 
 
-    public ActiveEvent activeRaces() {
+    public ActiveEvent activeRaces(EventSearchParams eventSearchParams) {
         ActiveEvent result = new ActiveEvent();
 
-        Iterable<Event> events = eventRepository.findAll();
+        Iterable<Event> events = null;
+        if (eventSearchParams.isNotEmpty()) {
+            events = eventRepository.findByEventSearchParams(
+                    eventSearchParams.getDiscipline(),
+                    eventSearchParams.getCategory(),
+                    eventSearchParams.getCountry(),
+                    null,
+                    null
+            );
+        } else {
+            events = eventRepository.findAll();
+        }
+
         for(Event event  : events) {
             result.getEvents().add((new EventMapper(lookupRepository)).entity2Dto(event));
         }
