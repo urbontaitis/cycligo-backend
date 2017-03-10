@@ -115,7 +115,7 @@ class EventMapper {
             entity.setLongitude(new BigDecimal(dto.getLongitude()));
         }
         entity.setContinentId(null);
-        entity.setCountryId(null);
+        entity.setCountry(null);
         entity.setCityId(null);
 
         return entity;

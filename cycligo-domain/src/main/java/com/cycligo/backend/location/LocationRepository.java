@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface LocationRepository extends JpaRepository<Location, Long> {
 
-    @Query("select l from Location l where l.countryId IS NULL")
-    Iterable<Location> findAllWhereCountryIdIsNull();
+    @Query("select l from Location l where l.country IS NULL")
+    Iterable<Location> findAllWhereCountryIsNull();
 }

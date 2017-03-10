@@ -35,7 +35,7 @@ public class UpdateLocation {
     @Scheduled(cron = "0 0 * * * ?") //the top of every hour of every day.
     public void findNotCompletedAndUpdate() {
         logger.info("UpdateLocation job started");
-        Iterable<Location> notCompletedList = locationRepository.findAllWhereCountryIdIsNull();
+        Iterable<Location> notCompletedList = locationRepository.findAllWhereCountryIsNull();
         for(Location location : notCompletedList) {
             String countryName = GoogleMapService.getCountryShortName(
                     location.getLatitude().doubleValue(),
@@ -45,7 +45,7 @@ public class UpdateLocation {
             if (null == country) {
                 country = lookupValueRepository.findByValue("UNKNOWN");
             }
-            location.setCountryId(country.getId());
+            location.setCountry(country);
             locationRepository.save(location);
         }
     }

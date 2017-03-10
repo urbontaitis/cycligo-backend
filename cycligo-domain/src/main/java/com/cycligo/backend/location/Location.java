@@ -1,9 +1,8 @@
 package com.cycligo.backend.location;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.cycligo.backend.lookup.LookupValue;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 /**
@@ -27,7 +26,9 @@ public class Location {
 
     private Long cityId;
 
-    private Long countryId;
+    @OneToOne(fetch = FetchType.LAZY, cascade={CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "country_id")
+    private LookupValue country;
 
     private Long continentId;
 
@@ -79,12 +80,12 @@ public class Location {
         this.cityId = cityId;
     }
 
-    public Long getCountryId() {
-        return countryId;
+    public LookupValue getCountry() {
+        return country;
     }
 
-    public void setCountryId(Long countryId) {
-        this.countryId = countryId;
+    public void setCountry(LookupValue country) {
+        this.country = country;
     }
 
     public Long getContinentId() {
