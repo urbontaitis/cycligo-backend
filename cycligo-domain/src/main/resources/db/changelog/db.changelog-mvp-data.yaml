@@ -148,3 +148,13 @@ databaseChangeLog:
               splitStatements: true
               sql: INSERT INTO lookup_value (name, value, lookup_id) SELECT 'Unknown country', 'UNKNOWN', id FROM lookup WHERE value = 'COUNTRIES'
               stripComments: true
+
+ - changeSet:
+        id: 7
+        author: murbontaitis
+        comment: "Mistyped backpacking in MTB category"
+        changes:
+          -sql:
+            splitStatements: true
+            sql: UPDATE lookup_value SET value="backpacking" WHERE value="bacpacking"
+            stripComments: true
