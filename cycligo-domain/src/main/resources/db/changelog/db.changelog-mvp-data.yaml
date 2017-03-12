@@ -149,7 +149,7 @@ databaseChangeLog:
               sql: INSERT INTO lookup_value (name, value, lookup_id) SELECT 'Unknown country', 'UNKNOWN', id FROM lookup WHERE value = 'COUNTRIES'
               stripComments: true
 
- - changeSet:
+  - changeSet:
         id: 7
         author: murbontaitis
         comment: "Mistyped backpacking in MTB category"
