@@ -4,13 +4,21 @@ import com.cycligo.backend.location.Location;
 import com.cycligo.backend.lookup.Lookup;
 import com.cycligo.backend.lookup.LookupRepository;
 import com.cycligo.backend.lookup.LookupValue;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Set;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Created by Mindaugas Urbontaitis on 25/01/2017.
  * cycligo-backend
+ *
+ * TODO make a Final class without any dao and contain only static methods
  */
 class EventMapper {
 
@@ -18,52 +26,6 @@ class EventMapper {
 
     EventMapper(LookupRepository repository) {
         this.repository = repository;
-    }
-
-    EventDto entity2Dto(Event event) {
-        EventDto dto = new EventDto();
-        dto.setId(event.getId());
-        dto.setTitle(event.getTitle());
-        dto.setStarts(event.getStarts());
-        dto.setEnds(event.getEnds());
-        dto.setPhoto(event.getPhotoId());
-        dto.setDescription(event.getDescription());
-        dto.setDiscipline(event.getDiscipline().getName());
-        dto.setCategory(event.getCategory().getName());
-        dto.setLocation(entity2Dto(event.getLocation()));
-        dto.setLinkToEvent(event.getLinkToEvent());
-        for (EventDetail eventDetail : event.getEventDetails()) {
-            dto.getDetails().add(entity2Dto(eventDetail));
-        }
-
-        return dto;
-    }
-
-    EventDetailDto entity2Dto(EventDetail eventDetail) {
-        EventDetailDto dto = new EventDetailDto();
-        if (null != eventDetail.getDistance()) {
-            dto.setDistance(eventDetail.getDistance().doubleValue());
-        }
-        if (null != eventDetail.getElevation()) {
-            dto.setElevation(eventDetail.getElevation().doubleValue());
-        }
-        if (null != eventDetail.getPrice()) {
-            dto.setPrice(eventDetail.getPrice().doubleValue());
-        }
-        return dto;
-    }
-
-    LocationDto entity2Dto(Location entity) {
-        LocationDto dto = new LocationDto();
-        dto.setLabel(entity.getLabel());
-        if (null != entity.getLatitude()) {
-            dto.setLatitude(entity.getLatitude().doubleValue());
-        }
-        if (null != entity.getLongitude()) {
-            dto.setLongitude(entity.getLongitude().doubleValue());
-        }
-        dto.setPlaceId(entity.getPlaceId());
-        return dto;
     }
 
     Event dto2Entity(EventDto dto) {
@@ -140,4 +102,60 @@ class EventMapper {
         return null;
     }
 
+    static EventDto entity2Dto(Event event) {
+        EventDto dto = new EventDto();
+        dto.setId(event.getId());
+        dto.setTitle(event.getTitle());
+        dto.setStarts(event.getStarts());
+        dto.setEnds(event.getEnds());
+        dto.setPhoto(event.getPhotoId());
+        dto.setDescription(event.getDescription());
+        dto.setDiscipline(event.getDiscipline().getName());
+        dto.setCategory(event.getCategory().getName());
+        dto.setLocation(entity2Dto(event.getLocation()));
+        dto.setLinkToEvent(event.getLinkToEvent());
+        for (EventDetail eventDetail : event.getEventDetails()) {
+            dto.getDetails().add(entity2Dto(eventDetail));
+        }
+
+        return dto;
+    }
+
+    static EventDetailDto entity2Dto(EventDetail eventDetail) {
+        EventDetailDto dto = new EventDetailDto();
+        if (null != eventDetail.getDistance()) {
+            dto.setDistance(eventDetail.getDistance().doubleValue());
+        }
+        if (null != eventDetail.getElevation()) {
+            dto.setElevation(eventDetail.getElevation().doubleValue());
+        }
+        if (null != eventDetail.getPrice()) {
+            dto.setPrice(eventDetail.getPrice().doubleValue());
+        }
+        return dto;
+    }
+
+    static LocationDto entity2Dto(Location entity) {
+        LocationDto dto = new LocationDto();
+        dto.setLabel(entity.getLabel());
+        if (null != entity.getLatitude()) {
+            dto.setLatitude(entity.getLatitude().doubleValue());
+        }
+        if (null != entity.getLongitude()) {
+            dto.setLongitude(entity.getLongitude().doubleValue());
+        }
+        dto.setPlaceId(entity.getPlaceId());
+        return dto;
+    }
+
+    static Page<EventDto> mapEntity2DtoPage(Pageable page, Page<Event> source) {
+        List<EventDto> dtos = mapEntities2Dtos(source.getContent());
+        return new PageImpl<EventDto>(dtos, page, source.getTotalElements());
+    }
+
+    static List<EventDto> mapEntities2Dtos(List<Event> entities) {
+        return entities.stream()
+                .map(EventMapper::entity2Dto)
+                .collect(toList());
+    }
 }

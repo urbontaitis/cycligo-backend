@@ -7,6 +7,9 @@ import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.hibernate.cfg.NotYetImplementedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -30,9 +33,9 @@ public class EventController {
     }
 
     @RequestMapping(value = "/events", method = RequestMethod.GET)
-    ActiveEvent getActiveEvents(EventSearchParams eventSearchParams) {
-        logger.info("search criteria: {}", eventSearchParams);
-        return eventService.activeRaces(eventSearchParams);
+    Page<EventDto> getActiveEvents(Pageable pageRequest) {
+//        logger.info("search criteria: {}", eventSearchParams);
+        return eventService.activeRaces(pageRequest);
     }
 
     @RequestMapping(value = "/events/recent", method = RequestMethod.GET)

@@ -3,6 +3,8 @@ package com.cycligo.backend.event;
 import com.cycligo.backend.event.race.EventSearchParams;
 import com.cycligo.backend.lookup.LookupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,6 +22,13 @@ public class EventService {
     public EventService(EventRepository eventRepository, LookupRepository lookupRepository) {
         this.eventRepository = eventRepository;
         this.lookupRepository = lookupRepository;
+    }
+
+    public Page<EventDto> activeRaces(Pageable pageRequest) {
+
+        Page<Event> searchResultPage = eventRepository.findAll(pageRequest);
+
+        return EventMapper.mapEntity2DtoPage(pageRequest, searchResultPage);
     }
 
 

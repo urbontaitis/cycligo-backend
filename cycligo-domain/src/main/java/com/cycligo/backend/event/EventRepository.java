@@ -1,7 +1,7 @@
 package com.cycligo.backend.event;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +12,7 @@ import java.util.Optional;
  * Created by panda on 07/11/2016.
  */
 @Repository
-public interface EventRepository extends JpaRepository<Event, Long> {
+public interface EventRepository extends PagingAndSortingRepository<Event, Long> {
 
     Optional<Event> findById(Long id);
 
