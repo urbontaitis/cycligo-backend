@@ -8,6 +8,38 @@ task jarTest (type: Jar, dependsOn: testClasses) {
     classifier = 'test'
 }
 
+sourceSets {
+    generated
+}
+
+sourceSets.generated.java.srcDirs = ['build/generated-sources']
+
+configurations {
+    querydslapt
+}
+
+task generateQueryDSL(type: JavaCompile, group: 'build', description: 'Generates the QueryDSL query types') {
+    source = sourceSets.main.java
+    classpath = configurations.compile + configurations.querydslapt
+    options.compilerArgs = [
+            "-proc:only",
+            "-processor", "com.querydsl.apt.jpa.JPAAnnotationProcessor"
+    ]
+    destinationDir = sourceSets.generated.java.srcDirs.iterator().next()
+}
+
+compileJava {
+    dependsOn generateQueryDSL
+    source generateQueryDSL.destinationDir
+}
+
+compileGeneratedJava {
+    dependsOn generateQueryDSL
+    options.warnings = false
+    classpath += sourceSets.main.runtimeClasspath
+}
+
+
 artifacts {
     testOutput jarTest
 }
@@ -15,6 +47,10 @@ artifacts {
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.liquibase:liquibase-core")
+    compile("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final")
+    compile("com.querydsl:querydsl-jpa:4.1.4")
+//    compile("com.mysema.querydsl:querydsl-jpa:${querydslVersion}")
+    querydslapt("com.querydsl:querydsl-apt:4.1.4")
     runtime("mysql:mysql-connector-java")
 
     testRuntime('com.h2database:h2')

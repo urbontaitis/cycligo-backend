@@ -2,10 +2,12 @@ package com.cycligo.backend.event;
 
 import com.cycligo.backend.event.race.EventSearchParams;
 import com.cycligo.backend.lookup.LookupRepository;
+import com.querydsl.core.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 
 /**
  * Created by Mindaugas Urbontaitis on 25/01/2017.
@@ -25,13 +27,16 @@ public class EventService {
     }
 
     public Page<EventDto> activeRaces(Pageable pageRequest) {
+        Predicate test = QEvent.event.discipline.value.containsIgnoreCase("ROAD")
+                .and(QEvent.event.category.value.containsIgnoreCase("race"));
 
-        Page<Event> searchResultPage = eventRepository.findAll(pageRequest);
+        Page<Event> searchResultPage = eventRepository.findAll(test, pageRequest);
 
         return EventMapper.mapEntity2DtoPage(pageRequest, searchResultPage);
     }
 
 
+    @Deprecated
     public ActiveEvent activeRaces(EventSearchParams eventSearchParams) {
         ActiveEvent result = new ActiveEvent();
 
