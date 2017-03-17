@@ -49,7 +49,6 @@ dependencies {
     compile("org.liquibase:liquibase-core")
     compile("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final")
     compile("com.querydsl:querydsl-jpa:4.1.4")
-//    compile("com.mysema.querydsl:querydsl-jpa:${querydslVersion}")
     querydslapt("com.querydsl:querydsl-apt:4.1.4")
     runtime("mysql:mysql-connector-java")
 
