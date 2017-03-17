@@ -26,9 +26,8 @@ public class EventService {
         this.lookupRepository = lookupRepository;
     }
 
-    public Page<EventDto> activeRaces(Pageable pageRequest) {
-        Predicate test = QEvent.event.discipline.value.containsIgnoreCase("ROAD")
-                .and(QEvent.event.category.value.containsIgnoreCase("race"));
+    public Page<EventDto> activeRaces(EventSearchParams searchParams, Pageable pageRequest) {
+        Predicate test = EventPredicates.eventSearchParamsContainsIgnoreCase(searchParams);
 
         Page<Event> searchResultPage = eventRepository.findAll(test, pageRequest);
 
@@ -41,17 +40,17 @@ public class EventService {
         ActiveEvent result = new ActiveEvent();
 
         Iterable<Event> events = null;
-        if (eventSearchParams.isNotEmpty()) {
-            events = eventRepository.findByEventSearchParams(
-                    eventSearchParams.getDiscipline(),
-                    eventSearchParams.getCategory(),
-                    eventSearchParams.getCountry(),
-                    null,
-                    null
-            );
-        } else {
-            events = eventRepository.findAll();
-        }
+//        if (eventSearchParams.isNotEmpty()) {
+//            events = eventRepository.findByEventSearchParams(
+//                    eventSearchParams.getDiscipline(),
+//                    eventSearchParams.getCategory(),
+//                    eventSearchParams.getCountry(),
+//                    null,
+//                    null
+//            );
+//        } else {
+//            events = eventRepository.findAll();
+//        }
 
         for(Event event  : events) {
             result.getEvents().add((new EventMapper(lookupRepository)).entity2Dto(event));

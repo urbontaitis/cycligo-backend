@@ -1,8 +1,6 @@
 package com.cycligo.backend.event.race;
 
-import org.apache.commons.lang3.StringUtils;
-
-import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Created by Mindaugas Urbontaitis on 10/03/2017.
@@ -10,38 +8,12 @@ import java.time.LocalDateTime;
  */
 public class EventSearchParams {
 
-    private String discipline;
-
-    private String category;
-
-    private String country;
     private String starts;
-
     private String ends;
-
-    public String getDiscipline() {
-        return discipline;
-    }
-
-    public void setDiscipline(String discipline) {
-        this.discipline = discipline;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
+    private List<String> mcat;
+    private List<String> rcat;
+    private List<String> country;
+    private List<String> distance;
 
     public String getStarts() {
         return starts;
@@ -59,11 +31,36 @@ public class EventSearchParams {
         this.ends = ends;
     }
 
-    public Boolean isNotEmpty() {
-        return StringUtils.isNotBlank(discipline)
-            || StringUtils.isNotBlank(category)
-            || StringUtils.isNotBlank(country)
-            || StringUtils.isNotBlank(starts)
-            || StringUtils.isNotBlank(ends);
+    public List<String> getMcat() {
+        return mcat;
     }
+
+    public void setMcat(List<String> mcat) {
+        this.mcat = mcat;
+    }
+
+    public List<String> getRcat() {
+        return rcat;
+    }
+
+    public void setRcat(List<String> rcat) {
+        this.rcat = rcat;
+    }
+
+    public List<String> getCountry() {
+        return country;
+    }
+
+    public void setCountry(List<String> country) {
+        this.country = country;
+    }
+
+    public List<String> getDistance() {
+        return distance;
+    }
+
+    public void setDistance(List<String> distance) {
+        this.distance = distance;
+    }
+
 }

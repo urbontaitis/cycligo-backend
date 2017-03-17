@@ -33,9 +33,9 @@ public class EventController {
     }
 
     @RequestMapping(value = "/events", method = RequestMethod.GET)
-    Page<EventDto> getActiveEvents(Pageable pageRequest) {
+    Page<EventDto> getActiveEvents(EventSearchParams searchParams, Pageable pageRequest) {
 //        logger.info("search criteria: {}", eventSearchParams);
-        return eventService.activeRaces(pageRequest);
+        return eventService.activeRaces(searchParams, pageRequest);
     }
 
     @RequestMapping(value = "/events/recent", method = RequestMethod.GET)
