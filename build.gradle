@@ -51,10 +51,12 @@ dependencies {
     compile("io.springfox:springfox-swagger2:${springfoxSwaggerVersion}")
     compile("io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}")
     compile("org.apache.commons:commons-io:${commonsIoVersion}")
+//    compile("org.springframework.security:spring-security-web")
+//    testCompile("org.springframework.security:spring-security-test")
 
     compile project('cycligo-core')
     compile project('cycligo-domain')
-    compile project('cycligo-security')
+
 
     testCompile project(path: ':cycligo-domain', configuration: 'testOutput')
 
