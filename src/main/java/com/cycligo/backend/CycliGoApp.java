@@ -2,13 +2,10 @@ package com.cycligo.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 
 import java.util.Arrays;
 
@@ -18,6 +15,8 @@ import java.util.Arrays;
  */
 @SpringBootApplication
 @EnableScheduling
+@EnableOAuth2Client
+@EnableAuthorizationServer
 public class CycliGoApp {
 
     public static void main(String[] args) {
@@ -28,55 +27,5 @@ public class CycliGoApp {
         for (String beanName : beanNames) {
             System.out.println(beanName);
         }
-    }
-
-    @Bean
-    FilterRegistrationBean corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.setAllowedOrigins(
-                Arrays.asList(
-                    "http://localhost:3000",
-                    "http://localhost:8080",
-                    "http://beta.cycligo.com",
-                    "http://cycligo.com",
-                    "http://www.cycligo.com"
-                ));
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
-        source.registerCorsConfiguration("/**", config);
-        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
-        bean.setOrder(0);
-        return bean;
-//        return new FilterRegistrationBean(new Filter() {
-//            public void doFilter(ServletRequest req, ServletResponse res,
-//                                 FilterChain chain) throws IOException, ServletException {
-//                HttpServletRequest request = (HttpServletRequest) req;
-//                HttpServletResponse response = (HttpServletResponse) res;
-//                String method = request.getMethod();
-//                // this origin value could just as easily have come from a database
-//                response.setHeader("Access-Control-Allow-Origin", origin);
-//                response.setHeader("Access-Control-Allow-Methods",
-//                        "POST,GET,OPTIONS,DELETE");
-//                response.setHeader("Access-Control-Max-Age", Long.toString(60 * 60));
-//                response.setHeader("Access-Control-Allow-Credentials", "true");
-//                response.setHeader(
-//                        "Access-Control-Allow-Headers",
-//                        "Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
-//                if ("OPTIONS".equals(method)) {
-//                    response.setStatus(HttpStatus.OK.value());
-//                }
-//                else {
-//                    chain.doFilter(req, res);
-//                }
-//            }
-//
-//            public void init(FilterConfig filterConfig) {
-//            }
-//
-//            public void destroy() {
-//            }
-//        });
     }
 }

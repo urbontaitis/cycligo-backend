@@ -48,10 +48,13 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-tomcat")
     compile("org.springframework.boot:spring-boot-starter-data-rest")
+    compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.security:spring-security-web")
+    compile("org.springframework.security.oauth:spring-security-oauth2")
     compile("io.springfox:springfox-swagger2:${springfoxSwaggerVersion}")
     compile("io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}")
     compile("org.apache.commons:commons-io:${commonsIoVersion}")
-//    compile("org.springframework.security:spring-security-web")
+//
 //    testCompile("org.springframework.security:spring-security-test")
 
     compile project('cycligo-core')

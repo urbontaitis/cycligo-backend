@@ -8,7 +8,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mock.http.MockHttpOutputMessage;
 
-import javax.inject.Inject;
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
@@ -31,7 +31,7 @@ public abstract class MvcMockTest {
     @Autowired
     private MessageSource messageSource;
 
-    @Inject
+    @Resource
     public void setConverters(HttpMessageConverter<?>[] converters) {
 
         this.mappingJackson2HttpMessageConverter = Arrays.asList(converters).stream()
