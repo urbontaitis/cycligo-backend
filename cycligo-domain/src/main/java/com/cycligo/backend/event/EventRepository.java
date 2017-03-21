@@ -26,5 +26,7 @@ public interface EventRepository extends PagingAndSortingRepository<Event, Long>
                                             @Param("starts") LocalDateTime starts,
                                             @Param("ends") LocalDateTime ends);
 
-//    Page<Event> findAll(Predicate searchTerm, Pageable pageRequest);
+    @Query("select e from Event e order by e.createdAt DESC")
+    Page<Event> findLatest(Pageable topTen);
+    
 }

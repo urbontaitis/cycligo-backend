@@ -5,8 +5,11 @@ import com.cycligo.backend.lookup.LookupRepository;
 import com.querydsl.core.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 
 /**
@@ -34,36 +37,10 @@ public class EventService {
         return EventMapper.mapEntity2DtoPage(pageRequest, searchResultPage);
     }
 
-
-    @Deprecated
-    public ActiveEvent activeRaces(EventSearchParams eventSearchParams) {
-        ActiveEvent result = new ActiveEvent();
-
-        Iterable<Event> events = null;
-//        if (eventSearchParams.isNotEmpty()) {
-//            events = eventRepository.findByEventSearchParams(
-//                    eventSearchParams.getDiscipline(),
-//                    eventSearchParams.getCategory(),
-//                    eventSearchParams.getCountry(),
-//                    null,
-//                    null
-//            );
-//        } else {
-//            events = eventRepository.findAll();
-//        }
-
-        for(Event event  : events) {
-            result.getEvents().add((new EventMapper(lookupRepository)).entity2Dto(event));
-        }
-
-        return result;
-    }
-
     public RecentEvents recentRaces() {
         RecentEvents result = new RecentEvents();
-        //TODO create a query which should return N latest events
-        Iterable<Event> events = eventRepository.findAll();
-        for(Event event  : events) {
+        Page<Event> events = eventRepository.findLatest(new PageRequest(0, 10));
+        for(Event event  : events.getContent()) {
             result.getRecentEvents().add(new RecentEventMapper().entity2Dto(event));
         }
 
@@ -81,6 +58,7 @@ public class EventService {
     public Long save(EventDto input) {
         EventMapper mapper = new EventMapper(lookupRepository);
         Event event = mapper.dto2Entity(input);
+        event.setCreatedAt(LocalDateTime.now());
 
         event = eventRepository.save(event);
 
