@@ -17,8 +17,6 @@ import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter;
 import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
-import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
@@ -45,11 +43,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+//        "/events/event",
+//                "/media/image",
         http.cors().and()
             .authorizeRequests()
                 .antMatchers(
-                    "/events/event",
-                    "/media/image"
+
+                        "/user"
                 ).authenticated()
                 .anyRequest().permitAll().and()
                 .exceptionHandling()
@@ -75,16 +75,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return source;
     }
 
-    @Configuration
-    @EnableResourceServer
-    protected static class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
-        @Override
-        public void configure(HttpSecurity http) throws Exception {
-            // @formatter:off
-            http.antMatcher("/me").authorizeRequests().anyRequest().authenticated();
-            // @formatter:on
-        }
-    }
+//Uncomment when we need to support own OAuth2 authorisation
+//    @Configuration
+//    @EnableResourceServer
+//    protected static class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
+//        @Override
+//        public void configure(HttpSecurity http) throws Exception {
+//            // @formatter:off
+//            http.antMatcher("/me").authorizeRequests().anyRequest().authenticated();
+//            // @formatter:on
+//        }
+//    }
 
     @Bean
     public FilterRegistrationBean oauth2ClientFilterRegistration(OAuth2ClientContextFilter filter) {
