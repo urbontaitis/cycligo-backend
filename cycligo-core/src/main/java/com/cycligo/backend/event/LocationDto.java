@@ -15,8 +15,11 @@ public class LocationDto {
     private String label;
     @Size(max=256)
     private String placeId;
+    @NotEmpty(message = "{event.location_is_required}")
     private Double latitude;
+    @NotEmpty(message = "{event.location_is_required}")
     private Double longitude;
+    private String country;
 
     public LocationDto() {}
 
@@ -54,5 +57,13 @@ public class LocationDto {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }

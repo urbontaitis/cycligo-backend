@@ -70,12 +70,8 @@ class EventMapper {
         Location entity = new Location();
         entity.setLabel(dto.getLabel());
         entity.setPlaceId(dto.getPlaceId());
-        if ( null != dto.getLatitude()) {
-            entity.setLatitude(new BigDecimal(dto.getLatitude()));
-        }
-        if (null != dto.getLongitude()) {
-            entity.setLongitude(new BigDecimal(dto.getLongitude()));
-        }
+        entity.setLatitude(new BigDecimal(dto.getLatitude()));
+        entity.setLongitude(new BigDecimal(dto.getLongitude()));
         entity.setContinentId(null);
         entity.setCountry(null);
         entity.setCityId(null);
@@ -138,13 +134,12 @@ class EventMapper {
     static LocationDto entity2Dto(Location entity) {
         LocationDto dto = new LocationDto();
         dto.setLabel(entity.getLabel());
-        if (null != entity.getLatitude()) {
-            dto.setLatitude(entity.getLatitude().doubleValue());
-        }
-        if (null != entity.getLongitude()) {
-            dto.setLongitude(entity.getLongitude().doubleValue());
-        }
+        dto.setLatitude(entity.getLatitude().doubleValue());
+        dto.setLongitude(entity.getLongitude().doubleValue());
         dto.setPlaceId(entity.getPlaceId());
+        if (null != entity.getCountry()) {
+            dto.setCountry(entity.getCountry().getValue());
+        }
         return dto;
     }
 
