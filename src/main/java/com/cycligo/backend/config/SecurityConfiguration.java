@@ -24,6 +24,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CompositeFilter;
+import org.springframework.web.filter.CorsFilter;
 
 import javax.servlet.Filter;
 import java.util.ArrayList;
@@ -41,6 +42,25 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     OAuth2ClientContext oAuth2ClientContext;
 
+    @Bean
+    CorsFilter corsFilter() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedOrigins(
+                Arrays.asList(
+                        "http://localhost:3000",
+                        "http://localhost:8080",
+                        "http://beta.cycligo.com",
+                        "http://cycligo.com",
+                        "http://www.cycligo.com"));
+        configuration.addAllowedHeader("*");
+        configuration.addAllowedMethod("*");
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+
+        return new CorsFilter(source);
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 //        "/events/event",
@@ -48,31 +68,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.cors().and()
             .authorizeRequests()
                 .antMatchers(
-
                         "/user"
                 ).authenticated()
                 .anyRequest().permitAll().and()
                 .exceptionHandling()
-                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/")).and().logout()
-                .logoutSuccessUrl("/").permitAll().and().csrf()
-                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
+                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/")).and()
+                .logout().logoutSuccessUrl("/").permitAll().and()
+                .csrf().disable()
                 .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
-    }
-
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(
-            Arrays.asList(
-                "http://localhost:3000",
-                "http://localhost:8080",
-                "http://beta.cycligo.com",
-                "http://cycligo.com",
-                "http://www.cycligo.com"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST"));//TODO add PUT and DELETE later
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
+//                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
     }
 
 //Uncomment when we need to support own OAuth2 authorisation
