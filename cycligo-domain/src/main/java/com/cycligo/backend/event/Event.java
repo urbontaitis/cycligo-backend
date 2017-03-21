@@ -45,6 +45,7 @@ public class Event {
     private LookupValue category;
 
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade={CascadeType.PERSIST, CascadeType.MERGE})
+    @OrderBy("distance")
     private Set<EventDetail> eventDetails = new HashSet<>(0);
 
     private String linkToEvent;
