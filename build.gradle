@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.5.1.RELEASE'
+        springBootVersion = '1.5.2.RELEASE'
         springfoxSwaggerVersion = '2.6.0'
         commonsIoVersion = '1.3.2'
         jUnitVersion = '4.12'
@@ -45,12 +45,13 @@ jar {
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.boot:spring-boot-starter-tomcat")
-    compile("org.springframework.boot:spring-boot-starter-data-rest")
+    compile("org.springframework.boot:spring-boot-starter-actuator")
     compile("org.springframework.boot:spring-boot-starter-security")
-    compile("org.springframework.security:spring-security-web")
+    compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.security.oauth:spring-security-oauth2")
+    compile("org.springframework.boot:spring-boot-starter-tomcat")
+//    compile("org.springframework.boot:spring-boot-starter-data-rest")
+//    compile("org.springframework.security:spring-security-web")
     compile("io.springfox:springfox-swagger2:${springfoxSwaggerVersion}")
     compile("io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}")
     compile("org.apache.commons:commons-io:${commonsIoVersion}")
