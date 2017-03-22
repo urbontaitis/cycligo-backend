@@ -18,9 +18,9 @@ public class EventDetail {
     @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
-    private Integer distance;
+    private Double distance;
 
-    private Integer elevation;
+    private Double elevation;
 
     private BigDecimal price;
 
@@ -40,19 +40,19 @@ public class EventDetail {
         this.event = event;
     }
 
-    public Integer getDistance() {
+    public Double getDistance() {
         return distance;
     }
 
-    public void setDistance(Integer distance) {
+    public void setDistance(Double distance) {
         this.distance = distance;
     }
 
-    public Integer getElevation() {
+    public Double getElevation() {
         return elevation;
     }
 
-    public void setElevation(Integer elevation) {
+    public void setElevation(Double elevation) {
         this.elevation = elevation;
     }
 

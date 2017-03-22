@@ -327,3 +327,17 @@ databaseChangeLog:
             splitStatements: true
             sql: ALTER TABLE comment CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
             stripComments: true
+
+- changeSet:
+    id: 10-eventDetail
+    author: murbontaitis
+    comment: Change distance and elevation column types to double
+    changes:
+      - modifyDataType:
+          columnName: distance
+          newDataType: double
+          tableName: event_detail
+      - modifyDataType:
+          columnName: elevation
+          newDataType: double
+          tableName: event_detail

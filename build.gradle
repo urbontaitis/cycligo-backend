@@ -50,11 +50,11 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.security.oauth:spring-security-oauth2")
     compile("org.springframework.boot:spring-boot-starter-tomcat")
-//    compile("org.springframework.boot:spring-boot-starter-data-rest")
-//    compile("org.springframework.security:spring-security-web")
     compile("io.springfox:springfox-swagger2:${springfoxSwaggerVersion}")
     compile("io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}")
     compile("org.apache.commons:commons-io:${commonsIoVersion}")
+    compile('org.springframework.boot:spring-boot-starter-social-facebook')
+    compile('org.springframework.social:spring-social-facebook:3.0.0.M1')
 //
 //    testCompile("org.springframework.security:spring-security-test")
 

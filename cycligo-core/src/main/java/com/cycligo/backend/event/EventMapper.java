@@ -54,10 +54,10 @@ class EventMapper {
     EventDetail dto2Entity(EventDetailDto dto) {
         EventDetail entity = new EventDetail();
         if(null != dto.getDistance()) {
-            entity.setDistance(dto.getDistance().intValue());
+            entity.setDistance(dto.getDistance());
         }
         if(null != dto.getElevation()) {
-            entity.setElevation(dto.getElevation().intValue());
+            entity.setElevation(dto.getElevation());
         }
         if (null != dto.getPrice()) {
             entity.setPrice(new BigDecimal(dto.getPrice()));
