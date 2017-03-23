@@ -10,6 +10,12 @@ public class UserDto {
     private String surname;
     private String photo;
 
+    public UserDto() {}
+
+    public UserDto(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }

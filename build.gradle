@@ -9,6 +9,7 @@ buildscript {
         googleMapsServicesVersion = '0.1.17'
         commonsLang3Version = '3.5'
         querydslVersion = '3.7.4'
+        springSocialFacebookVersion = '3.0.0.M1'
 
     }
     repositories {
@@ -47,14 +48,14 @@ jar {
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-actuator")
     compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.boot:spring-boot-starter-social-twitter")
+    compile("org.springframework.boot:spring-boot-starter-social-facebook")
+    compile("org.springframework.social:spring-social-facebook:${springSocialFacebookVersion}")
     compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.security.oauth:spring-security-oauth2")
     compile("org.springframework.boot:spring-boot-starter-tomcat")
     compile("io.springfox:springfox-swagger2:${springfoxSwaggerVersion}")
     compile("io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}")
     compile("org.apache.commons:commons-io:${commonsIoVersion}")
-    compile('org.springframework.boot:spring-boot-starter-social-facebook')
-    compile('org.springframework.social:spring-social-facebook:3.0.0.M1')
 //
 //    testCompile("org.springframework.security:spring-security-test")
 
