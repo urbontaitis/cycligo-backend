@@ -341,3 +341,30 @@ databaseChangeLog:
           columnName: elevation
           newDataType: double
           tableName: event_detail
+
+- changeSet:
+      id: 4-random
+      author: murbontaitis
+      changes:
+        - createTable:
+            tableName: account
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: nvarchar(255)
+              - column:
+                  name: password
+                  type: varchar(255)
+              - column:
+                  name: first_name
+                  type: nvarchar(255)
+              - column:
+                  name: last_name
+                  type: nvarchar(255)

@@ -45,6 +45,7 @@ artifacts {
 }
 
 dependencies {
+    compile("org.springframework.security:spring-security-crypto:${springSecurityVersion}")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.liquibase:liquibase-core")
     compile("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final")

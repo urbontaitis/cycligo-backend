@@ -10,6 +10,7 @@ buildscript {
         commonsLang3Version = '3.5'
         querydslVersion = '3.7.4'
         springSocialFacebookVersion = '3.0.0.M1'
+        springSecurityVersion = '4.2.2.RELEASE'
 
     }
     repositories {
