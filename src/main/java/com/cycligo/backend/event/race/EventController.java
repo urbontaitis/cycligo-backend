@@ -2,6 +2,7 @@ package com.cycligo.backend.event.race;
 
 import com.cycligo.backend.base.handler.error.ClientErrorInformation;
 import com.cycligo.backend.base.handler.error.ValidationException;
+import com.cycligo.backend.config.Constants;
 import com.cycligo.backend.event.*;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.hibernate.cfg.NotYetImplementedException;
@@ -22,6 +23,7 @@ import java.util.List;
 
 
 @RestController
+@RequestMapping(Constants.ROOT_API_PATH)
 public class EventController {
 
     private static final Logger logger = LoggerFactory.getLogger(EventController.class);

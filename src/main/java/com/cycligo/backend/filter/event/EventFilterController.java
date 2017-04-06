@@ -1,5 +1,6 @@
 package com.cycligo.backend.filter.event;
 
+import com.cycligo.backend.config.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import java.util.List;
  * cycligo-backend
  */
 @RestController
+@RequestMapping(Constants.ROOT_API_PATH)
 public class EventFilterController {
 
     private EventFilterService eventFilterService;

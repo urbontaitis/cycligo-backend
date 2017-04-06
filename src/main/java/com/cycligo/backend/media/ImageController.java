@@ -1,5 +1,6 @@
 package com.cycligo.backend.media;
 
+import com.cycligo.backend.config.Constants;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpHeaders;
@@ -17,6 +18,7 @@ import java.io.IOException;
  */
 @Api(value = "Images")
 @RestController
+@RequestMapping(Constants.ROOT_API_PATH)
 public class ImageController {
 
     private ImageRepository imageRepository;

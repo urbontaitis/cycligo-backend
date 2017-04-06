@@ -1,6 +1,7 @@
 package com.cycligo.backend.comment;
 
 import com.cycligo.backend.base.ParentType;
+import com.cycligo.backend.config.Constants;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import javax.validation.Valid;
  */
 @Api(value = "customers")
 @RestController
+@RequestMapping(Constants.ROOT_API_PATH)
 public class CommentController {
 
     private CommentService commentService;

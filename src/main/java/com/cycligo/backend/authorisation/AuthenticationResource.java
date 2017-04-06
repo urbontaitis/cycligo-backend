@@ -1,5 +1,6 @@
 package com.cycligo.backend.authorisation;
 
+import com.cycligo.backend.config.Constants;
 import com.cycligo.backend.user.UserDto;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import java.security.Principal;
  * cycligo-rest-api
  */
 @RestController
+@RequestMapping(Constants.ROOT_API_PATH)
 public class AuthenticationResource {
 
     AuthenticationManager authenticationManager;
