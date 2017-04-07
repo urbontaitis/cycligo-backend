@@ -6,14 +6,16 @@ package com.cycligo.backend.user;
  */
 public class UserDto {
     private Long id;
+    private Boolean authenticated;
     private String name;
     private String surname;
     private String photo;
 
     public UserDto() {}
 
-    public UserDto(String name) {
+    public UserDto(String name, boolean authenticated) {
         this.name = name;
+        this.authenticated = authenticated;
     }
 
     public Long getId() {
@@ -22,6 +24,14 @@ public class UserDto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Boolean getAuthenticated() {
+        return authenticated;
+    }
+
+    public void setAuthenticated(Boolean authenticated) {
+        this.authenticated = authenticated;
     }
 
     public String getName() {
