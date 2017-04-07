@@ -37,7 +37,7 @@ public class SignupController {
         if (connection != null) {
             Account account = createAccount(connection.fetchUserProfile(), null);
             if (account != null) {
-                AuthUtil.authenticate(connection);
+                SignInUtils.signin(account.getUsername());
                 signInUtils.doPostSignUp(connection.getDisplayName(), request);
             }
         }

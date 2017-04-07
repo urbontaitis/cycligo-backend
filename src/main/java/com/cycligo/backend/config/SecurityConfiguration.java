@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -59,6 +58,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .requestCache(new NullRequestCache())
             .and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER)
+            .and()
+            .httpBasic()
             .and().csrf().disable();
     }
 
@@ -70,6 +71,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public TextEncryptor textEncryptor() {
         return Encryptors.noOpText();
+    }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+            .inMemoryAuthentication()
+            .withUser("user").password("password").roles("USER");
     }
 
 //    @Bean

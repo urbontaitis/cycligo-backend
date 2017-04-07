@@ -10,11 +10,16 @@ import org.springframework.social.connect.UserProfile;
 /**
  * Created by Mindaugas Urbontaitis on 23/03/2017.
  * cycligo-rest-api
+ *
+ *
  */
+@Deprecated
 public class AuthUtil {
 
     private static final Logger log = LoggerFactory.getLogger(AuthUtil.class);
 
+
+    @Deprecated
     public static void authenticate(Connection<?> connection) {
         UserProfile userProfile = connection.fetchUserProfile();
         String username = userProfile.getName();

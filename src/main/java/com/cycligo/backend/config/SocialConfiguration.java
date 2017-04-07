@@ -1,8 +1,10 @@
 package com.cycligo.backend.config;
 
 import com.cycligo.backend.authorisation.AuthUtil;
+import com.cycligo.backend.authorisation.SimpleSignInAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.social.config.annotation.SocialConfigurer;
 import org.springframework.social.connect.web.SignInAdapter;
 
@@ -22,10 +24,7 @@ public class SocialConfiguration {
 
     @Bean
     public SignInAdapter authSignInAdapter() {
-        return (userId, connection, request) -> {
-            AuthUtil.authenticate(connection);
-            return null;
-        };
+        return new SimpleSignInAdapter(new HttpSessionRequestCache());
     }
 
 }
