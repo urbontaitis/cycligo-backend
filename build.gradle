@@ -54,7 +54,6 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-social-facebook")
     compile("org.springframework.social:spring-social-facebook:${springSocialFacebookVersion}")
     compile("org.springframework.session:spring-session")
-    compile("org.springframework.boot:spring-boot-starter-data-redis")
 
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-tomcat")

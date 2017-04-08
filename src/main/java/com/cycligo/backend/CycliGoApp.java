@@ -1,13 +1,8 @@
 package com.cycligo.backend;
 
-import com.cycligo.backend.account.Account;
-import com.cycligo.backend.account.AccountRepository;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.session.SessionAutoConfiguration;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.util.Arrays;
@@ -16,7 +11,7 @@ import java.util.Arrays;
  * Created by Mindaugas Urbontaitis on 13/11/2016.
  * CycliGO - Built by cyclists for cyclists.
  */
-@SpringBootApplication(exclude = SessionAutoConfiguration.class)
+@SpringBootApplication
 @EnableScheduling
 //@EnableOAuth2Client
 //@EnableAuthorizationServer
