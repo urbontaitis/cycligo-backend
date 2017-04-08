@@ -60,8 +60,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER)
             .and()
-            .httpBasic()
-            .and().csrf().disable();
+            .csrf().disable(); //TODO FIXME enable CSRF
+            //.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
     }
 
     @Bean
@@ -73,17 +73,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public TextEncryptor textEncryptor() {
         return Encryptors.noOpText();
     }
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-            .inMemoryAuthentication()
-            .withUser("user").password("password").roles("USER");
-    }
-
-//    @Bean
-//    public SpringSecurityDialect springSecurityDialect() {
-//        return new SpringSecurityDialect();
-//    }
 
 }
