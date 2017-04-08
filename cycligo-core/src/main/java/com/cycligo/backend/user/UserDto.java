@@ -1,10 +1,12 @@
 package com.cycligo.backend.user;
 
+import java.io.Serializable;
+
 /**
  * Created by Mindaugas Urbontaitis on 25/01/2017.
  * cycligo-backend
  */
-public class UserDto {
+public class UserDto implements Serializable {
     private Long id;
     private Boolean authenticated;
     private String name;
@@ -13,7 +15,7 @@ public class UserDto {
 
     public UserDto() {}
 
-    public UserDto(String name, boolean authenticated) {
+    public UserDto(String name, Boolean authenticated) {
         this.name = name;
         this.authenticated = authenticated;
     }
@@ -56,5 +58,16 @@ public class UserDto {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "id=" + id +
+                ", authenticated=" + authenticated +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", photo='" + photo + '\'' +
+                '}';
     }
 }

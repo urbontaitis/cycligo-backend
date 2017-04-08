@@ -1,4 +1,4 @@
-package com.cycligo.backend.config;
+package com.cycligo.backend.dbinitializer;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.ClassPathResource;
@@ -14,11 +14,11 @@ import javax.sql.DataSource;
  * cycligo-rest-api
  */
 @Component
-public class SocialDatabaseInitializer implements InitializingBean {
+public class JdbcDatabaseInitializer implements InitializingBean {
 
     private final DataSource dataSource;
 
-    public SocialDatabaseInitializer(DataSource dataSource) {
+    public JdbcDatabaseInitializer(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -29,10 +29,18 @@ public class SocialDatabaseInitializer implements InitializingBean {
         DatabasePopulatorUtils.execute(populator, dataSource);
     }
 
+    private ClassPathResource SocialScript() {
+        return new ClassPathResource("org/springframework/social/connect/jdbc/JdbcUsersConnectionRepository.sql");
+    }
+
+    private ClassPathResource SpringSessionMysqlScript() {
+        return new ClassPathResource("org/springframework/session/jdbc/schema-mysql.sql");
+    }
+
     @Override
     public void afterPropertiesSet() throws Exception {
-        ClassPathResource resource = new ClassPathResource("org/springframework/social/connect/jdbc/JdbcUsersConnectionRepository.sql");
-        runScript(resource);
+        runScript(SocialScript());
+        runScript(SpringSessionMysqlScript());
     }
 
 
