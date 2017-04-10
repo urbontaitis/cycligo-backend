@@ -3,6 +3,8 @@ package com.cycligo.backend.authorisation;
 import com.cycligo.backend.account.Account;
 import com.cycligo.backend.account.AccountRepository;
 import com.cycligo.backend.account.UsernameAlreadyInUseException;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.UserProfile;
@@ -13,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.view.RedirectView;
 
 /**
  * Created by Mindaugas Urbontaitis on 23/03/2017.
@@ -32,27 +35,27 @@ public class SignupController {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
-    public String signup(WebRequest request) {
+    public RedirectView signup(WebRequest request) throws UsernameAlreadyInUseException {
         Connection<?> connection = signInUtils.getConnectionFromSession(request);
         if (connection != null) {
-            Account account = createAccount(connection.fetchUserProfile(), null);
+            Account account = createAccount(connection.fetchUserProfile());
             if (account != null) {
                 SignInUtils.signin(account.getUsername());
-                signInUtils.doPostSignUp(connection.getDisplayName(), request);
+                signInUtils.doPostSignUp(account.getUsername(), request);
+                return (new RedirectView("/api/session/provider?username=" + account.getUsername(), true));
             }
         }
-        return "redirect:/";
+        // TODO Handle this kind of situation
+        return (new RedirectView("/", true));
     }
 
-    private Account createAccount(UserProfile providerUser, BindingResult formBinding) {
-        try {
-            //TODO generate random username and password
-            Account account = new Account(providerUser.getUsername(), "", providerUser.getFirstName(), providerUser.getLastName());
-            accountRepository.createAccount(account);
-            return account;
-        } catch (UsernameAlreadyInUseException e) {
-            //formBinding.rejectValue("username", "user.duplicateUsername", "already in use");
-            return null;
+    private Account createAccount(UserProfile providerUser) throws UsernameAlreadyInUseException {
+        //TODO generate random username and password
+        if (StringUtils.isEmpty(providerUser.getEmail())) {
+            throw new IllegalArgumentException("User email cant be empty");
         }
+        Account account = new Account(providerUser.getEmail(), "", providerUser.getFirstName(), providerUser.getLastName());
+        accountRepository.createAccount(account);
+        return account;
     }
 }

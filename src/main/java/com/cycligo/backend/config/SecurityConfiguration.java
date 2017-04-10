@@ -31,20 +31,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private DataSource dataSource;
-
-    @Autowired
-    public void registerAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()
-                .dataSource(dataSource)
-                .usersByUsernameQuery("select username, password, true from account where username = ?")
-                .authoritiesByUsernameQuery("select username, 'ROLE_USER' from account where username = ?")
-                .passwordEncoder(passwordEncoder());
-    }
-
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 //        "/events/event",
 //                "/media/image",
+        http.httpBasic().disable(); // prevent browser to popping up authentication dialogs
+
         http
             .authorizeRequests()
             .antMatchers("/api/session").permitAll()

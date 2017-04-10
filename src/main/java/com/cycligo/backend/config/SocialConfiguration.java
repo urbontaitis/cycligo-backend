@@ -1,6 +1,5 @@
 package com.cycligo.backend.config;
 
-import com.cycligo.backend.authorisation.AuthUtil;
 import com.cycligo.backend.authorisation.SimpleSignInAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
