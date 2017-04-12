@@ -368,3 +368,80 @@ databaseChangeLog:
               - column:
                   name: last_name
                   type: nvarchar(255)
+
+- changeSet:
+      id: 11-Blog
+      author: murbontaitis
+      changes:
+        - createTable:
+            tableName: blog
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: title
+                  type: nvarchar(1000)
+              - column:
+                  name: content
+                  type: mediumtext
+              - column:
+                  name: photo_id
+                  type: bigint
+              - column:
+                  name: category_id
+                  type: bigint
+              - column:
+                  name: approved
+                  type: boolean
+              - column:
+                  name: created_by
+                  type: bigint
+              - column:
+                  name: created_at
+                  type: timestamp
+              - column:
+                  name: updated_by
+                  type: bigint
+              - column:
+                  name: updated_at
+                  type: timestamp
+              - column:
+                  name: version
+                  type: int
+
+- changeSet:
+      id: 11-Blog_tags
+      author: murbontaitis
+      changes:
+        - createTable:
+            tableName: blog_tags
+            columns:
+              - column:
+                  name: blog_id
+                  type: bigint
+              - column:
+                  name: tag_id
+                  type: bigint
+
+- changeSet:
+      id: 11-Tag
+      author: murbontaitis
+      changes:
+        - createTable:
+            tableName: tag
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: nvarchar(250)
