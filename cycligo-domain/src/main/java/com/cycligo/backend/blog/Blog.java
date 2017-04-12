@@ -5,6 +5,7 @@ import com.cycligo.backend.tag.Tag;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -40,7 +41,7 @@ public class Blog {
             inverseJoinColumns = {
                 @JoinColumn(name = "tag_id", nullable = false, updatable = false)
             })
-    private Set<Tag> tags;
+    private Set<Tag> tags = new HashSet<>(0);
 
     private Long createdBy;
 
@@ -147,5 +148,9 @@ public class Blog {
 
     public void setVersion(int version) {
         this.version = version;
+    }
+
+    public void addTags(Tag tag) {
+        this.tags.add(tag);
     }
 }

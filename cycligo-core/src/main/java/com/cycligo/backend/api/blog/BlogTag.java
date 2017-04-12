@@ -1,26 +1,23 @@
-package com.cycligo.backend.tag;
+package com.cycligo.backend.api.blog;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 /**
  * Created by Mindaugas Urbontaitis on 12/04/2017.
  * cycligo-rest-api
  */
-@Entity
-public class Tag {
+public class BlogTag implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(max = 250)
     private String name;
 
-    public Tag() {}
+    public BlogTag() {}
 
-    public Tag(String name) {
+    public BlogTag(Long id, String name) {
+        this.id = id;
         this.name = name;
     }
 
