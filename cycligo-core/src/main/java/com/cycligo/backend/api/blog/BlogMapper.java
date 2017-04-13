@@ -47,7 +47,7 @@ public class BlogMapper {
     }
 
     LookupValue find(String name) {
-        LookupValue lookupValue = lookupValueRepository.findByName(name);
+        LookupValue lookupValue = lookupValueRepository.findByValue(name);
         if (lookupValue == null) {
             throw new IllegalArgumentException("Trying to save with non existing property: " + name);
         }

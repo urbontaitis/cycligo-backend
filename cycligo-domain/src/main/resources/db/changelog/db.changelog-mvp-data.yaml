@@ -158,3 +158,38 @@ databaseChangeLog:
             splitStatements: true
             sql: UPDATE lookup_value SET value="backpacking" WHERE value="bacpacking"
             stripComments: true
+
+  - changeSet:
+        id: 8
+        author: murbontaitis
+        comment: "Blogpost catagory parent lookup"
+        changes:
+          - insert:
+              tableName: lookup
+              columns:
+                - column:
+                    name: name
+                    value: "Categories"
+                - column:
+                    name: value
+                    value: "BLOG_CATEGORIES"
+
+  - changeSet:
+      id: 8-data
+      author: murbontaitis
+      comment: "Initial data for MTB filter"
+      changes:
+        - loadData:
+            encoding: UTF-8
+            file: db/changelog/data/blog-category-data.csv
+            tableName: lookup_value
+
+  - changeSet:
+      id: 8-data-add-filter-id
+      author: murbontaitis
+      comment: "Add Blog category filter FK"
+      changes:
+        - sql:
+            splitStatements: true
+            sql: UPDATE lookup_value SET lookup_id=(SELECT id FROM lookup WHERE value = 'BLOG_CATEGORIES') WHERE lookup_id IS NULL
+            stripComments: true

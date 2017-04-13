@@ -15,4 +15,6 @@ public interface LookupRepository extends CrudRepository<Lookup, Long> {
     Iterable<Lookup> findAllFilters();
 
     Lookup findByName(String name);
+
+    Lookup findByValue(String value);
 }

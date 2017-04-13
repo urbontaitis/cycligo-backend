@@ -2,7 +2,6 @@ package com.cycligo.backend.filter.event;
 
 import com.cycligo.backend.lookup.Lookup;
 import com.cycligo.backend.lookup.LookupRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -14,25 +13,29 @@ import java.util.List;
  * cycligo-backend
  */
 @Service
-public class EventFilterService {
+public class FilterService {
 
     private LookupRepository lookupRepository;
-    private EventFilterMapper mapper = new EventFilterMapper();
 
-    @Autowired
-    public EventFilterService(LookupRepository lookupRepository) {
+    public FilterService(LookupRepository lookupRepository) {
         this.lookupRepository = lookupRepository;
     }
 
     @Transactional
-    public List<EventFilterDto> fetchAll() {
-        List<EventFilterDto> result = new ArrayList<>();
+    public List<FilterDto> fetchAllEvents() {
+        List<FilterDto> result = new ArrayList<>();
         Iterable<Lookup> filters = lookupRepository.findAll();
         for (Lookup lookup : filters) {
-            result.add(mapper.entity2Dto(lookup));
+            result.add(FilterMapper.entity2Dto(lookup));
         }
 
         return result;
     }
 
+    public List<ChoiceDto> fetchBlogChoices() {
+        Lookup blogLookup = lookupRepository.findByValue("BLOG_CATEGORIES");
+        List<ChoiceDto> values = FilterMapper.mapEntities2Dtos(blogLookup.getLookups());
+
+        return values;
+    }
 }

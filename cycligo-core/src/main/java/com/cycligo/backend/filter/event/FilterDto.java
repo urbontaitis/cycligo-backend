@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Mindaugas Urbontaitis on 25/01/2017.
  * cycligo-backend
  */
-public class EventFilterDto {
+public class FilterDto {
     private Long id;
     private String title;
     private List<ChoiceDto> choices;
