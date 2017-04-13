@@ -8,5 +8,5 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface CommentRepository extends CrudRepository<Comment, Long> {
 
-    Iterable<Comment> findAllByParentId(Long parentId);
+    Iterable<Comment> findAllByParentIdAndParentType(Long parentId, String parentType);
 }

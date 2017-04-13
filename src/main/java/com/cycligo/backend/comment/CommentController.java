@@ -30,9 +30,9 @@ public class CommentController {
     @ApiOperation(value = "Gets a comments based on parent id",
             notes = "Retrieves a comments",
             response = Comments.class)
-    @RequestMapping(value = "/comments/{parentId}", method = RequestMethod.GET)
-    Comments commentsByParentId(@PathVariable Long parentId) {
-        return commentService.findByParentId(parentId);
+    @RequestMapping(value = "/comments/{parentId}/{parentType}", method = RequestMethod.GET)
+    Comments commentsByParentId(@PathVariable Long parentId, @PathVariable String parentType) {
+        return commentService.findByParentId(parentId, parentType);
     }
 
     @ApiOperation(value = "Post a comment based on parent id",

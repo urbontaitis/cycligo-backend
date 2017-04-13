@@ -23,10 +23,10 @@ public class CommentService {
     }
 
     @Transactional
-    public Comments findByParentId(Long parentId) {
+    public Comments findByParentId(Long parentId, String parentType) {
         Comments result = new Comments();
 
-        Iterable<Comment> comments = commentRepository.findAllByParentId(parentId);
+        Iterable<Comment> comments = commentRepository.findAllByParentIdAndParentType(parentId, parentType);
         for(Comment comment : comments) {
             comment.setUser(fake()); // FIXME use a real user
             result.getComments().add(mapper.entity2Dto(comment));
