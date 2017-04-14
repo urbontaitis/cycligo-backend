@@ -1,6 +1,6 @@
-pipelines {
-    stage 'build_Project'
-    node{
-      sh 'gradle build --info'
+node {
+    stage 'Build project'
+    node {
+      sh 'gradle clean build --info'
     }
 }
