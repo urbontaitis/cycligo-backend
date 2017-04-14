@@ -1,6 +1,6 @@
 node {
     stage 'Build project'
     node {
-      sh 'gradle clean build --info'
+      sh './gradlew clean build --info'
     }
 }
