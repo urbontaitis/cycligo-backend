@@ -2,7 +2,7 @@ node {
 
   deleteDir()
 
-  state('Checkout source') {
+  stage('Checkout source') {
     checkout scm
   }
 
