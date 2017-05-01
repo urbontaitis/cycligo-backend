@@ -28,3 +28,4 @@ nbdist/
 build/
 out/
 classes/
+bin/
