@@ -1,15 +1,15 @@
 package com.cycligo.backend.comment;
 
+import com.cycligo.backend.base.ParentType;
+import com.cycligo.backend.config.Constants;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.Valid;
 
 /**
  * Created by Mindaugas Urbontaitis on 24/01/2017.
@@ -17,6 +17,7 @@ import java.util.List;
  */
 @Api(value = "customers")
 @RestController
+@RequestMapping(Constants.ROOT_API_PATH)
 public class CommentController {
 
     private CommentService commentService;
@@ -29,19 +30,20 @@ public class CommentController {
     @ApiOperation(value = "Gets a comments based on parent id",
             notes = "Retrieves a comments",
             response = Comments.class)
-    @RequestMapping(value = "/comments", method = RequestMethod.GET)
-    Comments commentsByParentId(@RequestParam(value = "parentId") Long parentId) {
-        return commentService.findByParentId(parentId);
+    @RequestMapping(value = "/comments/{parentId}/{parentType}", method = RequestMethod.GET)
+    Comments commentsByParentId(@PathVariable Long parentId, @PathVariable String parentType) {
+        return commentService.findByParentId(parentId, parentType);
     }
 
     @ApiOperation(value = "Post a comment based on parent id",
             notes = "Post a comment",
-            response = Object.class)
-    @RequestMapping(value = "/comments/comment", method = RequestMethod.PUT)
-    List<Object> postComment(@RequestParam(value = "parentId") Long parentId) {
-        throw new NotYetImplementedException("TODO implement comments API");
+            response = CommentDto.class)
+    @RequestMapping(value = "/comments/comment", method = RequestMethod.POST)
+    ResponseEntity<CommentDto> add(@Valid @RequestBody CommentDto input) {
+
+        input.setParentType(ParentType.EVENT.name());// FIXME temporary workaround
+        CommentDto result = commentService.save(input);
+
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
-
-
-
 }

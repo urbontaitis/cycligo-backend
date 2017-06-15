@@ -1,61 +1,111 @@
 buildscript {
     ext {
-        springBootVersion = '1.4.4.RELEASE'
+        springBootVersion = '1.5.2.RELEASE'
+        springfoxSwaggerVersion = '2.6.0'
+        commonsIoVersion = '1.3.2'
+        jUnitVersion = '4.12'
+        jacksonVersion = '2.8.6'
+        hibernateValidatorVersion = '5.4.0.Final'
+        googleMapsServicesVersion = '0.1.17'
+        commonsLang3Version = '3.5'
+        querydslVersion = '3.7.4'
+        springSocialFacebookVersion = '3.0.0.M1'
+        springSecurityVersion = '4.2.2.RELEASE'
+
     }
     repositories {
         jcenter()
+        maven { url "https://repo.spring.io/libs-milestone" }
+        maven { url 'https://repo.spring.io/libs-snapshot' }
+        maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
 
+plugins {
+  id "org.sonarqube" version "2.5-rc1"
+}
+
+task dev << {
+    bootRun.systemProperty 'spring.profiles.active', 'domain-dev'
+}
+
+task debugDev << {
+    bootRun.jvmArgs "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005"
+    dev
+}
+
+task qa << {
+    bootRun.systemProperty 'spring.profiles.active', 'domain-qa'
+}
+
 apply plugin: 'java'
-apply plugin: 'org.springframework.boot'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
 
 jar {
-    baseName = 'cycligoapi'
+    baseName = 'cycligo-rest-api'
     version = '1.0.0-SNAPSHOT'
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
 dependencies {
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+
+    compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.boot:spring-boot-starter-social-twitter")
+    compile("org.springframework.boot:spring-boot-starter-social-facebook")
+    compile("org.springframework.social:spring-social-facebook:${springSocialFacebookVersion}")
+    compile("org.springframework.session:spring-session")
+
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-tomcat")
-    compile("org.springframework.boot:spring-boot-starter-data-rest")
-    compile("io.springfox:springfox-swagger2:2.6.0")
-    compile("io.springfox:springfox-swagger-ui:2.6.0")
 
-    compile project(':core-module')
-    compile project(':domain-module')
+    compile("io.springfox:springfox-swagger2:${springfoxSwaggerVersion}")
+    compile("io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}")
 
-    testCompile('org.springframework.boot:spring-boot-starter-test')
-    testRuntime group: 'com.h2database', name: 'h2', version: '1.4.192'
+    compile("org.apache.commons:commons-io:${commonsIoVersion}")
+//
+//    testCompile("org.springframework.security:spring-security-test")
+
+    compile project('cycligo-core')
+    compile project('cycligo-domain')
+
+
+    testCompile project(path: ':cycligo-domain', configuration: 'testOutput')
+
 }
 
 allprojects {
     group = 'com.cycligo.api'
     version = '0.1.0-SNAPSHOT'
 
+    apply plugin: 'org.springframework.boot'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
     repositories {
         jcenter()
+    }
+
+    dependencies {
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+        testCompile("junit:junit:${jUnitVersion}")
     }
 }
 
 subprojects {
     apply plugin: 'java'
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+
     tasks.withType(JavaCompile) {
         options.encoding = 'UTF-8'
     }
 
-
     repositories {
         mavenLocal()
         jcenter()
+        maven { url "https://repo.spring.io/libs-milestone" }
     }
-
 }

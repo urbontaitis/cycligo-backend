@@ -1,0 +1,195 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1-data
+      author: murbontaitis
+      comment: "Initial data for filter component"
+      changes:
+        - insert:
+            tableName: lookup
+            columns:
+              - column:
+                  name: name
+                  value: "MTB"
+              - column:
+                  name: value
+                  value: "MTB"
+        - insert:
+            tableName: lookup
+            columns:
+              - column:
+                  name: name
+                  value: "ROAD"
+              - column:
+                  name: value
+                  value: "ROAD"
+        - insert:
+            tableName: lookup
+            columns:
+              - column:
+                  name: name
+                  value: "Countries"
+              - column:
+                  name: value
+                  value: "COUNTRIES"
+        - insert:
+            tableName: lookup
+            columns:
+              - column:
+                  name: name
+                  value: "Distance"
+              - column:
+                  name: value
+                  value: "DISTANCE"
+
+  - changeSet:
+      id: 2-data
+      author: murbontaitis
+      comment: "Initial data for MTB filter"
+      changes:
+        - loadData:
+            encoding: UTF-8
+            file: db/changelog/data/mtb-data.csv
+            tableName: lookup_value
+
+  - changeSet:
+      id: 2-data-add-filter-id
+      author: murbontaitis
+      comment: "Add MTB filter FK"
+      changes:
+        - sql:
+            splitStatements: true
+            sql: UPDATE lookup_value SET lookup_id=(SELECT id FROM lookup WHERE value = 'MTB') WHERE lookup_id IS NULL
+            stripComments: true
+
+  - changeSet:
+        id: 3-data
+        author: murbontaitis
+        comment: "Initial data for ROAD filter"
+        changes:
+          - loadData:
+              columns:
+              encoding: UTF-8
+              file: db/changelog/data/road-data.csv
+              tableName: lookup_value
+
+  - changeSet:
+      id: 3-data-add-filter-id
+      author: murbontaitis
+      comment: "Add ROAD filter FK"
+      changes:
+        - sql:
+            splitStatements: true
+            sql: UPDATE lookup_value SET lookup_id=(SELECT id FROM lookup WHERE value = 'ROAD') WHERE lookup_id IS NULL
+            stripComments: true
+
+  - changeSet:
+        id: 4-delete
+        author: murbontaitis
+        comment: "Remove old country lookups"
+        preConditions:
+          - onFail: MARK_RAN
+          - sqlCheck:
+              expectedResult: 1
+              sql: select count(value) from lookup_value where value='LTU';
+        changes:
+          - sql:
+              splitStatements: true
+              sql: DELETE FROM lookup_value WHERE lookup_id=(SELECT id FROM lookup WHERE value = 'COUNTRIES')
+              stripComments: true
+
+  - changeSet:
+        id: 4-data-new
+        author: murbontaitis
+        comment: "Initial data for Countries filter (updated)"
+        changes:
+          - loadData:
+              columns:
+              encoding: UTF-8
+              file: db/changelog/data/countries-data.csv
+              tableName: lookup_value
+
+  - changeSet:
+      id: 4-data-add-filter-id-new
+      author: murbontaitis
+      comment: "Add Countries filter FK (updated)"
+      changes:
+        - sql:
+            splitStatements: true
+            sql: UPDATE lookup_value SET lookup_id=(SELECT id FROM lookup WHERE value = 'COUNTRIES') WHERE lookup_id IS NULL
+            stripComments: true
+
+  - changeSet:
+        id: 5-data
+        author: murbontaitis
+        comment: "Initial data for Distance filter"
+        changes:
+          - loadData:
+              columns:
+              encoding: UTF-8
+              file: db/changelog/data/distance-data.csv
+              tableName: lookup_value
+
+  - changeSet:
+      id: 5-data-add-filter-id
+      author: murbontaitis
+      comment: "Add Distance filter FK"
+      changes:
+        - sql:
+            splitStatements: true
+            sql: UPDATE lookup_value SET lookup_id=(SELECT id FROM lookup WHERE value = 'DISTANCE') WHERE lookup_id IS NULL
+            stripComments: true
+
+  - changeSet:
+        id: 6
+        author: murbontaitis
+        comment: "Create UNKNOWN country"
+        changes:
+          - sql:
+              splitStatements: true
+              sql: INSERT INTO lookup_value (name, value, lookup_id) SELECT 'Unknown country', 'UNKNOWN', id FROM lookup WHERE value = 'COUNTRIES'
+              stripComments: true
+
+  - changeSet:
+        id: 7
+        author: murbontaitis
+        comment: "Mistyped backpacking in MTB category"
+        changes:
+          -sql:
+            splitStatements: true
+            sql: UPDATE lookup_value SET value="backpacking" WHERE value="bacpacking"
+            stripComments: true
+
+  - changeSet:
+        id: 8
+        author: murbontaitis
+        comment: "Blogpost catagory parent lookup"
+        changes:
+          - insert:
+              tableName: lookup
+              columns:
+                - column:
+                    name: name
+                    value: "Categories"
+                - column:
+                    name: value
+                    value: "BLOG_CATEGORIES"
+
+  - changeSet:
+      id: 8-data
+      author: murbontaitis
+      comment: "Initial data for MTB filter"
+      changes:
+        - loadData:
+            encoding: UTF-8
+            file: db/changelog/data/blog-category-data.csv
+            tableName: lookup_value
+
+  - changeSet:
+      id: 8-data-add-filter-id
+      author: murbontaitis
+      comment: "Add Blog category filter FK"
+      changes:
+        - sql:
+            splitStatements: true
+            sql: UPDATE lookup_value SET lookup_id=(SELECT id FROM lookup WHERE value = 'BLOG_CATEGORIES') WHERE lookup_id IS NULL
+            stripComments: true

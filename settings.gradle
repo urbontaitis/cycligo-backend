@@ -1,6 +1,4 @@
-rootProject.name = 'cycligo-api'
-include ':core-module'
-include ':domain-module'
+rootProject.name='cycligo-rest-api'
 
-project(':core-module').projectDir = "$rootDir/core-module" as File
-project(':domain-module').projectDir = "$rootDir/domain-module" as File
+include 'cycligo-core'
+include 'cycligo-domain'

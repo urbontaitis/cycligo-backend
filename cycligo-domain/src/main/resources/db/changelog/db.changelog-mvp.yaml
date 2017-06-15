@@ -1,0 +1,447 @@
+databaseChangeLog:
+
+- changeSet:
+      id: 1
+      author: murbontaitis
+      changes:
+        - createTable:
+            tableName: event
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: title
+                  type: nvarchar(50)
+              - column:
+                  name: description
+                  type: mediumtext
+              - column:
+                  name: starts
+                  type: datetime
+              - column:
+                  name: ends
+                  type: datetime
+              - column:
+                  name: location_id
+                  type: bigint
+              - column:
+                  name: photo_id
+                  type: bigint
+              - column:
+                  name: discipline_id
+                  type: bigint
+              - column:
+                  name: category_id
+                  type: bigint
+              - column:
+                  name: link_to_event
+                  type: varchar(2083)
+              - column:
+                  name: approved
+                  type: boolean
+              - column:
+                  name: created_by
+                  type: bigint
+              - column:
+                  name: created_at
+                  type: timestamp
+              - column:
+                  name: updated_by
+                  type: bigint
+              - column:
+                  name: updated_at
+                  type: timestamp
+              - column:
+                  name: version
+                  type: int
+
+
+- changeSet:
+      id: 1-eventDetails
+      author: murbontaitis
+      changes:
+        - createTable:
+            tableName: event_detail
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: event_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_event_detail_event
+                    refenrences: event(id)
+                    nullable: true
+              - column:
+                  name: distance
+                  type: int
+              - column:
+                  name: elevation
+                  type: int
+              - column:
+                  name: price
+                  type: decimal(13, 2)
+
+- changeSet:
+      id: 1-location
+      author: murbontaitis
+      changes:
+          - createTable:
+                tableName: location
+                columns:
+                  - column:
+                      name: id
+                      type: bigint
+                      autoIncrement: true
+                      constraints:
+                          primaryKey: true
+                          nullable: false
+                  - column:
+                      name: label
+                      type: nvarchar(256)
+                  - column:
+                      name: place_id
+                      type: nvarchar(256)
+                  - column:
+                      name: latitude
+                      type: decimal(9,6)
+                  - column:
+                      name: longitude
+                      type: decimal(9,6)
+                  - column:
+                      name: city_id
+                      type: bigint
+                  - column:
+                      name: country_id
+                      type: bigint
+                  - column:
+                      name: continent_id
+                      type: bigint
+
+
+- changeSet:
+      id: 2
+      author: murbontaitis
+      changes:
+        - createTable:
+            tableName: lookup
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: nvarchar(50)
+              - column:
+                  name: value
+                  type: varchar(50)
+
+- changeSet:
+      id: 2-lookup-value
+      author: murbontaitis
+      changes:
+        - createTable:
+            tableName: lookup_value
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: nvarchar(50)
+              - column:
+                  name: value
+                  type: varchar(50)
+              - column:
+                  name: lookup_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_lookup_value_lookup
+                    references: lookup(id)
+                    nulable: false
+
+- changeSet:
+      id: 3-image
+      author: murbontaitis
+      changes:
+          - createTable:
+              tableName: image
+              columns:
+                - column:
+                    name: id
+                    type: bigint
+                    autoIncrement: true
+                    constraints:
+                        primaryKey: true
+                        nullable: false
+                - column:
+                    name: value
+                    type: longblob
+                    constraints:
+                        nullable: false
+                - column:
+                    name: media_type
+                    type: varchar(25)
+                - column:
+                    name: created_by
+                    type: bigint
+                - column:
+                    name: created_at
+                    type: timestamp
+                - column:
+                    name: updated_by
+                    type: bigint
+                - column:
+                    name: updated_at
+                    type: timestamp
+
+- changeSet:
+      id: 4
+      author: murbontaitis
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: nvarchar(255)
+              - column:
+                  name: surname
+                  type: nvarchar(255)
+              - column:
+                  name: email
+                  type: nvarchar(255)
+              - column:
+                  name: photo
+                  type: varchar(255)
+- changeSet:
+      id: 5
+      author: murbontaitis
+      changes:
+          - createTable:
+              tableName: comment
+              columns:
+                - column:
+                    name: id
+                    type: bigint
+                    autoIncrement: true
+                    constraints:
+                        primaryKey: true
+                        nullable: false
+                - column:
+                    name: comment
+                    type: mediumtext
+                - column:
+                    name: date
+                    type: datetime
+                - column:
+                    name: user_id
+                    type: bigint
+                    constraints:
+                        foreignKeyName: fk_comment_user
+                        refenrences: user(id)
+                        nullable: false
+                - column:
+                    name: reply_id
+                    type: bigint
+                    constraints:
+                        foreignKeyName: fk_comment_comment
+                        refenrences: comment(id)
+                        nullable: true
+                - column:
+                    name: parent_id
+                    type: bigint
+                    constraints:
+                        nullable: false
+                - column:
+                    name: parent_type
+                    type: varchar(10)
+                    constraints:
+                        nullable: false
+
+- changeSet:
+      id: 6-mysql
+      author: murbontaitis
+      comment: Not possible to store LT and emoji letters
+      dbms: mysql
+      changes:
+        - sql:
+            splitStatements: true
+            sql: ALTER DATABASE cycligo CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+            stripComments: true
+
+- changeSet:
+      id: 7-mysql
+      author: murbontaitis
+      comment: Not possible to store LT and emoji letters
+      dbms: mysql
+      changes:
+        - sql:
+            splitStatements: true
+            sql: ALTER TABLE event CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+            stripComments: true
+
+- changeSet:
+      id: 8-mysql
+      author: murbontaitis
+      comment: Not possible to store LT and emoji letters
+      dbms: mysql
+      changes:
+        - sql:
+            splitStatements: true
+            sql: ALTER TABLE location CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+            stripComments: true
+
+- changeSet:
+      id: 9-mysql
+      author: murbontaitis
+      comment: Not possible to store LT and emoji letters
+      dbms: mysql
+      changes:
+        - sql:
+            splitStatements: true
+            sql: ALTER TABLE comment CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+            stripComments: true
+
+- changeSet:
+    id: 10-eventDetail
+    author: murbontaitis
+    comment: Change distance and elevation column types to double
+    changes:
+      - modifyDataType:
+          columnName: distance
+          newDataType: double
+          tableName: event_detail
+      - modifyDataType:
+          columnName: elevation
+          newDataType: double
+          tableName: event_detail
+
+- changeSet:
+      id: 4-random
+      author: murbontaitis
+      changes:
+        - createTable:
+            tableName: account
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: nvarchar(255)
+              - column:
+                  name: password
+                  type: varchar(255)
+              - column:
+                  name: first_name
+                  type: nvarchar(255)
+              - column:
+                  name: last_name
+                  type: nvarchar(255)
+
+- changeSet:
+      id: 11-Blog
+      author: murbontaitis
+      changes:
+        - createTable:
+            tableName: blog
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: title
+                  type: nvarchar(1000)
+              - column:
+                  name: content
+                  type: mediumtext
+              - column:
+                  name: photo_id
+                  type: bigint
+              - column:
+                  name: category_id
+                  type: bigint
+              - column:
+                  name: approved
+                  type: boolean
+              - column:
+                  name: created_by
+                  type: bigint
+              - column:
+                  name: created_at
+                  type: timestamp
+              - column:
+                  name: updated_by
+                  type: bigint
+              - column:
+                  name: updated_at
+                  type: timestamp
+              - column:
+                  name: version
+                  type: int
+
+- changeSet:
+      id: 11-Blog_tags
+      author: murbontaitis
+      changes:
+        - createTable:
+            tableName: blog_tags
+            columns:
+              - column:
+                  name: blog_id
+                  type: bigint
+              - column:
+                  name: tag_id
+                  type: bigint
+
+- changeSet:
+      id: 11-Tag
+      author: murbontaitis
+      changes:
+        - createTable:
+            tableName: tag
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: nvarchar(250)
