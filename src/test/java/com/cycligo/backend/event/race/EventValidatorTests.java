@@ -3,7 +3,6 @@ package com.cycligo.backend.event.race;
 import com.cycligo.backend.event.Event;
 import com.cycligo.backend.event.EventDto;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;

@@ -8,13 +8,11 @@ import com.cycligo.backend.event.race.elastic.*;
 import com.cycligo.backend.event.race.elastic.Event;
 import com.cycligo.backend.event.race.elastic.EventDetail;
 import com.cycligo.backend.event.race.elastic.Location;
-import com.cycligo.backend.location.*;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.hibernate.cfg.NotYetImplementedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
@@ -144,7 +142,7 @@ public class EventController {
         l.setName(d.getName());
         l.setValue(d.getValue());
 //        Set<LookupValue> values = new HashSet<>();
-//        for(com.cycligo.backend.lookup.LookupValue v : d.getLookups()){
+//        for(LookupValue v : d.getLookups()){
 //            values.add(entity2Dto(v));
 //        }
 //        l.setLookups(values);

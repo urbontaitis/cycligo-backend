@@ -1,6 +1,5 @@
 package com.cycligo.backend.media;
 
-import com.cycligo.backend.base.ParentType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

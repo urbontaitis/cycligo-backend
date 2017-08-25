@@ -1,6 +1,9 @@
 package com.cycligo.backend.filter.event;
 
 import com.cycligo.backend.config.Constants;
+import com.cycligo.backend.event.ChoiceDto;
+import com.cycligo.backend.event.FilterDto;
+import com.cycligo.backend.event.FilterService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.RequestMapping;

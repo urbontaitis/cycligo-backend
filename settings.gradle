@@ -1,4 +1,1 @@
 rootProject.name='cycligo-rest-api'
-
-include 'cycligo-core'
-include 'cycligo-domain'

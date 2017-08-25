@@ -4,14 +4,12 @@ import com.cycligo.backend.account.Account;
 import com.cycligo.backend.account.AccountRepository;
 import com.cycligo.backend.account.UsernameAlreadyInUseException;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
@@ -24,13 +22,13 @@ import org.springframework.web.servlet.view.RedirectView;
 @Controller
 public class SignupController {
 
-    private final AccountRepository accountRepository;
+    private AccountRepository accountRepository;
     private final ProviderSignInUtils signInUtils;
 
     public SignupController(ConnectionFactoryLocator connectionFactoryLocator,
-                            UsersConnectionRepository connectionRepository,
-                            AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
+                            UsersConnectionRepository connectionRepository
+                            ) {
+//        this.accountRepository = accountRepository;
         this.signInUtils = new ProviderSignInUtils(connectionFactoryLocator, connectionRepository);
     }
 

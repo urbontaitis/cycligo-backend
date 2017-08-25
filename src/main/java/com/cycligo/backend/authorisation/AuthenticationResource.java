@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
-import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -31,9 +30,9 @@ public class AuthenticationResource {
     private AuthenticationManager authenticationManager;
     private AccountRepository accountRepository;
 
-    AuthenticationResource(AuthenticationManager authenticationManager, AccountRepository accountRepository) {
+    AuthenticationResource(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
-        this.accountRepository = accountRepository;
+//        this.accountRepository = accountRepository;
     }
 
     @PostMapping(value = "session")

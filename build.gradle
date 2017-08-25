@@ -70,11 +70,22 @@ dependencies {
 //
 //    testCompile("org.springframework.security:spring-security-test")
 
-    compile project('cycligo-core')
-    compile project('cycligo-domain')
+    // core module dependencies
+    compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}")
+    compile("com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}")
+    compile("org.hibernate:hibernate-validator:${hibernateValidatorVersion}")
+    compile("com.google.maps:google-maps-services:${googleMapsServicesVersion}")
+    compile("org.apache.commons:commons-lang3:${commonsLang3Version}")
 
-
-    testCompile project(path: ':cycligo-domain', configuration: 'testOutput')
+    // domain module dependencies
+    compile("org.springframework.security:spring-security-crypto:${springSecurityVersion}")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.liquibase:liquibase-core")
+    compile("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final")
+//    compile("com.querydsl:querydsl-jpa:4.1.4")
+//    querydslapt("com.querydsl:querydsl-apt:4.1.4")
+    runtime("mysql:mysql-connector-java")
+    testRuntime('com.h2database:h2')
 
 }
 

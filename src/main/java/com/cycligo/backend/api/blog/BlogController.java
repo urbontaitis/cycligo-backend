@@ -1,7 +1,9 @@
 package com.cycligo.backend.api.blog;
 
 import com.cycligo.backend.base.handler.error.ValidationException;
-import com.cycligo.backend.comment.CommentDto;
+import com.cycligo.backend.blog.BlogNotFoundException;
+import com.cycligo.backend.blog.BlogPost;
+import com.cycligo.backend.blog.BlogService;
 import com.cycligo.backend.config.Constants;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
