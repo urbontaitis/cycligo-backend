@@ -2,6 +2,7 @@
 /build/
 gradle/**
 logs/
+target/
 
 ### STS ###
 .apt_generated
@@ -33,3 +34,4 @@ classes/
 bin/
 data/
 gradle/
+.mvn/
