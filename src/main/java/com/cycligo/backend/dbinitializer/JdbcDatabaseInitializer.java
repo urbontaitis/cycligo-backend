@@ -13,7 +13,7 @@ import javax.sql.DataSource;
  * Created by Mindaugas Urbontaitis on 23/03/2017.
  * cycligo-rest-api
  */
-@Component
+//@Component
 public class JdbcDatabaseInitializer implements InitializingBean {
 
     private final DataSource dataSource;
