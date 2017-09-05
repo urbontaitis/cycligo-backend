@@ -1,24 +1,30 @@
 package com.cycligo.backend.event.race;
 
-import com.cycligo.backend.base.MvcMockTest;
-import com.cycligo.backend.event.EventDto;
-import com.cycligo.backend.event.EventService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-
-import java.time.LocalDateTime;
-
 import static com.cycligo.backend.event.race.EventTestHelper.initEventDto;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.time.LocalDateTime;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+
+import com.cycligo.backend.base.MvcMockTest;
+import com.cycligo.backend.event.EventDto;
+import com.cycligo.backend.event.EventRepository;
+import com.cycligo.backend.event.EventService;
+import com.cycligo.backend.event.race.elastic.EventElasticsearch;
 
 /**
  * Created by Mindaugas Urbontaitis on 04/02/2017.
@@ -33,13 +39,22 @@ public class EventControllerTests extends MvcMockTest {
 
     @MockBean
     private EventService eventService;
+    
+    @MockBean
+    private ElasticsearchTemplate elasticsearchTemplate;
+    
+    @MockBean
+    private EventElasticsearch eventElasticSearch;
+    
+    @MockBean
+    private EventRepository eventRepository;
 
     @Test
     public void readSingleEvent() throws Exception {
         EventDto expected = initEventDto();
         given(eventService.race(1L)).willReturn(expected);
 
-        mvc.perform(get("/events/event/1"))
+        mvc.perform(get("/api/events/event/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(getContentType()))
                 .andExpect(jsonPath("$.id", is(1)))
@@ -67,7 +82,7 @@ public class EventControllerTests extends MvcMockTest {
         String eventJson = json(expected);
         given(eventService.save(expected)).willReturn(1L);
 
-        mvc.perform(post("/events/event")
+        mvc.perform(post("/api/events/event/")
             .contentType(getContentType())
             .content(eventJson))
             .andExpect(status().isCreated());
