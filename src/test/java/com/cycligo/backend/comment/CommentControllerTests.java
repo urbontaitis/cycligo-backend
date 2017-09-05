@@ -24,7 +24,6 @@ import com.cycligo.backend.core.handler.error.ValidationError;
  */
 @RunWith(SpringRunner.class)
 @WebMvcTest(CommentController.class)
-@ActiveProfiles(value="test")
 public class CommentControllerTests extends MvcMockTest {
 
     @Autowired

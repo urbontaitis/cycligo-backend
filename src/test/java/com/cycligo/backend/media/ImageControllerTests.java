@@ -39,7 +39,7 @@ public class ImageControllerTests extends ImageHelper {
         given(this.imageRepository.findById(1L))
                 .willReturn(expected);
 
-        this.mvc.perform(get("/media/image/1")
+        this.mvc.perform(get("/api/media/image/1")
                 .accept(MediaType.IMAGE_PNG))
                 .andExpect(status().isOk())
                 .andExpect(content().bytes(expected.getValue()));
@@ -58,7 +58,7 @@ public class ImageControllerTests extends ImageHelper {
         given(this.imageRepository.save(any(Image.class))).willReturn(expected);
 
 
-        this.mvc.perform(fileUpload("/media/image").file(file))
+        this.mvc.perform(fileUpload("/api/media/image").file(file))
                 .andExpect(status().isOk())
                 .andExpect(content().string("100"));
 

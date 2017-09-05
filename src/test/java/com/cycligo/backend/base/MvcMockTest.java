@@ -15,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mock.http.MockHttpOutputMessage;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.cycligo.backend.core.handler.error.ValidationError;
 
@@ -22,6 +23,7 @@ import com.cycligo.backend.core.handler.error.ValidationError;
  * Created by Mindaugas Urbontaitis on 08/02/2017.
  * cycligo-rest-api
  */
+@ActiveProfiles(value="test")
 public abstract class MvcMockTest {
 
     private HttpMessageConverter mappingJackson2HttpMessageConverter;
