@@ -1,22 +1,22 @@
 package com.cycligo.backend.comment;
 
-import com.cycligo.backend.base.MvcMockTest;
-import com.cycligo.backend.core.handler.error.ValidationError;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.junit.Ignore;
+import java.time.LocalDateTime;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.LocalDateTime;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import com.cycligo.backend.base.MvcMockTest;
+import com.cycligo.backend.core.handler.error.ValidationError;
 
 /**
  * Created by Mindaugas Urbontaitis on 08/02/2017.
@@ -24,7 +24,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @RunWith(SpringRunner.class)
 @WebMvcTest(CommentController.class)
-public class CommentCotrollerTests extends MvcMockTest {
+@ActiveProfiles(value="test")
+public class CommentControllerTests extends MvcMockTest {
 
     @Autowired
     private MockMvc mvc;
@@ -32,32 +33,32 @@ public class CommentCotrollerTests extends MvcMockTest {
     @MockBean
     private CommentService commentService;
 
-    @Ignore
+    @Test
     public void shouldThrowParentIdIsRequired() throws Exception {
-        ValidationError expected = createValidationError("global", "base.parent_id_is_required");
+        ValidationError expected = createValidationError("parentId", "base.parent_id_is_required");
         String expectedJson = json(expected);
 
         CommentDto requestDto = initCommentDto();
         requestDto.setParentId(null);
         String requestJson = json(requestDto);
 
-        mvc.perform(post("/comments/comment")
+        mvc.perform(post("/api/comments/comment")
                 .contentType(getContentType())
                 .content(requestJson))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().json(expectedJson));
     }
 
-    @Ignore
+    @Test
     public void shouldThrowParentTypeIsRequired() throws Exception {
-        ValidationError expected = createValidationError("global", "base.parent_type_is_required");
+        ValidationError expected = createValidationError("parentType", "base.parent_type_is_required");
         String expectedJson = json(expected);
 
         CommentDto requestDto = initCommentDto();
         requestDto.setParentType(null);
         String requestJson = json(requestDto);
 
-        mvc.perform(post("/comments/comment")
+        mvc.perform(post("/api/comments/comment")
                 .contentType(getContentType())
                 .content(requestJson))
                 .andExpect(status().isBadRequest())
@@ -73,7 +74,7 @@ public class CommentCotrollerTests extends MvcMockTest {
         requestDto.setComment("");
         String requestJson = json(requestDto);
 
-        mvc.perform(post("/comments/comment")
+        mvc.perform(post("/api/comments/comment")
                 .contentType(getContentType())
                 .content(requestJson))
                 .andExpect(status().isBadRequest())

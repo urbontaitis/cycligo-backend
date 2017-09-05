@@ -1,5 +1,14 @@
 package com.cycligo.backend.base;
 
+import static org.junit.Assert.assertNotNull;
+
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.Arrays;
+import java.util.Locale;
+
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.MediaType;
@@ -8,14 +17,6 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.mock.http.MockHttpOutputMessage;
 
 import com.cycligo.backend.core.handler.error.ValidationError;
-
-import javax.annotation.Resource;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.Arrays;
-import java.util.Locale;
-
-import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by Mindaugas Urbontaitis on 08/02/2017.
