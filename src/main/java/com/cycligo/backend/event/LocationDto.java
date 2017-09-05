@@ -1,8 +1,9 @@
 package com.cycligo.backend.event;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * Created by Mindaugas Urbontaitis on 28/02/2017.
@@ -15,9 +16,9 @@ public class LocationDto {
     private String label;
     @Size(max=256)
     private String placeId;
-    @NotEmpty(message = "{event.location_is_required}")
+    @NotNull(message = "{event.location_is_required}")
     private Double latitude;
-    @NotEmpty(message = "{event.location_is_required}")
+    @NotNull(message = "{event.location_is_required}")
     private Double longitude;
     private String country;
 

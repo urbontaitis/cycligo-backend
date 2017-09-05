@@ -24,14 +24,14 @@ import org.springframework.web.servlet.view.RedirectView;
 public class SignupController {
 
     private AccountRepository accountRepository;
-    private final ProviderSignInUtils signInUtils;
+    private ProviderSignInUtils signInUtils;
 
-    public SignupController(ConnectionFactoryLocator connectionFactoryLocator,
-                            UsersConnectionRepository connectionRepository
-                            ) {
-//        this.accountRepository = accountRepository;
-        this.signInUtils = new ProviderSignInUtils(connectionFactoryLocator, connectionRepository);
-    }
+//    public SignupController(ConnectionFactoryLocator connectionFactoryLocator,
+//                            UsersConnectionRepository connectionRepository
+//                            ) {
+////        this.accountRepository = accountRepository;
+//        this.signInUtils = new ProviderSignInUtils(connectionFactoryLocator, connectionRepository);
+//    }
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public RedirectView signup(WebRequest request) throws UsernameAlreadyInUseException {

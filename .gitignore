@@ -34,3 +34,4 @@ classes/
 bin/
 gradle/
 .mvn/
+data/elasticsearch/

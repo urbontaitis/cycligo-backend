@@ -21,7 +21,10 @@ public class EventTestHelper {
         dto.setDescription("test-description");
         dto.setStarts(LocalDateTime.of(2017,01,01,10,30));
         dto.setEnds(LocalDateTime.of(2017,01,10,00,00));
-        dto.setLocation(new LocationDto("test-location"));
+        LocationDto location = new LocationDto("test-location");
+        location.setLatitude(1.0);
+        location.setLongitude(1.0);
+        dto.setLocation(location);
         dto.setDiscipline("MTB");
         dto.setCategory("marathon");
         dto.getDetails().add(new EventDetailDto((double) 100, (double) 2000, (double) 50));
@@ -56,17 +59,17 @@ public class EventTestHelper {
         return null;
     }
 
-    public static Lookup initLockup(){
+    public static Lookup initLookup(){
         Lookup lookup = new Lookup();
         lookup.setId(-1L);
         lookup.setName("MTB");
         lookup.setValue("test");
-        lookup.getLookups().add(initLockupValue());
+        lookup.getLookups().add(initLookupValue());
 
         return lookup;
     }
 
-    public static LookupValue initLockupValue() {
+    public static LookupValue initLookupValue() {
         LookupValue value = new LookupValue();
         value.setId(-2L);
         value.setName("test-value");
