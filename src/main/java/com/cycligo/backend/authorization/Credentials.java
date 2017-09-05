@@ -1,4 +1,4 @@
-package com.cycligo.backend.authorisation;
+package com.cycligo.backend.authorization;
 
 /**
  * Created by Mindaugas Urbontaitis on 07/04/2017.

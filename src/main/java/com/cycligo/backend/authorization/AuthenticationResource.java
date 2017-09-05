@@ -1,4 +1,4 @@
-package com.cycligo.backend.authorisation;
+package com.cycligo.backend.authorization;
 
 import com.cycligo.backend.account.Account;
 import com.cycligo.backend.account.AccountRepository;

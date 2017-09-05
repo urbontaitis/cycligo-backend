@@ -1,8 +1,9 @@
-package com.cycligo.backend.authorisation;
+package com.cycligo.backend.authorization;
 
 import com.cycligo.backend.account.Account;
 import com.cycligo.backend.account.AccountRepository;
 import com.cycligo.backend.account.UsernameAlreadyInUseException;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;

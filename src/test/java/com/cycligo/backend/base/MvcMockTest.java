@@ -1,12 +1,13 @@
 package com.cycligo.backend.base;
 
-import com.cycligo.backend.base.handler.error.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mock.http.MockHttpOutputMessage;
+
+import com.cycligo.backend.core.handler.error.ValidationError;
 
 import javax.annotation.Resource;
 import java.io.IOException;

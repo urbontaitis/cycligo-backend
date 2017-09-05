@@ -1,4 +1,4 @@
-package com.cycligo.backend.authorisation;
+package com.cycligo.backend.authorization;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

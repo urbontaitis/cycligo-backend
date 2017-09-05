@@ -1,8 +1,8 @@
 package com.cycligo.backend.event.race;
 
-import com.cycligo.backend.base.handler.error.ClientErrorInformation;
-import com.cycligo.backend.base.handler.error.ValidationException;
 import com.cycligo.backend.config.Constants;
+import com.cycligo.backend.core.handler.error.ClientErrorInformation;
+import com.cycligo.backend.core.handler.error.ValidationException;
 import com.cycligo.backend.event.*;
 import com.cycligo.backend.event.race.elastic.*;
 import com.cycligo.backend.event.race.elastic.Event;

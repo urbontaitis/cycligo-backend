@@ -1,4 +1,4 @@
-package com.cycligo.backend.authorisation;
+package com.cycligo.backend.authorization;
 
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.social.connect.Connection;

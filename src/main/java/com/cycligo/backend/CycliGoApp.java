@@ -1,39 +1,28 @@
 package com.cycligo.backend;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-import java.util.Arrays;
-
 /**
- * Created by Mindaugas Urbontaitis on 13/11/2016.
- * CycliGO - Built by cyclists for cyclists.
+ * Created by Mindaugas Urbontaitis on 13/11/2016. CycliGO - Built by cyclists for cyclists.
  */
 @SpringBootApplication
 @EnableScheduling
-//@EnableOAuth2Client
-//@EnableAuthorizationServer
-public class CycliGoApp {
+public class CycliGoApp extends SpringBootServletInitializer {
 
-    public static void main(String[] args) {
-        ApplicationContext ctx = SpringApplication.run(CycliGoApp.class, args);
+  @Override
+  protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+    return configureApplication(builder);
+  }
 
-        String[] beanNames = ctx.getBeanDefinitionNames();
-//        Arrays.sort(beanNames);
-//        for (String beanName : beanNames) {
-//            System.out.println(beanName);
-//        }
-    }
+  public static void main(String[] args) {
+    configureApplication(new SpringApplicationBuilder()).run(args);
+  }
 
-//    @Bean
-//    CommandLineRunner init(final AccountRepository accountRepository) {
-//        return new CommandLineRunner() {
-//            @Override
-//            public void run(String... args) throws Exception {
-//                accountRepository.createAccount(new Account("mindaugas", "test123", "", ""));
-//            }
-//        };
-//    }
+  private static SpringApplicationBuilder configureApplication(SpringApplicationBuilder builder) {
+    return builder.sources(CycliGoApp.class);
+  }
+
 }

@@ -1,7 +1,8 @@
 package com.cycligo.backend.comment;
 
 import com.cycligo.backend.base.MvcMockTest;
-import com.cycligo.backend.base.handler.error.ValidationError;
+import com.cycligo.backend.core.handler.error.ValidationError;
+
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;

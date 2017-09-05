@@ -1,7 +1,7 @@
 package com.cycligo.backend.event.race;
 
 import com.cycligo.backend.base.MvcMockTest;
-import com.cycligo.backend.base.handler.error.ValidationError;
+import com.cycligo.backend.core.handler.error.ValidationError;
 import com.cycligo.backend.event.EventDto;
 import com.cycligo.backend.event.EventService;
 import com.cycligo.backend.event.LocationDto;

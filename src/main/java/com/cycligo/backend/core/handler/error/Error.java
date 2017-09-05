@@ -1,4 +1,4 @@
-package com.cycligo.backend.base.handler.error;
+package com.cycligo.backend.core.handler.error;
 
 /**
  * Created by Mindaugas Urbontaitis on 02/03/2017.
