@@ -62,7 +62,7 @@
 		<dependency>
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-facebook</artifactId>
-			<version>${spring.social.facebook.version}</version>
+			<!--<version>${spring.social.facebook.version}</version>-->
 		</dependency>
 		<!-- FIXME start app with in memory database 
 		<dependency>
@@ -193,37 +193,4 @@
 			</plugin>				
 		</plugins>
 	</build>
-
-	<repositories>
-		<repository>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>central</id>
-			<name>joined-maven-releases</name>
-			<url>http://artifactory.danskenet.net/artifactory/joined-maven-releases</url>
-		</repository>
-		<repository>
-			<snapshots />
-			<id>snapshots</id>
-			<name>joined-maven-snapshots</name>
-			<url>http://artifactory.danskenet.net/artifactory/joined-maven-snapshots</url>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>central</id>
-			<name>joined-maven-releases</name>
-			<url>http://artifactory.danskenet.net/artifactory/joined-maven-releases</url>
-		</pluginRepository>
-		<pluginRepository>
-			<snapshots />
-			<id>snapshots</id>
-			<name>joined-maven-releases</name>
-			<url>http://artifactory.danskenet.net/artifactory/joined-maven-releases</url>
-		</pluginRepository>
-	</pluginRepositories>
 </project>
