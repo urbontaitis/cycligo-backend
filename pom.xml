@@ -7,7 +7,7 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>CycliGO-rest-api</name>
+	<name>cycligo-backend</name>
 	<description>Cycligo rest endpoints</description>
 
 	<parent>
@@ -21,6 +21,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+        <sonar.projectKey>com.cycligo:cycligo-backend</sonar.projectKey>
 		
 		<springfox.swagger.version>2.6.0</springfox.swagger.version>
 		<commons.io.version>1.3.2</commons.io.version>
